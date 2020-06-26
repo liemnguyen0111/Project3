@@ -3,6 +3,7 @@ const { model, Schema } = require('mongoose')
 const Item = new Schema({
   title: String,
   description: String,
+  price: Number,
   category: {
     type: String,
     default: 'Miscellaneous'
@@ -11,16 +12,17 @@ const Item = new Schema({
     type: String,
     default: ''
   }],
-  photo: [{
-    imagePaths: String
+  photos: [{
+    type: String
   }],
   isBought: {
     type: Boolean,
     default: false
   },
-  live: {
+  auctionOn: {
     type: Boolean,
-    default: false
+    default: false,
+    time: Date
   }
 })
 
