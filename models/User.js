@@ -24,6 +24,19 @@ const User = new Schema({
       ref: "Item",
     },
   ],
+  soldItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
+  boughtItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
+ 
 })
 
 User.plugin(require('passport-local-mongoose'))
