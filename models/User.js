@@ -3,9 +3,27 @@ const { model, Schema } = require('mongoose')
 const User = new Schema({
   fName: String,
   lName: String,
-  age : Number,
-  email: String,
-  username: String
+  age: Number,
+  address: {
+    type: String,
+    default: "",
+  },
+  email: {
+    type: String,
+    unique: true,
+  },
+  buyItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
+  sellItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
 })
 
 User.plugin(require('passport-local-mongoose'))
