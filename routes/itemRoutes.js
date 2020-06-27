@@ -36,9 +36,9 @@ router.post("/items", passport.authenticate("jwt"), (req, res) => {
         .then(() =>
           res.json(newItem)
         )
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
     })
-    .catch((err) => console.error(err));
+    .catch((err) => console.error(err))
 });
 
 // update created auction item
@@ -48,12 +48,12 @@ router.put('/items/:id', passport.authenticate("jwt"), (req, res) => {
     .catch(err => console.error(err))
 })
 
-// delete item by id
-router.delete('/items/:id', passport.authenticate("jwt"), (req, res) => {
-  Item.findByIdAndRemove(req.params.id)
-    .then(data => res.json(data))
-    .catch(err => console.error(err))
-})
+// // delete item by id
+// router.delete('/items/:id', passport.authenticate("jwt"), (req, res) => {
+//   Item.findByIdAndRemove(req.params.id)
+//     .then(data => res.json(data))
+//     .catch(err => console.error(err))
+// })
 
 
 // create new bid on item
