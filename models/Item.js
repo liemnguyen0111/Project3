@@ -8,10 +8,10 @@ const Item = new Schema({
     type: Schema.Types.ObjectId
     ref: 'User'
   }
-  bid: {
+  bid: [{
     type: Schema.Types.ObjectId
     ref: 'Bid'
-  }
+  }]
   comment: {
     type: Schema.Types.ObjectId
     ref: 'Comment'
