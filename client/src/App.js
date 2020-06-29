@@ -1,8 +1,13 @@
 import React from 'react';
+import ItemsGrid from './components/ItemsGrid'
 
 function App() {
   return (
-   <div></div>
+   <div>
+
+    <ItemsGrid />
+
+   </div>
   );
 }
 
