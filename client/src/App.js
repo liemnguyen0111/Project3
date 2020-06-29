@@ -1,8 +1,9 @@
 import React from 'react';
+import Cat from './components/Category'
 
 function App() {
   return (
-   <div></div>
+   <Cat />
   );
 }
 
