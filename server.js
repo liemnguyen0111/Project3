@@ -5,6 +5,9 @@ const passport = require('passport')
 const { Strategy } = require('passport-local')
 const { Strategy : JWTStrategy, ExtractJwt } = require('passport-jwt')
 
+//File upload
+const fileUpload = require("express-fileupload");
+
 const app = express()
 const { User } = require('./models')
 
@@ -12,6 +15,7 @@ const { User } = require('./models')
 app.use(express.static(join(__dirname, 'client', 'build')))
 app.use(express.urlencoded({ extended : true }))
 app.use(express.json())
+app.use(fileUpload());
 
 // Using routes that available on client/build folder that available in index.html file
 app.get('*', (req,res) => 

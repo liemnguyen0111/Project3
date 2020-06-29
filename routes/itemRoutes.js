@@ -20,14 +20,39 @@ router.get("/items", (req, res) => {
 // });
 
 // creating new item for sale
-router.post("/items", passport.authenticate("jwt"), (req, res) => {
+router.post("/items", passport.authenticate("jwt"), async (req, res) => {
+
+  let isImage = false
+  let filename
+  let path = []
+  if (req.files) {
+    const file = req.files.filename
+    for(let i = 0; i < file.length; i++ )
+  {
+    await file[i].mv(
+      `./assets/Image/` + file[i].name,
+      async (err) => {
+        if (err) {
+          res.send(err)
+        } else {
+          res.send("sucessfully to uploaded");
+          path.push(`./assets/Image/` + filename.name)
+          isImage = true;
+        }
+      }
+    ); 
+  }
+  }
+
+  path = isImage? path : "#"
+
   const newItem = {
     title: req.body.title,
     description: req.body.body,
     user: req.user._id,
     price: req.body.price,
     category: req.body.category,
-    photos: req.body.photo,
+    photos: path,
     keywords: req.body.keywords,
   };
   Item.create(newItem)
@@ -60,7 +85,7 @@ router.put('/items/:id', passport.authenticate("jwt"), (req, res) => {
 router.post("/bids", passport.authenticate("jwt"), (req, res) => {
   const newBid = {
     body: req.body.body,
-    photos: req.body.photo
+    photos: req.body.photo,
     user: req.user._id,
     item: req.body.item
   };
