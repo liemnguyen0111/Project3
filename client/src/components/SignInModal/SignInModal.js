@@ -10,7 +10,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles({
   modal: {
-    margin: "20px"
+    margin: "15px",
+    color: 'white',
+    borderColor: 'white'
   }
 })
 
@@ -28,7 +30,7 @@ export default function FormDialog() {
 
   return (
     <>
-      <Button className={classes.modal} variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button className={classes.modal} variant="outlined" color="default" onClick={handleClickOpen}>
         Sign in
       </Button>
       <Dialog
@@ -52,10 +54,10 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="default">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="default">
             Login
           </Button>
         </DialogActions>
