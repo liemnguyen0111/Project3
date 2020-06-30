@@ -4,6 +4,7 @@ import Cat from './components/Category'
 import ItemsGrid from './components/ItemsGrid'
 import Jumbotron from './components/Jumbotron'
 import Footer from './components/Footer'
+import SearchButton from './components/SearchButton'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
      <Cat />
       <ItemsGrid />
       <Footer />
+      <SearchButton />
    </div>
   )
 }

@@ -20,6 +20,7 @@ import HelpIcon from '@material-ui/icons/Help'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import SearchButton from "../../components/SearchButton";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -109,7 +110,7 @@ const Navbar = () => {
             C A C H E
           </Typography>
           <IconButton className={classes.icon} aria-label="search">
-            <SearchIcon />
+            <SearchButton />
           </IconButton>
           <IconButton aria-label="display more actions" edge="end">
             <div>
