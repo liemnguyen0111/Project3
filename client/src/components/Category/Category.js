@@ -17,7 +17,7 @@ const Category = () =>
 {
 
     const classes = useStyles();
-    const list = ['cat1','cat2','cat3','cat4']
+    const list = ['Art', 'Collectables', 'Experiences', 'Fashion', 'Home & Garden', 'Media', 'Miscellaneous', 'Services', 'Sporting Goods', 'Tech']
 
     const handleOnChange = (event) =>
     {
