@@ -5,17 +5,17 @@ const Item = new Schema({
   description: String,
   price: Number,
   user: {
-    type: Schema.Types.ObjectId
+    type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
   bid: [{
-    type: Schema.Types.ObjectId
+    type: Schema.Types.ObjectId,
     ref: 'Bid'
-  }]
+  }],
   comment: {
-    type: Schema.Types.ObjectId
+    type: Schema.Types.ObjectId,
     ref: 'Comment'
-  }
+  },
   category: {
     type: String,
     default: 'Miscellaneous'

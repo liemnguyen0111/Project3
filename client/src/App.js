@@ -8,7 +8,7 @@ import Jumbotron from './components/Jumbotron'
 function App() {
   return (
    <div>
-     <Navbar />
+     <Navbar/>
      <Jumbotron />
      <Cat />
       <ItemsGrid />
