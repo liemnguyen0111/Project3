@@ -5,7 +5,8 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import SignInModal from "../../components/SignInModal";
+import SignUpModal from "../../components/SignUpModal";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,11 +33,13 @@ const useStyles = makeStyles((theme) => ({
     padding: "40px",
     height: "auto",
   },
-  // button: {
-  //   margin: "20px",
-  //   color: "#ffffff",
-  //   borderColor: "#ffffff",
-  // },
+
+  button: {
+    margin: "20px",
+    color: "#ffffff",
+    borderColor: "#ffffff",
+  },
+
 }));
 
 export default function Jumbotron() {
@@ -52,59 +55,12 @@ export default function Jumbotron() {
             </Typography>
           </Grid>
 
-          {/* <Grid item xs={12} sm={6} direction="row" className={classes.tagline}>
-            <Typography>Buy, sell, barter, trade... anything.</Typography>
-          </Grid> */}
           <Grid item xs={12} sm={6} direction="row">
-            <SignInModal />
-            <SignInModal />
-            
-              {/* <SignInModal /> */}
+            <SignUpModal />
 
-              {/* <Button
-              className={classes.button}
-              size="large"
-              variant="outlined"
-              color="default"
-            >
-              Sign up
-            </Button> */}
           </Grid>
         </Grid>
       </Box>
     </div>
-
-    // <div className={classes.root}>
-    //   <Paper elevation={1}>
-    //     <Grid direction="column" alignItems="center" container spacing={1}>
-    //       <Grid item xs={12} direction="row">
-    //         <Typography variant="h5">
-    //           <strong>Welcome to C A C H E</strong>
-    //         </Typography>
-    //       </Grid>
-    //       <Grid item xs={12} sm={6} direction="row">
-    //         <Typography>Buy, sell, barter, trade...anything!</Typography>
-    //       </Grid>
-    //       <Grid item xs={12} sm={6} direction="row">
-    //         <Button
-    //           className={classes.button}
-    //           size="medium"
-    //           variant="outlined"
-    //           color="default"
-    //         >
-    //           Sign up
-    //         </Button>
-    //         <Button
-    //           className={classes.button}
-    //           size="medium"
-    //           variant="outlined"
-    //           color="default"
-    //         >
-    //           Sign in
-    //         </Button>
-    //       </Grid>
-    //     </Grid>
-    //   </Paper>
-    // </div>
-  );
+  )
 }
