@@ -1,11 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
-import DetailsDialog from '../DetailsDialog'
+import DetailsDialog from './DetailsDialog'
 
 const defaultProps = {
   bgcolor: 'background.paper',
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ImageDisplay = () => {
+const ItemLeftWindow = () => {
   const classes = useStyles();
 
   return (
@@ -45,4 +43,4 @@ const ImageDisplay = () => {
   )
 }
 
-export default ImageDisplay
+export default ItemLeftWindow
