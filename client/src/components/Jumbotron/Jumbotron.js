@@ -5,7 +5,8 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import SignUpModal from "../../components/SignUpModal";
+import SignUpModal from "./SignUpModal";
+import SignInModal from "./SignInModal";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,8 +57,8 @@ export default function Jumbotron() {
           </Grid>
 
           <Grid item xs={12} sm={6} direction="row">
-            <SignUpModal />
-
+            <SignUpModal/>
+            <SignInModal/>
           </Grid>
         </Grid>
       </Box>

@@ -5,11 +5,9 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Category from './components/Category'
-import ItemsGrid from './components/ItemsGrid'
-import Jumbotron from './components/Jumbotron'
 import Footer from './components/Footer'
 import HowItWorks from './pages/HowItWorks'
+import ItemView from './pages/ItemView'
 import Home from './pages/Home'
 
 function App() {
@@ -21,7 +19,7 @@ function App() {
 
         <Route exact path="/" component={Home} />
         <Route path="/howitworks" component={HowItWorks} />
-
+        <Route path="/watching" component={ItemView} />
       </Switch>
       <Footer />
 

@@ -11,8 +11,6 @@ export default function ItemRightWindow() {
 
   return (
    <>
-   {/* <TopNav></TopNav>
-   {value? <ChatSection/> : <BidSection/> }  */}
    <BottomNav value={value} setValue={setValue} />
    </>
   );

@@ -1,24 +1,23 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
-import DetailsDialog from '../DetailsDialog'
+import DetailsDialog from './DetailsDialog'
 
 const defaultProps = {
   bgcolor: 'background.paper',
-  m: 1,
+  // m: 1,
   border: 1,
-  style: { width: '600px', height: '600px' },
+ 
+  style: { width: '100%', height: '600px'},
 };
 
 const useStyles = makeStyles((theme) => ({
   thumbnail: {
     marginTop: '50px',
-    height: '400px',
-    width: '400px',
+    height: '50%',
+    width: '95%',
     objectFit: 'contain',
   },
   title: {
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ImageDisplay = () => {
+const ItemLeftWindow = () => {
   const classes = useStyles();
 
   return (
@@ -45,4 +44,4 @@ const ImageDisplay = () => {
   )
 }
 
-export default ImageDisplay
+export default ItemLeftWindow

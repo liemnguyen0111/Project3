@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search'
-import MoreIcon from '@material-ui/icons/MoreVert'
 import clsx from 'clsx'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Button from '@material-ui/core/Button'
@@ -20,6 +18,7 @@ import HelpIcon from '@material-ui/icons/Help'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import { Link } from 'react-router-dom'
 import SearchButton from "../../components/SearchButton";
 
 
@@ -50,8 +49,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
+const drawerList = [
+  {
+    name : 'Home',
+    link : '/'
+  },
+  {
+    name : 'How it Works',
+    link : '/howItWorks'
+  },
+  {
+    name : 'Watching',
+    link : '/watching'
+  },
+  {
+    name : 'Selling',
+    link : '/selling'
+  }
+]
 const Navbar = () => {
   const classes = useStyles()
   const [state, setState] = React.useState({
@@ -75,15 +90,15 @@ const Navbar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Home', 'How it Works', 'Watching', 'Selling'].map((text, index) => (
-          <ListItem button key={text}>
+        {drawerList.map((item, index) => (
+          <ListItem button key={item.name} component={Link} to={item.link}>
             <ListItemIcon>
               {index === 0 && <HomeIcon />}
               {index === 1 && <HelpIcon />}
               {index === 2 && <VisibilityIcon />}
               {index === 3 && <MonetizationOnIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={item.name} />
           </ListItem>
         ))}
       </List>
