@@ -94,6 +94,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
+    border : '1px solid'
   },
   textField: {
     marginLeft: theme.spacing(1),

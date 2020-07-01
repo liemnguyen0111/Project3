@@ -7,16 +7,17 @@ import DetailsDialog from './DetailsDialog'
 
 const defaultProps = {
   bgcolor: 'background.paper',
-  m: 1,
+  // m: 1,
   border: 1,
-  style: { width: '600px', height: '600px' },
+ 
+  style: { width: '100%', height: '600px'},
 };
 
 const useStyles = makeStyles((theme) => ({
   thumbnail: {
     marginTop: '50px',
-    height: '400px',
-    width: '400px',
+    height: '50%',
+    width: '95%',
     objectFit: 'contain',
   },
   title: {
