@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
 import FormControl from '@material-ui/core/FormControl';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -17,7 +17,13 @@ const Category = () =>
 {
 
     const classes = useStyles();
-    const list = ['cat1','cat2','cat3','cat4']
+    const list = ['Art', 'Collectables', 'Experiences', 'Fashion', 'Home & Garden', 'Media', 'Miscellaneous', 'Services', 'Sporting Goods', 'Tech']
+
+    const handleOnChange = (event) =>
+    {
+        console.log(event.target.value)
+    }
+
     return(
         <>
         <Grid
@@ -26,14 +32,14 @@ const Category = () =>
              justify="flex-end"
              alignItems="center"
             >
-        <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Categories</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="" />
-            {list.map(item =>
-            <option value={item}>{item}</option>
-            )}  
-        </Select>
+      <FormControl className={classes.formControl}>
+        <InputLabel shrink htmlFor="age-native-label-placeholder">
+          Categories
+        </InputLabel>
+        <NativeSelect onChange={handleOnChange}>
+          <option value="">All</option>
+          {list.map(item => <option key={item} value={item}>{item}</option > )}  
+        </NativeSelect>
       </FormControl>
       </Grid>
       <Divider light />
