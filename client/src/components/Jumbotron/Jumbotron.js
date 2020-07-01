@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import SignUpModal from "../../components/SignUpModal";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -32,11 +33,13 @@ const useStyles = makeStyles((theme) => ({
     padding: "40px",
     height: "auto",
   },
+
   button: {
     margin: "20px",
     color: "#ffffff",
     borderColor: "#ffffff",
   },
+
 }));
 
 export default function Jumbotron() {
@@ -51,8 +54,10 @@ export default function Jumbotron() {
               Buy, sell, barter, trade... anything.
             </Typography>
           </Grid>
+
           <Grid item xs={12} sm={6} direction="row">
             <SignUpModal />
+
           </Grid>
         </Grid>
       </Box>
