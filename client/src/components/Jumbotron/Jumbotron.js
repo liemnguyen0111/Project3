@@ -60,7 +60,6 @@ export default function Jumbotron() {
 
   return (
     <div className={classes.root}>
-      {console.log("in the return")}
       <Box className={classes.background}>
         <Grid direction="column" alignItems="center" container spacing={1}>
           <Grid item xs={12} direction="row">
@@ -80,5 +79,5 @@ export default function Jumbotron() {
         </Grid>
       </Box>
     </div>
-  );
+  )
 }
