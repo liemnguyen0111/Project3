@@ -36,7 +36,7 @@ export default function FormDialog() {
     createUser(userSignupInfo)
       .then(({ data }) => {
         if (data.name) {
-          console.log(data.message);
+          // console.log(data.message);
           setOpen(true);
         } else {
           setOpen(false)
