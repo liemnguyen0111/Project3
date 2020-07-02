@@ -6,7 +6,6 @@ import Box from "@material-ui/core/Box";
 import SignUpModal from "./SignUpModal";
 import SignInModal from "./SignInModal";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
