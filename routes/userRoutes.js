@@ -5,17 +5,17 @@ const passport = require("passport");
 
 // Register Route
 router.post("/users/register", (req, res) => {
-  const { name, email, username } = req.body;
+  const { firstName, lastName, address, age, email, username, password } = req.body;
   User.register(
-    new User({ name, email, username }),
+    new User({ firstName, lastName, address, age, email, username }),
     req.body.password,
-    (err) => {
+    (err, response) => {
       if (err) {
         console.error(err);
       }
-      res.sendStatus(200);
+      res.json(response)
     }
-  )
+  );
 })
 
 // Login Route
@@ -35,3 +35,5 @@ router.get("/user/items", passport.authenticate("jwt"), (req, res) => {
 router.get("/users/authorize", passport.authenticate("jwt"), (req, res) => {
   res.sendStatus(200);
 })
+
+module.exports = router

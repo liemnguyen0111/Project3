@@ -10,10 +10,7 @@ import axios from 'axios'
 import UserAPI from '../../../utils/UserAPI'
 
 const {
-  getUsers,
   createUser,
-  updateUser,
-  deleteUser
 } = UserAPI
 
 const useStyles = makeStyles({
@@ -37,7 +34,7 @@ export default function FormDialog() {
       email: event.target.email.value,
       password: event.target.password.value
     }
-    createUser({})
+    createUser(userSignupInfo)
   }
 
   const [open, setOpen] = React.useState(false)
