@@ -45,13 +45,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Jumbotron() {
   const classes = useStyles();
-  const [loginState, setLoginState] = useState({
-    isLoggedIn: false
-  })
+  const [loginState, setLoginState] = useState(false)
   useEffect(() => {
     authorizeUser()
       .then((data) => {
-        setLoginState({isLoggedIn: true})
+        setLoginState(true)
       })
       .catch((err) => {
         console.error(err)
@@ -71,7 +69,7 @@ export default function Jumbotron() {
             {loginState.isLoggedIn ? null : (
               <>
                 <SignUpModal setLoginState={setLoginState} />
-                <SignInModal />
+                <SignInModal setLoginState={setLoginState} />
               </>
             )}
           </Grid>

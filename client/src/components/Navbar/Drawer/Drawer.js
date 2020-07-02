@@ -97,7 +97,10 @@ const Drawer = () => {
       <Divider />
       <List>
         {["Sign In", "Sign Out"].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem onClick={() => { if (index === 1) {
+            localStorage.removeItem('user')
+            window.location = '/'
+          }}} button key={text}>
             <ListItemIcon>
               {index === 0 && <ExitToAppIcon />}
               {index === 1 && <ExitToAppIcon />}

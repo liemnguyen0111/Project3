@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FormDialog() {
+export default function FormDialog({setLoginState}) {
   const handleLogin = (event) => {
     // console.log(event);
     event.preventDefault();
@@ -31,19 +31,20 @@ export default function FormDialog() {
       .then(( {data} ) => {
         if (data) {
           localStorage.setItem('user', data)
+          setLoginState(true)
           console.log(data)
         } else {
           console.log('Incorrect username or password')
         }
       })
-      .catch((err) => console.error(err));
-  };
+      .catch((err) => console.error(err))
+  }
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
-  };
+  }
 
   const handleClose = () => {
     setOpen(false);

@@ -38,7 +38,7 @@ export default function FormDialog({setLoginState}) {
           setOpen(true)
         } else {
           localStorage.setItem("user", data)
-          setLoginState({ isLoggedIn: true })
+          setLoginState(true)
           setOpen(false)
         }
       })
