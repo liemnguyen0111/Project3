@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FormDialog() {
+export default function FormDialog({setLoginState}) {
   const classes = useStyles();
 
   const handleSignup = (event) => {
@@ -32,20 +32,20 @@ export default function FormDialog() {
       username: event.target.username.value,
       password: event.target.password.value,
     };
-    // console.log(userSignupInfo)
     createUser(userSignupInfo)
       .then(({ data }) => {
         if (data.name) {
-          // console.log(data.message);
-          setOpen(true);
+          setOpen(true)
         } else {
+          localStorage.setItem("user", data)
+          setLoginState({ isLoggedIn: true })
           setOpen(false)
         }
       })
       .catch((err) => {
-        console.error(err);
-      });
-  };
+        console.error(err)
+      })
+  }
 
   const [open, setOpen] = React.useState(false);
 
