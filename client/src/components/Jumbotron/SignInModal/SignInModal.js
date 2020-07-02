@@ -30,6 +30,7 @@ export default function FormDialog() {
     loginUser(userSigninInfo)
       .then(( {data} ) => {
         if (data) {
+          document.cookie = `user=${data}`
           console.log(data)
         } else {
           console.log('Incorrect username or password')
