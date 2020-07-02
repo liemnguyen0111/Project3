@@ -19,10 +19,10 @@ const ItemView = () => {
       <div className={classes.root}>
       <Grid container spacing={0}>
         
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} >
          <ItemLeftWindow />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} >
          <ItemRightWindow />
         </Grid>
        

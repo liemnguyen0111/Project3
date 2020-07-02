@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'contain',
   },
   title: {
+    display: 'block',
+    position: 'sticky',
     marginTop: '50px',
     color: 'black',
   },
@@ -34,6 +36,7 @@ const ItemLeftWindow = () => {
       <Box textAlign="center" borderColor="text.primary" {...defaultProps}>
         <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt=""/>
         <Typography className={classes.title}>
+          
           <strong>Air Jordan 5 Retro 'Top 3'</strong>
         </Typography>
         <Button>

@@ -93,16 +93,24 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    position: 'relative',
+    display : 'flex',
+    flexFlow : 'column',
     backgroundColor: theme.palette.background.paper,
-    border : '1px solid'
+    border : '1px solid',
+    height : '80vh',
   },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '25ch',
-    height : '50vh',
+  bottomNav : 
+  {
+    position : 'absolute',
+    bottom : '0',
   },
-
+  chatSection:
+  {
+    // display : 'flex',
+    // flexFlow : 'column',
+    // height : '100%',
+  }
 }));
 
 export default function BottomNav() {
@@ -135,6 +143,7 @@ export default function BottomNav() {
   }
 
   return (
+    <>
     <div className={classes.root}>
     
       <SwipeableViews
@@ -147,49 +156,26 @@ export default function BottomNav() {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
     
-        <ChatSection messages={messages}/>
-      <form onSubmit={handleOnSubmitMessage}>
-        <TextField
-          id="outlined-full-width"
-          name="message"
-          style={{ height: "5vh" }}
-          placeholder="Send a message"
-          fullWidth
-          variant="outlined"
-         
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="start">
-                  <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        endIcon={<Icon>send</Icon>}
-      >
-        Send
-      </Button>
-              </InputAdornment>
-            ),
-          }}
-          
-        />  
-     </form>
+        <ChatSection messages={messages} />
+     
         </TabPanel>
       </SwipeableViews>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="full width tabs example"
-        >
-          <Tab label="Bid" {...a11yProps(0)} icon={<ImportExportIcon />} />
-          <Tab label="Chat" {...a11yProps(1)} icon={<ChatIcon />} />
-        </Tabs>
-      </AppBar>
+    
+      <AppBar position="static" color="default" className={classes.bottomNav}>
+     <Tabs
+       value={value}
+       onChange={handleChange}
+       indicatorColor="primary"
+       textColor="primary"
+       variant="fullWidth"
+       aria-label="full width tabs example"
+     >
+       <Tab label="Bid" {...a11yProps(0)} icon={<ImportExportIcon />} />
+       <Tab label="Chat" {...a11yProps(1)} icon={<ChatIcon />} />
+     </Tabs>
+   </AppBar>
     </div>
+   
+   </>
   );
 }
