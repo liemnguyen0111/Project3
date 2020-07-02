@@ -8,7 +8,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const styles = (theme) => ({
   root: {
@@ -63,7 +63,7 @@ const DetailsDialog = () => {
   return (
     <div>
       <Button size="medium" color="default" onClick={handleClickOpen}>
-        Details <KeyboardArrowDownIcon />
+        Details <KeyboardArrowUpIcon/>
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
