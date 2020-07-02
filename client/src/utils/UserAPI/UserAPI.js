@@ -2,6 +2,7 @@ import axios from "axios";
 
 const UserAPI = {
   createUser: (user) => axios.post("/api/users/register", user),
+  loginUser: (user) => axios.post('api/users/login', user),
   authorizeUser: () => axios.get('/api/users/authorize'),
   // getUser: () => axios.get("/api/user/:id"),
   // deleteUser: (id) => axios.delete(`/api/users/${id}`),

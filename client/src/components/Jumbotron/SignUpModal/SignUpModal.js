@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 export default function FormDialog() {
   const classes = useStyles();
 
-  const handleSubmit = (event) => {
+  const handleSignup = (event) => {
     event.preventDefault();
     const userSignupInfo = {
       firstName: event.target.firstName.value,
@@ -74,7 +74,7 @@ export default function FormDialog() {
       >
         <DialogTitle id="form-dialog-title">Sign up</DialogTitle>
         <DialogContent>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSignup}>
             <TextField
               autoFocus
               margin="dense"
