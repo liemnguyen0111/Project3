@@ -6,7 +6,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle"
-import axios from 'axios'
 import UserAPI from '../../../utils/UserAPI'
 
 const {
@@ -32,9 +31,16 @@ export default function FormDialog() {
       address: event.target.address.value,
       age: event.target.age.value,
       email: event.target.email.value,
+      username: event.target.username.value,
       password: event.target.password.value
     }
+    console.log(userSignupInfo)
     createUser(userSignupInfo)
+      .then(data => {
+      console.log(data)
+      setOpen(false)
+    })
+      .catch(err => console.error(err))
   }
 
   const [open, setOpen] = React.useState(false)
@@ -108,6 +114,14 @@ export default function FormDialog() {
             />
             <TextField
               margin="dense"
+              name="username"
+              id="username"
+              label="Username"
+              type="username"
+              fullWidth
+            />
+            <TextField
+              margin="dense"
               name="password"
               id="password"
               label="Password"
@@ -118,7 +132,7 @@ export default function FormDialog() {
               <Button onClick={handleClose} color="default">
                 Cancel
               </Button>
-              <Button type='submit' onClick={handleClose} color="default">
+              <Button type='submit' color="default">
                 Sign Up
               </Button>
             </DialogActions>

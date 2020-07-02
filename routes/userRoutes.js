@@ -3,8 +3,24 @@ const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
+router.post('/users', (req, res) => {
+   const {
+     firstName,
+     lastName,
+     address,
+     age,
+     email,
+     username,
+     password,
+   } = req.body
+  User.create(firstName, lastName, address, age, email, username, password)
+   .then(data => console.log(data))
+   .catch(err => console.error(err))
+})
+
 // Register Route
 router.post("/users/register", (req, res) => {
+  console.log('im in the register user route')
   const { firstName, lastName, address, age, email, username, password } = req.body;
   User.register(
     new User({ firstName, lastName, address, age, email, username }),
