@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -10,19 +10,22 @@ import UserAPI from "./utils/UserAPI";
 const { authorizeUser } = UserAPI;
 
 function App() {
-  
-  authorizeUser({
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem("user")}`,
-    },
-  })
-    .then((thing) => console.log(thing))
-    .catch((err) => console.log(err));
+  const [loginState, setLoginState] = useState(false);
+  useEffect(() => {
+    authorizeUser()
+      .then((data) => {
+        setLoginState(true);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   return (
     <Router>
-      <Navbar />
+      <Navbar setLoginState={setLoginState} loginState={loginState}/>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={() => <Home setLoginState={setLoginState} loginState={loginState}/>} />
         <Route path="/howitworks" component={HowItWorks} />
         <Route path="/watching" component={ItemView} />
       </Switch>

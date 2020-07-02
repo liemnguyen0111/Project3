@@ -41,20 +41,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     borderColor: "#ffffff",
   },
-}));
+}))
 
-export default function Jumbotron() {
+export default function Jumbotron({loginState, setLoginState}) {
   const classes = useStyles();
-  const [loginState, setLoginState] = useState(false)
-  useEffect(() => {
-    authorizeUser()
-      .then((data) => {
-        setLoginState(true)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }, [])
+
 
   return (
     <div className={classes.root}>
@@ -76,5 +67,5 @@ export default function Jumbotron() {
         </Grid>
       </Box>
     </div>
-  );
+  )
 }

@@ -17,7 +17,6 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 
-
 const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
@@ -34,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-const Drawer = () => {
+const Drawer = ({ loginState, setLoginState }) => {
   const [state, setState] = React.useState({
     right: false,
   });
@@ -51,7 +49,7 @@ const Drawer = () => {
     setState({ ...state, [anchor]: open });
   };
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   const drawerList = [
     {
@@ -70,7 +68,7 @@ const Drawer = () => {
       name: "Selling",
       link: "/selling",
     },
-  ]
+  ];
 
   const list = (anchor) => (
     <div
@@ -96,18 +94,28 @@ const Drawer = () => {
       </List>
       <Divider />
       <List>
-        {["Sign In", "Sign Out"].map((text, index) => (
-          <ListItem onClick={() => { if (index === 1) {
-            localStorage.removeItem('user')
-            window.location = '/'
-          }}} button key={text}>
+        {!loginState ? (
+          <ListItem button>
             <ListItemIcon>
-              {index === 0 && <ExitToAppIcon />}
-              {index === 1 && <ExitToAppIcon />}
+              <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary="Sign In" />
           </ListItem>
-        ))}
+        ) : null}
+        {loginState ? (
+          <ListItem
+            onClick={() => {
+              localStorage.removeItem("user");
+              window.location = "/";
+            }}
+            button
+          >
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sign Out" />
+          </ListItem>
+        ) : null}
       </List>
     </div>
   );
@@ -137,4 +145,4 @@ const Drawer = () => {
   );
 };
 
-export default Drawer
+export default Drawer;
