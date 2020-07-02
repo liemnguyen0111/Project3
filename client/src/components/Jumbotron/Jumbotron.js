@@ -10,8 +10,6 @@ import UserAPI from "../../utils/UserAPI";
 let { authorizeUser } = UserAPI;
 let isLoggedIn = false;
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -57,7 +55,7 @@ export default function Jumbotron() {
       })
       .catch((err) => {
         console.error(err)
-      });
+      })
   }, [])
 
   return (
