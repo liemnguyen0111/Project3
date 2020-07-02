@@ -34,13 +34,16 @@ export default function FormDialog() {
       username: event.target.username.value,
       password: event.target.password.value
     }
-    console.log(userSignupInfo)
+    // console.log(userSignupInfo)
     createUser(userSignupInfo)
       .then(data => {
       console.log(data)
       setOpen(false)
     })
-      .catch(err => console.error(err))
+      .catch(err => {
+        // console.error(err)
+        console.log('handsubmit prob')
+      })
   }
 
   const [open, setOpen] = React.useState(false)
