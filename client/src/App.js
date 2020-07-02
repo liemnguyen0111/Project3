@@ -7,7 +7,7 @@ import ItemView from "./pages/ItemView";
 import Home from "./pages/Home";
 import UserAPI from "./utils/UserAPI";
 
-const { isLoggedIn, authorizeUser } = UserAPI;
+const { authorizeUser } = UserAPI;
 
 function App() {
   
