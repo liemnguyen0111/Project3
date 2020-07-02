@@ -15,8 +15,8 @@ router.post("/users/register", (req, res) => {
       }
       res.sendStatus(200);
     }
-  );
-});
+  )
+})
 
 // Login Route
 router.post("/users/login", (req, res) => {
@@ -25,13 +25,13 @@ router.post("/users/login", (req, res) => {
       console.error(err);
     }
     res.json(user ? jwt.sign({ id: user._id }, process.env.SECRET) : null);
-  });
-});
+  })
+})
 
 router.get("/user/items", passport.authenticate("jwt"), (req, res) => {
   res.json(req.user);
-});
+})
 
 router.get("/users/authorize", passport.authenticate("jwt"), (req, res) => {
   res.sendStatus(200);
-});
+})

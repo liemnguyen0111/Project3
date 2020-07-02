@@ -5,7 +5,16 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogTitle from "@material-ui/core/DialogTitle"
+import axios from 'axios'
+import UserAPI from '../../../utils/UserAPI'
+
+const {
+  getUsers,
+  createUser,
+  updateUser,
+  deleteUser
+} = UserAPI
 
 const useStyles = makeStyles({
   modal: {
@@ -28,6 +37,7 @@ export default function FormDialog() {
       email: event.target.email.value,
       password: event.target.password.value
     }
+    createUser({})
   }
 
   const [open, setOpen] = React.useState(false)
