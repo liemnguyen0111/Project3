@@ -27,9 +27,11 @@ router.post("/users/register", (req, res) => {
     req.body.password,
     (err, response) => {
       if (err) {
-        console.error(err);
+        console.error(err)
+        res.json(err)
       }
-      res.json(response)
+      else
+      res.json(response);
     }
   );
 })

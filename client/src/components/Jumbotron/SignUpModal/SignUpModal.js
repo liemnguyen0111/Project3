@@ -5,12 +5,10 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle"
-import UserAPI from '../../../utils/UserAPI'
+import DialogTitle from "@material-ui/core/DialogTitle";
+import UserAPI from "../../../utils/UserAPI";
 
-const {
-  createUser,
-} = UserAPI
+const { createUser } = UserAPI;
 
 const useStyles = makeStyles({
   modal: {
@@ -18,13 +16,13 @@ const useStyles = makeStyles({
     color: "white",
     borderColor: "white",
   },
-})
+});
 
 export default function FormDialog() {
   const classes = useStyles();
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const userSignupInfo = {
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
@@ -32,29 +30,32 @@ export default function FormDialog() {
       age: event.target.age.value,
       email: event.target.email.value,
       username: event.target.username.value,
-      password: event.target.password.value
-    }
+      password: event.target.password.value,
+    };
     // console.log(userSignupInfo)
     createUser(userSignupInfo)
-      .then(data => {
-      console.log(data)
-      setOpen(false)
-    })
-      .catch(err => {
-        // console.error(err)
-        console.log('handsubmit prob')
+      .then(({ data }) => {
+        if (data.name) {
+          console.log(data.message);
+          setOpen(true);
+        } else {
+          setOpen(false)
+        }
       })
-  }
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <>
@@ -135,7 +136,7 @@ export default function FormDialog() {
               <Button onClick={handleClose} color="default">
                 Cancel
               </Button>
-              <Button type='submit' color="default">
+              <Button type="submit" color="default">
                 Sign Up
               </Button>
             </DialogActions>
