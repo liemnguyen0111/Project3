@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     width: 'auto',
     marginTop: '20px',
-
     textAlign : 'center',
     color: 'gray'
   },

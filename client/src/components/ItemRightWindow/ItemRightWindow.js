@@ -4,14 +4,11 @@ import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import ChatIcon from '@material-ui/icons/Chat';
-import ImportExportIcon from '@material-ui/icons/ImportExport';
 import BidSection from './BidSection'
 import ChatSection from './ChatSection'
 import TopNav from './TopNav'
 import TopBid from './TopBid'
 import BottomNav from './BottomNav';
-
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
@@ -52,11 +49,17 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    position: 'relative',
     display : 'flex',
     flexFlow : 'column',
     backgroundColor: theme.palette.background.paper,
-    border : '1px solid',
+    border : '1px solid #bdbdbd',
+    borderLeft : 'none',
     height : '90vh',
+    [theme.breakpoints.down('xs')]: {
+      borderLeft : '1px solid #bdbdbd',
+      marginTop :'15px'
+  }
   },
   body: {
     display : 'flex',
@@ -182,6 +185,7 @@ export default function ItemRightWindow() {
       
       <BottomNav className={classes.bottomNav} handleChange={handleChange} value={value}/>
    </div> 
+ 
    </div>
   );
 }

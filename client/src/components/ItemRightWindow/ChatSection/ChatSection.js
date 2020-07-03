@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow : '1',
     overflow: "auto",
-    minHeight : '80vh',
+    minHeight : '55vh',
     backgroundColor: theme.palette.background.paper,
     
   },

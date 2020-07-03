@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Divider } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import ItemLeftWindow from '../../components/ItemLeftWindow'
 import ItemRightWindow from '../../components/ItemRightWindow'
@@ -8,11 +7,9 @@ import ItemRightWindow from '../../components/ItemRightWindow'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin : '0px 15px 0px 15px',
-    paddingBottom : '70px'
-  },
-  item: {
-    marginTop : '15px',
+    margin : '15px 15px 0px 15px',
+    paddingBottom : '75px',
+  
   }
 }));
 
@@ -21,14 +18,13 @@ const ItemView = () => {
 
   return (
     <>
-    <Divider/>
       <div className={classes.root}>
       <Grid container >
         
-        <Grid item xs={12} sm={6} className={classes.item}>
+        <Grid item xs={12} sm={6} >
          <ItemLeftWindow />
         </Grid>
-        <Grid item xs={12} sm={6} className={classes.item}>
+        <Grid item xs={12} sm={6} >
          <ItemRightWindow />
         </Grid>
        

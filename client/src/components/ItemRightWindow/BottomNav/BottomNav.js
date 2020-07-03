@@ -65,7 +65,7 @@ export default function BottomNav(props) {
        textColor="primary"
        variant="fullWidth"
        aria-label="full width tabs example"
-       style={{backgroundColor: '#e0e0e0'}}
+       style={{backgroundColor: '#e0e0e0', borderBottomRightRadius : '5px',}}
      >
        <Tab label="Bid" {...a11yProps(0)} icon={<ImportExportIcon />} />
        <Tab label="Chat" {...a11yProps(1)} icon={<ChatIcon />} />
