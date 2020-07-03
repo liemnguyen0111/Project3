@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import SignUpModal from "./SignUpModal";
 import SignInModal from "./SignInModal";
-import UserAPI from "../../utils/UserAPI";
+import UserAPI from "../../utils/UserAPI"
+import LoginContext from '../../utils/LoginContext'
 
 let { authorizeUser } = UserAPI;
 let isLoggedIn = false;
@@ -41,26 +42,16 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     borderColor: "#ffffff",
   },
-}));
+}))
 
 export default function Jumbotron() {
-  const classes = useStyles();
-  const [loginState, setLoginState] = useState({
-    isLoggedIn: false
-  })
-  useEffect(() => {
-    authorizeUser()
-      .then((data) => {
-        setLoginState({isLoggedIn: true})
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }, [])
+
+  const classes = useStyles()
+
+  const { loginState, setLoginState } = useContext(LoginContext)
 
   return (
     <div className={classes.root}>
-      {console.log("in the return")}
       <Box className={classes.background}>
         <Grid direction="column" alignItems="center" container spacing={1}>
           <Grid item xs={12} direction="row">
@@ -69,16 +60,15 @@ export default function Jumbotron() {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} direction="row">
-            {loginState.isLoggedIn 
-            ? null 
-            : (<>
-            <SignUpModal />
-            <SignInModal />
-            </>)}
-            
+            {loginState ? null : (
+              <>
+                <SignUpModal setLoginState={setLoginState} />
+                <SignInModal setLoginState={setLoginState} />
+              </>
+            )}
           </Grid>
         </Grid>
       </Box>
     </div>
-  );
+  )
 }

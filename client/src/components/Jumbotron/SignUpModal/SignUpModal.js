@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -6,7 +6,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import UserAPI from "../../../utils/UserAPI";
+import UserAPI from "../../../utils/UserAPI"
+import LoginContext from '../../../utils/LoginContext'
 
 const { createUser } = UserAPI;
 
@@ -21,6 +22,8 @@ const useStyles = makeStyles({
 export default function FormDialog() {
   const classes = useStyles();
 
+  const { loginState, setLoginState } = useContext(LoginContext)
+
   const handleSignup = (event) => {
     event.preventDefault();
     const userSignupInfo = {
@@ -29,23 +32,23 @@ export default function FormDialog() {
       address: event.target.address.value,
       age: event.target.age.value,
       email: event.target.email.value,
-      username: event.target.username.value,
+      // username: event.target.username.value,
       password: event.target.password.value,
-    };
-    // console.log(userSignupInfo)
+    }
     createUser(userSignupInfo)
       .then(({ data }) => {
         if (data.name) {
-          // console.log(data.message);
-          setOpen(true);
+          setOpen(true)
         } else {
+          localStorage.setItem("user", data)
+          setLoginState(true)
           setOpen(false)
         }
       })
       .catch((err) => {
-        console.error(err);
-      });
-  };
+        console.error(err)
+      })
+  }
 
   const [open, setOpen] = React.useState(false);
 
@@ -116,14 +119,14 @@ export default function FormDialog() {
               type="email"
               fullWidth
             />
-            <TextField
+            {/* <TextField
               margin="dense"
               name="username"
               id="username"
               label="Username"
               type="username"
               fullWidth
-            />
+            /> */}
             <TextField
               margin="dense"
               name="password"

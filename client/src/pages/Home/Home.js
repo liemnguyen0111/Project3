@@ -3,10 +3,10 @@ import Jumbotron from '../../components/Jumbotron'
 import Category from '../../components/Category'
 import ItemsGrid from '../../components/ItemsGrid'
 
-const Home = () => {
+const Home = ({loginState, setLoginState}) => {
   return (
     <>
-      <Jumbotron />
+      <Jumbotron loginState={loginState} setLoginState={setLoginState}/>
       <Category />
       <ItemsGrid />
     </>

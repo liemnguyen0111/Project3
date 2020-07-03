@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +7,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import UserAPI from "../../../utils/UserAPI";
+import LoginContext from "../../../utils/LoginContext";
+import SignInDialog from './SignInDialog'
 
 const { loginUser } = UserAPI;
 
@@ -19,11 +21,12 @@ const useStyles = makeStyles({
 });
 
 export default function FormDialog() {
+  const { loginState, setLoginState } = useContext(LoginContext);
   const handleLogin = (event) => {
     // console.log(event);
     event.preventDefault();
     const userSigninInfo = {
-      username: event.target.username.value,
+      email: event.target.email.value,
       password: event.target.password.value,
     };
     // console.log(userSigninInfo)
@@ -31,19 +34,20 @@ export default function FormDialog() {
       .then(( {data} ) => {
         if (data) {
           localStorage.setItem('user', data)
+          setLoginState(true)
           console.log(data)
         } else {
           console.log('Incorrect username or password')
         }
       })
-      .catch((err) => console.error(err));
-  };
+      .catch((err) => console.error(err))
+  }
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
-  };
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -59,40 +63,8 @@ export default function FormDialog() {
       >
         Sign in
       </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Sign In</DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleLogin}>
-            <TextField
-              autoFocus
-              margin="dense"
-              name="username"
-              label="Email Address"
-              type="username"
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="password"
-              label="Password"
-              type="password"
-              fullWidth
-            />
-            <DialogActions>
-              <Button onClick={handleClose} color="default">
-                Cancel
-              </Button>
-              <Button type="submit" color="default">
-                Sign In
-              </Button>
-            </DialogActions>
-          </form>
-        </DialogContent>
-      </Dialog>
+      <SignInDialog open={open} setOpen={setOpen}/>
+    
     </>
   );
 }

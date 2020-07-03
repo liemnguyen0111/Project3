@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
@@ -16,7 +16,8 @@ import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
-
+import LoginContext from "../../../utils/LoginContext";
+import SignInDialog from "../../Jumbotron/SignInModal/SignInDialog";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -34,8 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Drawer = () => {
+  const [open, setOpen] = useState(false);
+
+  const { loginState, setLoginState } = useContext(LoginContext);
+
   const [state, setState] = React.useState({
     right: false,
   });
@@ -51,7 +55,7 @@ const Drawer = () => {
     setState({ ...state, [anchor]: open });
   };
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   const drawerList = [
     {
@@ -70,7 +74,7 @@ const Drawer = () => {
       name: "Selling",
       link: "/selling",
     },
-  ]
+  ];
 
   const list = (anchor) => (
     <div
@@ -79,8 +83,15 @@ const Drawer = () => {
       })}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
+      <SignInDialog
+        onClick={(event) => {
+          event.stopPropagation()
+        }}
+        open={open}
+        setOpen={setOpen}
+      />
       <List>
         {drawerList.map((item, index) => (
           <ListItem button key={item.name} component={Link} to={item.link}>
@@ -96,15 +107,34 @@ const Drawer = () => {
       </List>
       <Divider />
       <List>
-        {["Sign In", "Sign Out"].map((text, index) => (
-          <ListItem button key={text}>
+        {!loginState ? (
+          <ListItem
+            onClick={(event) => {
+              event.stopPropagation();
+              setOpen(true);
+            }}
+            button
+          >
             <ListItemIcon>
-              {index === 0 && <ExitToAppIcon />}
-              {index === 1 && <ExitToAppIcon />}
+              <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary="Sign In" />
           </ListItem>
-        ))}
+        ) : null}
+        {loginState ? (
+          <ListItem
+            onClick={() => {
+              localStorage.removeItem("user");
+              window.location = "/";
+            }}
+            button
+          >
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sign Out" />
+          </ListItem>
+        ) : null}
       </List>
     </div>
   );
@@ -134,4 +164,4 @@ const Drawer = () => {
   );
 };
 
-export default Drawer
+export default Drawer;

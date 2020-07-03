@@ -12,10 +12,6 @@ const User = new Schema({
     type: String,
     unique: true,
   },
-  username: {
-    type: String,
-    unique: true
-  },
   sellItems: [
     {
       type: Schema.Types.ObjectId,
@@ -42,6 +38,6 @@ const User = new Schema({
   ],
 });
 
-User.plugin(require("passport-local-mongoose"));
+User.plugin(require("passport-local-mongoose"), {usernameField: 'email'})
 
 module.exports = model("User", User);

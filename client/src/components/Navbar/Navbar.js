@@ -52,7 +52,7 @@ const Navbar = () => {
           <IconButton className={classes.icon} aria-label="search">
             <SearchButton />
           </IconButton>
-          <Drawer/>
+          <Drawer />
         </Toolbar>
       </AppBar>
     </div>
