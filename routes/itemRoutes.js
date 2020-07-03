@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Item, User, Bid, Comment } = require("../models");
+const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 
@@ -21,7 +22,6 @@ router.get("/items", (req, res) => {
 
 // creating new item for sale
 router.post("/items", passport.authenticate("jwt"), async (req, res) => {
-
   let isImage = false
   let filename
   let path = []
@@ -43,6 +43,7 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
     ); 
   }
   }
+   console.log(path)
 
   path = isImage? path : "#"
 
@@ -55,23 +56,24 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
     photos: path,
     keywords: req.body.keywords,
   };
-  Item.create(newItem)
-    .then((item) => {
-      User.findByIdAndUpdate(req.user._id, { $push: { sellItems: item._id } })
-        .then(() =>
-          res.json(newItem)
-        )
-        .catch((err) => console.error(err))
-    })
-    .catch((err) => console.error(err))
+ 
+  // Item.create(newItem)
+  //   .then((item) => {
+  //     User.findByIdAndUpdate(req.user._id, { $push: { sellItems: item._id } })
+  //       .then(() =>
+  //         res.json(newItem)
+  //       )
+  //       .catch((err) => console.error(err))
+  //   })
+  //   .catch((err) => console.error(err))
 });
 
 // update created auction item
-router.put('/items/:id', passport.authenticate("jwt"), (req, res) => {
-  Item.findByIdAndUpdate(req.params.id, { $set: req.body })
-    .then(data => res.json(data))
-    .catch(err => console.error(err))
-})
+// router.put('/items/:id', passport.authenticate("jwt"), (req, res) => {
+//   Item.findByIdAndUpdate(req.params.id, { $set: req.body })
+//     .then(data => res.json(data))
+//     .catch(err => console.error(err))
+// })
 
 // // delete item by id
 // router.delete('/items/:id', passport.authenticate("jwt"), (req, res) => {

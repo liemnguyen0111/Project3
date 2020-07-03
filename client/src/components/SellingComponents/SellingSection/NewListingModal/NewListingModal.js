@@ -47,9 +47,10 @@ export default function FormDialog() {
   const classes = useStyles();
 
   const [category, setCategory] = useState("Art");
-
+  const [files, setFiles] = useState([]);
   const handleSubmit = (event) => {
     event.preventDefault();
+    const formData = new FormData();
     const NewListingInfo = {
       title: event.target.itemTitle.value,
       description: event.target.itemDescription.value,
@@ -59,13 +60,13 @@ export default function FormDialog() {
       dateTimeStart: event.target.dateTimeStart.value,
       dateTimeStop: event.target.dateTimeStop.value,
     };
-    console.log(NewListingInfo);
-    setOpen(false);
-    // createItem(NewListingInfo)
+    formData.append('hi', files);
+    createItem(formData);
   };
 
-  const handleOnChange = (event) => {
-    console.log(event);
+  const handleFilesOnChange = (event) => {
+    event.preventDefault();
+    setFiles(event.target.files);
   };
 
   const [open, setOpen] = React.useState(false);
@@ -93,9 +94,10 @@ export default function FormDialog() {
     ((today.getDate() < 10 ? "0" : "") + (today.getDate() + 5)) +
     "/" +
     today.getFullYear();
-  const time = 
-    ((today.getHours() < 10 ? '0' : '') + today.getHours() % 12 || 12) + ':' +
-    ((today.getMinutes() < 10 ? '0' : '') + today.getMinutes());
+  const time =
+    ((today.getHours() < 10 ? "0" : "") + (today.getHours() % 12) || 12) +
+    ":" +
+    ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
   const hours = today.getHours();
   const ampm = hours >= 12 ? "PM" : "AM";
   const startDate = date + ", " + time + " " + ampm;
@@ -175,14 +177,6 @@ export default function FormDialog() {
                   fullWidth
                 />
               </Grid>
-              {/* <TextField
-                  margin="dense"
-                  name="images"
-                  id="images"
-                  label="Item Images"
-                  type="file"
-                  fullWidth
-                /> */}
               <Grid item xs={12}>
                 <label htmlFor="upload-photo">
                   <input
@@ -191,6 +185,7 @@ export default function FormDialog() {
                     name="upload-photo"
                     label="Add Photos of the Item"
                     type="file"
+                    onChange={handleFilesOnChange}
                     multiple
                   />
                   <Button color="gray" variant="contained" component="span">
