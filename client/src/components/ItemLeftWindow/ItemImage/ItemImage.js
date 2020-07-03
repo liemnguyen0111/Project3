@@ -8,21 +8,21 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) =>
 ({
   root: {
-    display: "block",
+    display: 'block',
+    flexGrow : '1',
+    overflow: "auto",
+    // minHeight : '100%',
     marginLeft: "auto",
     marginRight: "auto",
-    maxWidth: "90%",
-    overflow: "scroll",
-    minHeight : '50vh',
-    maxHeight : '50vh',
+    maxWidth: "80%",
+    overflow: "auto",
     backgroundColor: theme.palette.background.paper,
     '&::-webkit-scrollbar': {
       display: 'none'
     }
   },
   thumbnail: {
-    marginTop: '50px',
-    height: '50%',
+    minHeight: '85vh',
     width: '95%',
     objectFit: 'contain',
   },
@@ -34,8 +34,15 @@ const ItemImage = () => {
   return(
     <div className={classes.root}>
       <Grid item xs={12}>
+
+        <img className={classes.thumbnail} src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit.jpg" alt="" />
         <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
         <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
+        <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
+        <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
+        <img className={classes.thumbnail} src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit.jpg" alt="" />
+      
+
       </Grid>
     </div>
   )

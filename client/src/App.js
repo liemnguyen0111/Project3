@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, createContext } from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -7,6 +8,7 @@ import ItemView from "./pages/ItemView";
 import Home from "./pages/Home";
 import LoginContext from "./utils/LoginContext";
 import UserAPI from "./utils/UserAPI";
+import './App.css'
 
 const { authorizeUser } = UserAPI;
 
