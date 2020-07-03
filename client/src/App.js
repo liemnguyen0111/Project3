@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, createContext } from "react";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -9,6 +8,8 @@ import Home from "./pages/Home";
 import LoginContext from "./utils/LoginContext";
 import UserAPI from "./utils/UserAPI";
 import './App.css'
+import Buying from './pages/Buying'
+import Selling from './pages/Selling'
 
 const { authorizeUser } = UserAPI;
 
@@ -37,7 +38,9 @@ function App() {
             )}
           />
           <Route path="/howitworks" component={HowItWorks} />
+          <Route path="/buying" component={Buying} />
           <Route path="/watching" component={ItemView} />
+          <Route path="/selling" component={Selling} />
         </Switch>
         <Footer />
       </Router>

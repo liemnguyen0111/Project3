@@ -51,9 +51,9 @@ function getStepContent(step) {
     case 2:
       return `Click on an item to see its details. On the details page, click the "WATCH" button to save an item you're watching, click the "BID" button to make an offer to the seller, or click the "BUY" button to buy the item immediately.`;
     case 3:
-      return `Click on the menu icon, then click "Watching" to see items you're watching or bid on. You'll be alerted if you win an item you've bid on.`;
+      return `Click on the menu icon, then click "Buying" to see items you're watching, have placed a bid on, and/or have won. You'll be alerted if you win an item you've bid on.`;
     case 4:
-      return `Click on the menu icon, then click "Selling" to post items for sale and to see items you're selling. On the detail page of any items you're selling you can receive and accept bids, and answer buyer questions about the item. You'll be alerted if a buyer purchases any of the items you're selling.`;
+      return `Click on the menu icon, then click "Selling" to post items for sale, and to see items you're selling, items you've already sold, and items you've shipped to buyers. On the detail page of any items you're selling you can receive and accept bids, and answer buyer questions about the item. You'll be alerted if a buyer purchases any of the items you're selling.`;
     default:
       return 'Unknown step';
   }
