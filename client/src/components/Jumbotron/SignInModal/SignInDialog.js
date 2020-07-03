@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     color: "white",
     borderColor: "white",
   },
-});
+})
 
 export default function SignInDialog({open, setOpen}) {
   const { loginState, setLoginState } = useContext(LoginContext);
@@ -32,20 +32,20 @@ export default function SignInDialog({open, setOpen}) {
     loginUser(userSigninInfo)
       .then(({ data }) => {
         if (data) {
-          localStorage.setItem("user", data);
-          setLoginState(true);
-          // console.log(data);
+          localStorage.setItem("user", data)
+          setLoginState(true)
+          handleClose()
         } else {
-          console.log("Incorrect username or password");
+          console.log("Incorrect username or password")
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
   };
   const classes = useStyles()
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
       <Dialog

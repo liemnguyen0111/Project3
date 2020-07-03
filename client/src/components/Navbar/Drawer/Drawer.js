@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
@@ -16,7 +16,8 @@ import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
-import LoginContext from '../../../utils/LoginContext'
+import LoginContext from "../../../utils/LoginContext";
+import SignInDialog from "../../Jumbotron/SignInModal/SignInDialog";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -35,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Drawer = () => {
-  const {loginState, setLoginState} = useContext(LoginContext)
+  const [open, setOpen] = useState(false);
+
+  const { loginState, setLoginState } = useContext(LoginContext);
 
   const [state, setState] = React.useState({
     right: false,
@@ -80,8 +83,15 @@ const Drawer = () => {
       })}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
+      <SignInDialog
+        onClick={(event) => {
+          event.stopPropagation()
+        }}
+        open={open}
+        setOpen={setOpen}
+      />
       <List>
         {drawerList.map((item, index) => (
           <ListItem button key={item.name} component={Link} to={item.link}>
@@ -98,7 +108,13 @@ const Drawer = () => {
       <Divider />
       <List>
         {!loginState ? (
-          <ListItem button>
+          <ListItem
+            onClick={(event) => {
+              event.stopPropagation();
+              setOpen(true);
+            }}
+            button
+          >
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
