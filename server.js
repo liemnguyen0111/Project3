@@ -34,6 +34,8 @@ passport.use(new JWTStrategy({
   .then(user => cb(null, user))
   .catch(err => cb(err))))
 
+
+
 app.use(require("./routes"));
 app.get("*", (req, res) => {
   res.sendfile(join(__dirname, "client", "build", "index.html"))
