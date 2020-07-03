@@ -116,6 +116,7 @@ export default function SellingSection(props) {
   {
     console.log(itemId)
   }
+  
   return (
     <>
       <Typography className={classes.title}>
