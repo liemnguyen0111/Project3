@@ -7,7 +7,9 @@ import ItemRightWindow from '../../components/ItemRightWindow'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin : '0px 15px 0px 15px',
+    margin : '15px 15px 0px 15px',
+    paddingBottom : '75px',
+  
   }
 }));
 
@@ -17,12 +19,12 @@ const ItemView = () => {
   return (
     <>
       <div className={classes.root}>
-      <Grid container spacing={0}>
+      <Grid container >
         
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} >
          <ItemLeftWindow />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} >
          <ItemRightWindow />
         </Grid>
        

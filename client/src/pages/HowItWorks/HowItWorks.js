@@ -13,6 +13,7 @@ import Box from '@material-ui/core/Box';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    paddingBottom : '70px'
   },
   title: {
     textAlign: 'center',

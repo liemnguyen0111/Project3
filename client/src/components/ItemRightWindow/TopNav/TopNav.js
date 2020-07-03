@@ -4,25 +4,52 @@ import { makeStyles } from '@material-ui/core/styles';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import SaveIcon from '@material-ui/icons/Save';
+import Grid from '@material-ui/core/Grid';
+import BidDialog from '../BidDialog'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // height: '5vh',
-    
+      whiteSpace: 'nowrap',
+      width : '100%',
+      marginLeft : '0',
+      marginRight : '0',
   },
   button: {
-    width: '30%',
-    whiteSpace: "nowrap",
+    width: '28%',
+    // whiteSpace: "nowrap",
     margin: theme.spacing(1),
+    backgroundColor :'#757575',
+    '&:hover':
+    {
+      backgroundColor :'#424242'
+    }
   },
 }));
 
 export default function TopNav() {
   const classes = useStyles();
 
+   const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    console.log('open')
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
+  
     <div className={classes.root}>
+  <BidDialog  handleClickOpen={handleClickOpen} handleClose={handleClose} open={open}/>
+  <Grid
+  container
+  direction="row"
+  justify="space-evenly"
+  alignItems="center"
+>
       <Button
         variant="contained"
         color="primary"
@@ -39,6 +66,7 @@ export default function TopNav() {
         size="small"
         className={classes.button}
         startIcon={<ReceiptIcon />}
+        onClick={handleClickOpen}
       >
         Place Bid
       </Button>
@@ -52,7 +80,8 @@ export default function TopNav() {
       >
         Buy Out
       </Button>
-    
+      </Grid>
     </div>
+    
   );
 }

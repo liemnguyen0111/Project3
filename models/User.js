@@ -1,8 +1,8 @@
-const { model, Schema } = require('mongoose')
+const { model, Schema } = require("mongoose");
 
 const User = new Schema({
-  fName: String,
-  lName: String,
+  firstName: String,
+  lastName: String,
   age: Number,
   address: {
     type: String,
@@ -12,12 +12,6 @@ const User = new Schema({
     type: String,
     unique: true,
   },
-  buyItems: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Item",
-    },
-  ],
   sellItems: [
     {
       type: Schema.Types.ObjectId,
@@ -30,15 +24,20 @@ const User = new Schema({
       ref: "Item",
     },
   ],
+  buyItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
   boughtItems: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item",
     },
   ],
- 
-})
+});
 
-User.plugin(require('passport-local-mongoose'))
+User.plugin(require("passport-local-mongoose"), {usernameField: 'email'})
 
-module.exports = model('User', User)
+module.exports = model("User", User);

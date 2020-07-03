@@ -1,16 +1,21 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Divider } from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    position : 'absolute',
+    height : '60px',
+    width: '100%',
+    bottom: '0'
   },
   footer: {
     width: 'auto',
     marginTop: '20px',
-    marginBottom: '20px',
+    textAlign : 'center',
     color: 'gray'
   },
   textLink: {
@@ -24,7 +29,8 @@ export default function Footer() {
 
     return (
       <div className={classes.root}>
-        <Grid direction="column" alignItems="center" container spacing={1}>
+        <Divider/>
+        <Grid direction="column" alignItems="center" justify="center" container spacing={1}>
             <Typography className={classes.footer}>
             &copy;2020 C A C H E  •  <a href="https://github.com/liemnguyen0111/Project3" target="_blank" className={classes.textLink}>GitHub</a>
             </Typography>

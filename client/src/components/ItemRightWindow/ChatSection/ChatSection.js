@@ -8,17 +8,11 @@ import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-    maxWidth: "90%",
-    overflow: "scroll",
-    minHeight : '45vh',
-    maxHeight : '45vh',
+    flexGrow : '1',
+    overflow: "auto",
+    minHeight : '55vh',
     backgroundColor: theme.palette.background.paper,
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
+    
   },
   bigAvatar: {
     margin: 10,
