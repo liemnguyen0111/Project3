@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Category from '../Category'
+import ItemAPI from '../../../../utils/ItemAPI'
 
 const useStyles = makeStyles({
   modal: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles({
   },
 })
 
+const { createItem } = ItemAPI
 export default function FormDialog() {
   const classes = useStyles();
 
@@ -56,6 +58,8 @@ export default function FormDialog() {
       dateTimeStop: event.target.dateTimeStop.value,
 
     }
+    console.log(NewListingInfo)
+    // createItem(NewListingInfo)
   }
 
   const [open, setOpen] = React.useState(false)
@@ -184,6 +188,7 @@ export default function FormDialog() {
                     name="upload-photo"
                     label="Add Photos of the Item"
                     type="file"
+                    multiple
                   />
                   <Button color="gray" variant="contained" component="span">
                     Choose Photos

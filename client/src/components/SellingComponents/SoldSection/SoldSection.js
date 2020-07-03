@@ -86,7 +86,7 @@ export default function SoldSection(props) {
   return (
     <>
       <Typography className={classes.title}>
-        Processing
+        Sold
           <br />
         <p className={classes.subtitle}>Contact the buyer to arrange payment/delivery. Click 'Shipped' to move item to the Shipped column.</p>
       </Typography>

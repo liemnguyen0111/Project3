@@ -106,10 +106,14 @@ const useStyles = makeStyles((theme) => ({
     color: '#4d4d4d',
     fontSize: '14px',
   },
-}));
+}))
 
 export default function SellingSection(props) {
   
+  const handleSubmit = () => {
+    createItem
+  }
+
   const classes = useStyles();
 
   const handleOnClick = itemId =>

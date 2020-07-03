@@ -18,13 +18,13 @@ const User = new Schema({
       ref: "Item",
     },
   ],
-  shipItems: [
+  soldItems: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item",
     },
   ],
-  soldItems: [
+  shipItems: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item",
@@ -50,6 +50,6 @@ const User = new Schema({
   ],
 });
 
-User.plugin(require("passport-local-mongoose"), {usernameField: 'email'})
+User.plugin(require("passport-local-mongoose"), { usernameField: "email" });
 
 module.exports = model("User", User);

@@ -46,6 +46,12 @@ const Item = new Schema({
     default: false,
     time: Date,
   },
+  dateTimeStart: {
+    type: String
+  },
+  dateTimeStop: {
+    type: String
+  }
 });
 
 module.exports = model("Item", Item);
