@@ -82,8 +82,6 @@ const Drawer = () => {
         [classes.fullList]: anchor === "top" || anchor === "bottom",
       })}
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
-      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <SignInDialog
         onClick={(event) => {
@@ -94,7 +92,7 @@ const Drawer = () => {
       />
       <List>
         {drawerList.map((item, index) => (
-          <ListItem button key={item.name} component={Link} to={item.link}>
+          <ListItem button key={item.name} component={Link} to={item.link}  onClick={toggleDrawer(anchor, false)}>
             <ListItemIcon>
               {index === 0 && <HomeIcon />}
               {index === 1 && <HelpIcon />}
