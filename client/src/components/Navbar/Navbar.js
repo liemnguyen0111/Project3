@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Navbar = ({loginState, setLoginState}) => {
+const Navbar = () => {
   const classes = useStyles()
   
 
@@ -52,7 +52,7 @@ const Navbar = ({loginState, setLoginState}) => {
           <IconButton className={classes.icon} aria-label="search">
             <SearchButton />
           </IconButton>
-          <Drawer loginState={loginState} setLoginState={setLoginState}/>
+          <Drawer />
         </Toolbar>
       </AppBar>
     </div>

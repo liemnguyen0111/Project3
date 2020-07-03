@@ -26,11 +26,10 @@ router.post("/users/register", (req, res) => {
     address,
     age,
     email,
-    username,
     password,
   } = req.body;
   User.register(
-    new User({ firstName, lastName, address, age, email, username }),
+    new User({ firstName, lastName, address, age, email}),
     req.body.password,
     (err, response) => {
       if (err) {
@@ -38,7 +37,7 @@ router.post("/users/register", (req, res) => {
         res.json(err);
       } else {
         User.authenticate()(
-          req.body.username,
+          req.body.email,
           req.body.password,
           (err, user) => {
             if (err) {
@@ -49,7 +48,6 @@ router.post("/users/register", (req, res) => {
             );
           }
         );
-        // res.json(response);
       }
     }
   );
@@ -57,7 +55,7 @@ router.post("/users/register", (req, res) => {
 
 // Login Route
 router.post("/users/login", (req, res) => {
-  User.authenticate()(req.body.username, req.body.password, (err, user) => {
+  User.authenticate()(req.body.email, req.body.password, (err, user) => {
     if (err) {
       console.error(err);
     }

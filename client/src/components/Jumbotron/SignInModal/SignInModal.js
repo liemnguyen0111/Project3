@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +7,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import UserAPI from "../../../utils/UserAPI";
+import LoginContext from "../../../utils/LoginContext";
 
 const { loginUser } = UserAPI;
 
@@ -18,12 +19,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FormDialog({setLoginState}) {
+export default function FormDialog() {
+  const { loginState, setLoginState } = useContext(LoginContext);
   const handleLogin = (event) => {
     // console.log(event);
     event.preventDefault();
     const userSigninInfo = {
-      username: event.target.username.value,
+      email: event.target.email.value,
       password: event.target.password.value,
     };
     // console.log(userSigninInfo)
@@ -71,9 +73,9 @@ export default function FormDialog({setLoginState}) {
             <TextField
               autoFocus
               margin="dense"
-              name="username"
+              name="email"
               label="Email Address"
-              type="username"
+              type="email"
               fullWidth
             />
             <TextField

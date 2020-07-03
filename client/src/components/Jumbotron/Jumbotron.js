@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import SignUpModal from "./SignUpModal";
 import SignInModal from "./SignInModal";
-import UserAPI from "../../utils/UserAPI";
+import UserAPI from "../../utils/UserAPI"
+import LoginContext from '../../utils/LoginContext'
 
 let { authorizeUser } = UserAPI;
 let isLoggedIn = false;
@@ -43,9 +44,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Jumbotron({loginState, setLoginState}) {
-  const classes = useStyles();
+export default function Jumbotron() {
 
+  const classes = useStyles()
+
+  const { loginState, setLoginState } = useContext(LoginContext)
 
   return (
     <div className={classes.root}>

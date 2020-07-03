@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -6,7 +6,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import UserAPI from "../../../utils/UserAPI";
+import UserAPI from "../../../utils/UserAPI"
+import LoginContext from '../../../utils/LoginContext'
 
 const { createUser } = UserAPI;
 
@@ -18,8 +19,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FormDialog({setLoginState}) {
+export default function FormDialog() {
   const classes = useStyles();
+
+  const { loginState, setLoginState } = useContext(LoginContext)
 
   const handleSignup = (event) => {
     event.preventDefault();
@@ -29,9 +32,9 @@ export default function FormDialog({setLoginState}) {
       address: event.target.address.value,
       age: event.target.age.value,
       email: event.target.email.value,
-      username: event.target.username.value,
+      // username: event.target.username.value,
       password: event.target.password.value,
-    };
+    }
     createUser(userSignupInfo)
       .then(({ data }) => {
         if (data.name) {
@@ -116,14 +119,14 @@ export default function FormDialog({setLoginState}) {
               type="email"
               fullWidth
             />
-            <TextField
+            {/* <TextField
               margin="dense"
               name="username"
               id="username"
               label="Username"
               type="username"
               fullWidth
-            />
+            /> */}
             <TextField
               margin="dense"
               name="password"
