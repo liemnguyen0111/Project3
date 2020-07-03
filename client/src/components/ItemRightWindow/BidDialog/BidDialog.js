@@ -3,28 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-
-const useStyles = makeStyles((theme) => ({
-  root:
-  {
-    overFlow: 'hidden',
-    '&*': {
-      // margin: theme.spacing(1),
-      overFlow: 'hidden !important'
-    }
-  },
-  input: {
-    display: 'none',
-  },
-}));
-
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -54,12 +38,31 @@ NumberFormatCustom.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
+const useStyles = makeStyles((theme) => ({
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 'auto',
+    width: 'fit-content',
+  },
+  formControl: {
+    marginTop: theme.spacing(2),
+    minWidth: 120,
+  },
+  formControlLabel: {
+    marginTop: theme.spacing(1),
+  },
+    input: {
+    display: 'none',
+  },
+}));
+
 export default function BidDialog(props) {
   const classes = useStyles();
-  console.log(props)
+ 
   const [values, setValues] = React.useState({
-    numberformat: '',
-  });
+        numberformat: '',
+      });
 
   const handleChange = (event) => {
     setValues({
@@ -78,17 +81,28 @@ export default function BidDialog(props) {
     props.handleClose();
   }
 
+  const handleFilesOnChange = (event) =>
+  {
+    event.preventDefault()
+    console.log(event.target.files)
+
+  }
+
+
+    
   return (
-    <div className={classes.root}>
+    <React.Fragment>
       <Dialog
+        fullWidth={true}
+        maxWidth={'md'}
         open={props.open}
         onClose={props.handleClose}
-      
+        aria-labelledby="max-width-dialog-title"
       >
-   <form enctype="multipart/form-data" onSubmit={handleOnSubmit} style={{ overFlow: 'hidden !important',whiteSpace: "nowrap"}}>
-        <DialogTitle style={{width:'100vw'}}>
-          Place bid
-        </DialogTitle>
+       <form enctype="multipart/form-data" onSubmit={handleOnSubmit} style={{ overFlow: 'hidden !important',whiteSpace: "nowrap"}}>
+        <DialogTitle>
+           Place bid
+         </DialogTitle>
  
         <DialogContent>
 
@@ -99,20 +113,6 @@ export default function BidDialog(props) {
   justify="flex-start"
   alignItems="flex-start"
 >
-
-
-<TextField
-          id="standard-full-width"
-          name='title'
-          label="Label"
-          placeholder="Placeholder"
-          helperText="Full width!"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
 
 <TextField
         label="$ Your Price"
@@ -146,6 +146,7 @@ export default function BidDialog(props) {
         multiple
         type="file"
         name ='files'
+        onChange={handleFilesOnChange}
       />
       <label htmlFor="contained-button-file">
         <Button variant="contained" 
@@ -168,8 +169,8 @@ export default function BidDialog(props) {
           </Button>
         </DialogActions>
    </form>
+
       </Dialog>
-   
-    </div>
+    </React.Fragment>
   );
 }
