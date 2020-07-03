@@ -8,9 +8,6 @@ import SignInModal from "./SignInModal";
 import UserAPI from "../../utils/UserAPI"
 import LoginContext from '../../utils/LoginContext'
 
-let { authorizeUser } = UserAPI;
-let isLoggedIn = false;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
