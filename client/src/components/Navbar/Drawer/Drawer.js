@@ -73,7 +73,6 @@ const Drawer = () => {
   ]
 
   const list = (anchor) => (
-
     <div
       className={clsx(classes.list, {
         [classes.fullList]: anchor === "top" || anchor === "bottom",

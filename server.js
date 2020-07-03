@@ -17,6 +17,8 @@ app.use(express.urlencoded({ extended : true }))
 app.use(express.json())
 app.use(fileUpload());
 
+app.use(require('./routes'))
+
 // Using routes that available on client/build folder that available in index.html file
 app.get('*', (req,res) => 
 {

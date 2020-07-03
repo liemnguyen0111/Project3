@@ -3,20 +3,38 @@ const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
+router.post('/users', (req, res) => {
+   const {
+     firstName,
+     lastName,
+     address,
+     age,
+     email,
+     username,
+     password,
+   } = req.body
+  User.create(firstName, lastName, address, age, email, username, password)
+   .then(data => console.log(data))
+   .catch(err => console.error(err))
+})
+
 // Register Route
 router.post("/users/register", (req, res) => {
-  const { name, email, username } = req.body;
+  console.log('im in the register user route')
+  const { firstName, lastName, address, age, email, username, password } = req.body;
   User.register(
-    new User({ name, email, username }),
+    new User({ firstName, lastName, address, age, email, username }),
     req.body.password,
-    (err) => {
+    (err, response) => {
       if (err) {
-        console.error(err);
+        console.error(err)
+        res.json(err)
       }
-      res.sendStatus(200);
+      else
+      res.json(response);
     }
   );
-});
+})
 
 // Login Route
 router.post("/users/login", (req, res) => {
@@ -25,13 +43,15 @@ router.post("/users/login", (req, res) => {
       console.error(err);
     }
     res.json(user ? jwt.sign({ id: user._id }, process.env.SECRET) : null);
-  });
-});
+  })
+})
 
 router.get("/user/items", passport.authenticate("jwt"), (req, res) => {
   res.json(req.user);
-});
+})
 
 router.get("/users/authorize", passport.authenticate("jwt"), (req, res) => {
   res.sendStatus(200);
-});
+})
+
+module.exports = router
