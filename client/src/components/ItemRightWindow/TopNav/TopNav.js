@@ -5,13 +5,14 @@ import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Grid from '@material-ui/core/Grid';
+import BidDialog from '../BidDialog'
 
 const useStyles = makeStyles((theme) => ({
   root: {
       whiteSpace: 'nowrap',
       width : '100%',
       marginLeft : '0',
-      marginRight : '0'
+      marginRight : '0',
   },
   button: {
     width: '28%',
@@ -28,9 +29,21 @@ const useStyles = makeStyles((theme) => ({
 export default function TopNav() {
   const classes = useStyles();
 
+   const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    console.log('open')
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
   
     <div className={classes.root}>
+  <BidDialog  handleClickOpen={handleClickOpen} handleClose={handleClose} open={open}/>
   <Grid
   container
   direction="row"
@@ -53,6 +66,7 @@ export default function TopNav() {
         size="small"
         className={classes.button}
         startIcon={<ReceiptIcon />}
+        onClick={handleClickOpen}
       >
         Place Bid
       </Button>

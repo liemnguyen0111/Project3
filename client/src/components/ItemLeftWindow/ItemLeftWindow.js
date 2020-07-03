@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     display : 'flex',
     flexFlow : 'column',
     backgroundColor: theme.palette.background.paper,
-    border : '1px solid',
+    border : '1px solid #bdbdbd',
     height : '90vh',
   },
   body: {
