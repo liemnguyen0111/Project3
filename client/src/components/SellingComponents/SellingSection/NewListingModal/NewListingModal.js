@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -6,15 +6,15 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import axios from 'axios'
-import Box from '@material-ui/core/Box';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import Category from '../Category'
-import ItemAPI from '../../../../utils/ItemAPI'
+import axios from "axios";
+import Box from "@material-ui/core/Box";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Category from "../Category";
+import ItemAPI from "../../../../utils/ItemAPI";
 
 const useStyles = makeStyles({
   modal: {
@@ -27,89 +27,102 @@ const useStyles = makeStyles({
     marginLeft: "auto",
     marginRight: "auto",
     maxWidth: "95%",
-    minHeight: '10vh',
-    maxHeight: '10vh',
-    background: '#adadad',
-    alignItems: 'center',
+    minHeight: "10vh",
+    maxHeight: "10vh",
+    background: "#adadad",
+    alignItems: "center",
   },
   plusIcon: {
-    color: 'white',
-    fontSize: '50px',
+    color: "white",
+    fontSize: "50px",
   },
   addItemText: {
-    margin: 'auto',
+    margin: "auto",
   },
-})
+});
 
-const { createItem } = ItemAPI
+const { createItem } = ItemAPI;
+
 export default function FormDialog() {
   const classes = useStyles();
 
+  const [category, setCategory] = useState("Art");
+
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const NewListingInfo = {
-      itemTitle: event.target.itemTitle.value,
-      itemDescription: event.target.itemDescription.value,
-      itemPrice: event.target.itemPrice.value,
-      itemCategory: event.target.itemCategory.value,
-      itemKeywords: event.target.itemKeywords.value,
-      images: event.target.images.value,
+      title: event.target.itemTitle.value,
+      description: event.target.itemDescription.value,
+      price: event.target.itemPrice.value,
+      category: category,
+      keywords: event.target.itemKeywords.value,
       dateTimeStart: event.target.dateTimeStart.value,
       dateTimeStop: event.target.dateTimeStop.value,
-
-    }
-    console.log(NewListingInfo)
+    };
+    console.log(NewListingInfo);
+    setOpen(false);
     // createItem(NewListingInfo)
-  }
+  };
 
-  const [open, setOpen] = React.useState(false)
+  const handleOnChange = (event) => {
+    console.log(event);
+  };
+
+  const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const today = new Date();
-  const date = 
-    ((today.getMonth() < 10 ? '0' : '') + (today.getMonth() + 1)) + '/' + 
-    ((today.getDate() < 10 ? '0' : '') + today.getDate()) + '/' + 
+  const date =
+    (today.getMonth() < 10 ? "0" : "") +
+    (today.getMonth() + 1) +
+    "/" +
+    ((today.getDate() < 10 ? "0" : "") + today.getDate()) +
+    "/" +
     today.getFullYear();
-  const futureDate = 
-    ((today.getMonth() < 10 ? '0' : '') + (today.getMonth() + 1)) + '/' +  
-    ((today.getDate() < 10 ? '0' : '') + (today.getDate() + 5)) + '/' +  
+  const futureDate =
+    (today.getMonth() < 10 ? "0" : "") +
+    (today.getMonth() + 1) +
+    "/" +
+    ((today.getDate() < 10 ? "0" : "") + (today.getDate() + 5)) +
+    "/" +
     today.getFullYear();
-  const time = 
-    ((today.getHours() < 10 ? '0' : '') + today.getHours()) + ':' +
-    ((today.getMinutes() < 10 ? '0' : '') + today.getMinutes());
+  const time =
+    (today.getHours() < 10 ? "0" : "") +
+    today.getHours() +
+    ":" +
+    ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
   const hours = today.getHours();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const startDate = date + ', ' + time + ' ' + ampm;
-  const stopDate = futureDate + ', ' + time + ' ' + ampm;
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const startDate = date + ", " + time + " " + ampm;
+  const stopDate = futureDate + ", " + time + " " + ampm;
 
   return (
     <>
-        <List>
-          <ListItem button
-            className={classes.modal}
-            variant="outlined"
-            color="default"
-            onClick={handleClickOpen}
-          >
-            <Grid container>
-              <Grid item xs={2}>
-                <AddCircleIcon className={classes.plusIcon} />
-              </Grid>
-            <Grid item xs={9} className={classes.addItemText}>
-                <Typography>
-                  Click Here to Sell A New Item
-                </Typography>
-              </Grid>
+      <List>
+        <ListItem
+          button
+          className={classes.modal}
+          variant="outlined"
+          color="default"
+          onClick={handleClickOpen}
+        >
+          <Grid container>
+            <Grid item xs={2}>
+              <AddCircleIcon className={classes.plusIcon} />
             </Grid>
-          </ListItem>
-        </List>
+            <Grid item xs={9} className={classes.addItemText}>
+              <Typography>Click Here to Sell A New Item</Typography>
+            </Grid>
+          </Grid>
+        </ListItem>
+      </List>
 
       <Dialog
         open={open}
@@ -121,7 +134,6 @@ export default function FormDialog() {
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
-
                 <TextField
                   autoFocus
                   margin="dense"
@@ -153,14 +165,7 @@ export default function FormDialog() {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Category
-                  margin="dense"
-                  name="itemCategory"
-                  id="itemCategory"
-                  label="Category"
-                  type="text"
-                  fullWidth
-                />
+                <Category setCategory={setCategory} />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -172,7 +177,7 @@ export default function FormDialog() {
                   fullWidth
                 />
               </Grid>
-                {/* <TextField
+              {/* <TextField
                   margin="dense"
                   name="images"
                   id="images"
@@ -183,7 +188,7 @@ export default function FormDialog() {
               <Grid item xs={12}>
                 <label htmlFor="upload-photo">
                   <input
-                    style={{ display: 'none' }}
+                    style={{ display: "none" }}
                     id="upload-photo"
                     name="upload-photo"
                     label="Add Photos of the Item"
@@ -194,8 +199,8 @@ export default function FormDialog() {
                     Choose Photos
                   </Button>
                 </label>
-              </Grid> 
-              <Grid item xs={12} sm={6}> 
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   margin="dense"
                   name="dateTimeStart"
@@ -222,14 +227,14 @@ export default function FormDialog() {
                     shrink: true,
                   }}
                 />
-              </Grid>  
+              </Grid>
             </Grid>
 
             <DialogActions>
               <Button onClick={handleClose} color="default">
                 Cancel
               </Button>
-              <Button type='submit' onClick={handleClose} color="default">
+              <Button type="submit" color="default">
                 Create Listing
               </Button>
             </DialogActions>

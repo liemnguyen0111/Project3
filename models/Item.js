@@ -4,24 +4,6 @@ const Item = new Schema({
   title: String,
   description: String,
   price: Number,
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  bid: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Bid",
-    },
-  ],
-  topBid: { 
-    type: Schema.Types.ObjectId, 
-    ref: "Bid" 
-  },
-  comment: {
-    type: Schema.Types.ObjectId,
-    ref: "Comment",
-  },
   category: {
     type: String,
     default: "Miscellaneous",
@@ -44,14 +26,31 @@ const Item = new Schema({
   auctionOn: {
     type: Boolean,
     default: false,
-    time: Date,
   },
   dateTimeStart: {
     type: String
   },
   dateTimeStop: {
     type: String
-  }
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  bid: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Bid",
+    },
+  ],
+  topBid: { 
+    type: Schema.Types.ObjectId, 
+    ref: "Bid" 
+  },
+  comment: {
+    type: Schema.Types.ObjectId,
+    ref: "Comment",
+  },
 });
 
 module.exports = model("Item", Item);

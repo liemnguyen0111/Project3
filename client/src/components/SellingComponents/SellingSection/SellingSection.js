@@ -109,10 +109,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function SellingSection(props) {
-  
-  const handleSubmit = () => {
-    createItem
-  }
 
   const classes = useStyles();
 
