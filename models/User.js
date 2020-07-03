@@ -24,6 +24,18 @@ const User = new Schema({
       ref: "Item",
     },
   ],
+  shipItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
+  watchItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
   buyItems: [
     {
       type: Schema.Types.ObjectId,
@@ -38,6 +50,6 @@ const User = new Schema({
   ],
 });
 
-User.plugin(require("passport-local-mongoose"), {usernameField: 'email'})
+User.plugin(require("passport-local-mongoose"), { usernameField: "email" });
 
 module.exports = model("User", User);

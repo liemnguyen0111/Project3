@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    maxWidth: "95%",
+    maxWidth: "100%",
     overflow: "scroll",
     minHeight : '60vh',
     maxHeight : '60vh',
@@ -106,10 +106,10 @@ const useStyles = makeStyles((theme) => ({
     color: '#4d4d4d',
     fontSize: '14px',
   },
-}));
+}))
 
 export default function SellingSection(props) {
-  
+
   const classes = useStyles();
 
   const handleOnClick = itemId =>

@@ -82,7 +82,6 @@ const Drawer = () => {
         [classes.fullList]: anchor === "top" || anchor === "bottom",
       })}
       role="presentation"
-      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <SignInDialog
         onClick={(event) => {

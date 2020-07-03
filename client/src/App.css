@@ -2,6 +2,13 @@
   {
     position : relative;
     min-height: 100vh;
+    overflow-x: hidden
+
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+    
   }
 
   body::-webkit-scrollbar {
