@@ -25,6 +25,9 @@ import SearchButton from "../../components/SearchButton";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    position : 'sticky',
+    top: 0,
+    zIndex : 20
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -148,6 +151,7 @@ const Navbar = () => {
           </IconButton>
         </Toolbar>
       </AppBar>
+      <Divider/>
     </div>
   )
 }

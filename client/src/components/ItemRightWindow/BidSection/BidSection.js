@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     flexGrow : '1',
     overflow: "auto",
-    minHeight : '80vh',
+    minHeight : '65vh',
+    // padding : '0px',
     backgroundColor: theme.palette.background.paper,
   },
   bigAvatar: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   {
     flex: 0.5,
     border : "1px",
+    top: '0',
     borderStyle : "solid",
     borderRadius : "5px",
     marginBottom : '5px',
@@ -69,7 +71,7 @@ export default function BidSection(props) {
         </ListItemIcon>
         <ListItemText primary="Alan L" secondary="Offer : 2016 Hyyndai" />
       </ListItem>
-      {/* <ListItem 
+      <ListItem 
       button 
       onClick={()=>{handleClickOpen('item1')}} 
       className={classes.item}>
@@ -78,8 +80,74 @@ export default function BidSection(props) {
         <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
         </ListItemIcon>
         <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem>
+      </ListItem> 
 
+      <ListItem 
+      button 
+      onClick={()=>{handleClickOpen('item1')}} 
+      className={classes.item}>
+     
+        <ListItemIcon >
+        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
+        </ListItemIcon>
+        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
+      </ListItem> 
+
+      <ListItem 
+      button 
+      onClick={()=>{handleClickOpen('item1')}} 
+      className={classes.item}>
+     
+        <ListItemIcon >
+        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
+        </ListItemIcon>
+        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
+      </ListItem> 
+
+      <ListItem 
+      button 
+      onClick={()=>{handleClickOpen('item1')}} 
+      className={classes.item}>
+     
+        <ListItemIcon >
+        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
+        </ListItemIcon>
+        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
+      </ListItem> 
+
+      <ListItem 
+      button 
+      onClick={()=>{handleClickOpen('item1')}} 
+      className={classes.item}>
+     
+        <ListItemIcon >
+        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
+        </ListItemIcon>
+        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
+      </ListItem> 
+
+      <ListItem 
+      button 
+      onClick={()=>{handleClickOpen('item1')}} 
+      className={classes.item}>
+     
+        <ListItemIcon >
+        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
+        </ListItemIcon>
+        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
+      </ListItem> 
+
+      <ListItem 
+      button 
+      onClick={()=>{handleClickOpen('item1')}} 
+      className={classes.item}>
+     
+        <ListItemIcon >
+        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
+        </ListItemIcon>
+        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
+      </ListItem> 
+{/* 
       <ListItem 
       button 
       onClick={()=>{handleClickOpen('item1')}} 
@@ -101,7 +169,6 @@ export default function BidSection(props) {
         </ListItemIcon>
         <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
       </ListItem>
-
       <ListItem 
       button 
       onClick={()=>{handleClickOpen('item1')}} 
