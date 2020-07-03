@@ -17,11 +17,6 @@ app.use(express.urlencoded({ extended : true }))
 app.use(express.json())
 app.use(fileUpload());
 
-// Using routes that available on client/build folder that available in index.html file
-app.get('*', (req,res) => 
-{
-    res.sendfile(join(__dirname, 'client' , 'build' , 'index.html'))
-})
 
 // User authenticate using passport
 app.use(passport.initialize())
@@ -39,6 +34,14 @@ passport.use(new JWTStrategy({
   .populate('posts')
   .then(user => cb(null, user))
   .catch(err => cb(err))))
+
+  // Using routes that available on client/build folder that available in index.html file
+app.get('*', (req,res) => 
+{
+    res.sendfile(join(__dirname, 'client' , 'build' , 'index.html'))
+})
+
+app.use(require('./routes'))
 
 // Start a connection on port 3001
 require('./config')

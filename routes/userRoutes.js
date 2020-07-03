@@ -35,3 +35,5 @@ router.get("/user/items", passport.authenticate("jwt"), (req, res) => {
 router.get("/users/authorize", passport.authenticate("jwt"), (req, res) => {
   res.sendStatus(200);
 });
+
+module.exports = router 

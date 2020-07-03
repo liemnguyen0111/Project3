@@ -5,16 +5,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import DetailsDialog from '../DetailsDialog';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'block',
     flexGrow : '1',
     overflow: "auto",
+    minHeight : '80vh',
     backgroundColor: theme.palette.background.paper,
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
   },
   bigAvatar: {
     margin: 10,
@@ -52,6 +51,7 @@ export default function BidSection(props) {
   return (
     <>
     {/* <DetailsDialog/> */}
+   
    <List
       component="nav"
       aria-labelledby="nested-list-subheader"
@@ -65,11 +65,11 @@ export default function BidSection(props) {
       className={classes.item}>
      
         <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
+        <Avatar alt="Remy Sharp" src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit.jpg" className={classes.bigAvatar} />
         </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
+        <ListItemText primary="Alan L" secondary="Offer : 2016 Hyyndai" />
       </ListItem>
-      <ListItem 
+      {/* <ListItem 
       button 
       onClick={()=>{handleClickOpen('item1')}} 
       className={classes.item}>
@@ -155,9 +155,9 @@ export default function BidSection(props) {
         <ListItemIcon >
         <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
         </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
+        <ListItemText primary="User" secondary=" 123321Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
       </ListItem>
-     
+      */}
      
     </List>
     </>

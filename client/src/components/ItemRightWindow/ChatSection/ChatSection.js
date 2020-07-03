@@ -10,10 +10,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow : '1',
     overflow: "auto",
+    minHeight : '80vh',
     backgroundColor: theme.palette.background.paper,
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
+    
   },
   bigAvatar: {
     margin: 10,

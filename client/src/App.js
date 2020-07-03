@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import HowItWorks from './pages/HowItWorks'
 import ItemView from './pages/ItemView'
 import Home from './pages/Home'
+import './App.css'
 
 function App() {
   return (
