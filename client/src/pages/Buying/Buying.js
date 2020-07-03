@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import SellingSection from '../../components/SellingComponents/SellingSection'
-import SoldSection from '../../components/SellingComponents/SoldSection'
-import ShippedSection from '../../components/SellingComponents/ShippedSection'
+import WatchingSection from '../../components/BuyingComponents/WatchingSection'
+import BidsSection from '../../components/BuyingComponents/BidsSection'
+import WonSection from '../../components/BuyingComponents/WonSection'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Selling = () => {
+const Buying = () => {
   const classes = useStyles();
 
   return (
@@ -22,13 +22,13 @@ const Selling = () => {
         <Grid container spacing={0}>
 
           <Grid item xs={12} sm={4}>
-            <SellingSection />
+            <WatchingSection />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <SoldSection />
+            <BidsSection />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <ShippedSection />
+            <WonSection />
           </Grid>
 
         </Grid>
@@ -37,4 +37,4 @@ const Selling = () => {
   )
 }
 
-export default Selling
+export default Buying

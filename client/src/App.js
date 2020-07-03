@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import HowItWorks from './pages/HowItWorks'
 import ItemView from './pages/ItemView'
 import Home from './pages/Home'
+import Buying from './pages/Buying'
 import Selling from './pages/Selling'
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
 
         <Route exact path="/" component={Home} />
         <Route path="/howitworks" component={HowItWorks} />
-        <Route path="/watching" component={ItemView} />
+        <Route path="/buying" component={Buying} />
         <Route path="/selling" component={Selling} />
         
       </Switch>

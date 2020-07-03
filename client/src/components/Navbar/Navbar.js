@@ -59,8 +59,8 @@ const drawerList = [
     link : '/howItWorks'
   },
   {
-    name : 'Watching',
-    link : '/watching'
+    name : 'Buying',
+    link : '/buying'
   },
   {
     name : 'Selling',

@@ -9,8 +9,6 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import NewListingModal from './NewListingModal';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const defaultProps = {
   bgcolor: 'background.paper',
@@ -26,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     maxWidth: "95%",
     overflow: "scroll",
-    minHeight : '60vh',
-    maxHeight : '60vh',
+    minHeight : '70vh',
+    maxHeight : '70vh',
     backgroundColor: theme.palette.background.paper,
     '&::-webkit-scrollbar': {
       display: 'none'
@@ -52,29 +50,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '14px',
     marginTop: '-6px'
   },
-  listItem:
-  {
-    // flexgrow: 1,
-    display: "flex",
-    marginLeft: "auto",
-    marginRight: "auto",
-    paddingTop: '20px',
-    maxWidth: "95%",
-    minHeight: '10vh',
-    maxHeight: '10vh',
-    alignItems: 'center',
-  },
-  listNewItem:
-  {
-    display: "flex",
-    marginLeft: "auto",
-    marginRight: "auto",
-    maxWidth: "95%",
-    minHeight: '10vh',
-    maxHeight: '10vh',
-    background: '#adadad',
-    alignItems: 'center',
-  },
   item:
   {
     flex: 0.5,
@@ -82,13 +57,6 @@ const useStyles = makeStyles((theme) => ({
     borderStyle : "solid",
     borderRadius : "5px",
     marginBottom : '5px',
-  },
-  plusIcon: {
-    color: 'white',
-    fontSize: '50px',
-  },
-  addItemText: {
-    margin: 'auto',
   },
   thumbnail: {
     marginTop: '10px',
@@ -102,13 +70,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'gray',
     fontSize: '14px',
   },
-  detailTextNew: {
-    color: '#4d4d4d',
-    fontSize: '14px',
-  },
 }));
 
-export default function SellingSection(props) {
+export default function WatchingSection(props) {
   
   const classes = useStyles();
 
@@ -119,24 +83,20 @@ export default function SellingSection(props) {
   return (
     <>
       <Typography className={classes.title}>
-        Selling
+        Watching
           <br />
-        <p className={classes.subtitle}>Click an item to go to the detail page. There you can chat with buyers and accept offers.</p>
+        <p className={classes.subtitle}>These are items you're watching. To bid or chat with the seller, click an item to go to the detail page.</p>
       </Typography>
       
-
-      <Box textAlign="center" borderColor="text.primary" {...defaultProps} className={classes.listNewItem}>
-        <NewListingModal />
-      </Box>
-
       <Box textAlign="center" borderColor="text.primary" {...defaultProps} className={classes.root}>
+
         <List
           component="nav"
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
 
-          <ListItem button className={classes.item}>
+          <ListItem button className={classes.item}>  
             <Grid container spacing={1}>
               <Grid item xs={3}>
                 <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
@@ -149,11 +109,11 @@ export default function SellingSection(props) {
                   Item Title
                 </Typography>
                 <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
+                  Item description goes here. Look at these features! 
                 </Typography>
               </Grid>
             </Grid>
-          </ListItem>
+          </ListItem>  
 
           <ListItem button className={classes.item}>
             <Grid container spacing={1}>
@@ -192,66 +152,9 @@ export default function SellingSection(props) {
               </Grid>
             </Grid>
           </ListItem>
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
-                <Typography className={classes.itemPrice}>
-                  $230
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>
-                  Item Title
-                </Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img className={classes.thumbnail} src="https://secure.img1-fg.wfcdn.com/im/55776803/resize-h600-w600%5Ecompr-r85/4366/43669260/King+Tutankhamen%2527s+Life+Size+Sarcophagus+Statue.jpg" alt="" />
-                <Typography className={classes.itemPrice}>
-                  $230
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>
-                  Item Title
-                </Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img className={classes.thumbnail} src="https://images.homedepot-static.com/productImages/797b0135-79ff-4196-9644-483ed8ca0a72/svn/paint-buckets-lids-rg580-12-64_1000.jpg" alt="" />
-                <Typography className={classes.itemPrice}>
-                  $230
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>
-                  Item Title
-                </Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
                     
         </List>
       </Box> 
-    </>  
+    </> 
   );
 }

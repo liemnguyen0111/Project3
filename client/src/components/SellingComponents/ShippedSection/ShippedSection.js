@@ -7,7 +7,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 const defaultProps = {
@@ -58,16 +57,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius : "5px",
     marginBottom : '5px',
   },
-  imageArea: {
-    marginRight: '10px',
-  },
   thumbnail: {
     marginTop: '10px',
     width: '90%',
-  },
-  shippedButton: {
-    background: '#5c9c5d',
-    marginTop: '20px',
   },
   detailText: {
     color: 'gray',
@@ -75,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SoldSection(props) {
+export default function ShippedSection(props) {
   
   const classes = useStyles();
 
@@ -86,9 +78,9 @@ export default function SoldSection(props) {
   return (
     <>
       <Typography className={classes.title}>
-        Sold
+        Shipped
           <br />
-        <p className={classes.subtitle}>Contact the buyer to arrange payment/delivery. Click 'Shipped' to move item to the Shipped column.</p>
+        <p className={classes.subtitle}>After you've clicked the 'Shipped' button on an item in the Sold column, the item will move here.</p>
       </Typography>
       
       <Box textAlign="center" borderColor="text.primary" {...defaultProps} className={classes.root}>
@@ -103,9 +95,6 @@ export default function SoldSection(props) {
             <Grid container spacing={1}>
               <Grid item xs={3} className={classes.imageArea}>
                 <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
-                <Button size="small" className={classes.shippedButton}>
-                  Shipped
-                </Button>
               </Grid>
               <Grid item xs={8}>
                 <Typography>
@@ -136,9 +125,6 @@ export default function SoldSection(props) {
             <Grid container spacing={1}>
               <Grid item xs={3} className={classes.imageArea}>
                 <img className={classes.thumbnail} src="https://secure.img1-fg.wfcdn.com/im/55776803/resize-h600-w600%5Ecompr-r85/4366/43669260/King+Tutankhamen%2527s+Life+Size+Sarcophagus+Statue.jpg" alt="" />
-                <Button size="small" className={classes.shippedButton}>
-                  Shipped
-                </Button>
               </Grid>
               <Grid item xs={8}>
                 <Typography>
@@ -169,9 +155,6 @@ export default function SoldSection(props) {
             <Grid container spacing={1}>
               <Grid item xs={3} className={classes.imageArea}>
                 <img className={classes.thumbnail} src="https://images.homedepot-static.com/productImages/797b0135-79ff-4196-9644-483ed8ca0a72/svn/paint-buckets-lids-rg580-12-64_1000.jpg" alt="" />
-                <Button size="small" className={classes.shippedButton}>
-                  Shipped
-                </Button>
               </Grid>
               <Grid item xs={8}>
                 <Typography>
