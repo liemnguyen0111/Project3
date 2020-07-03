@@ -8,7 +8,6 @@ import Divider from '@material-ui/core/Divider'
 import SearchButton from "../../components/SearchButton";
 import Drawer from './Drawer'
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -39,13 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Navbar = () => {
+  
   const classes = useStyles()
   
-
-
-
   return (
     <div className={classes.root}>
         <AppBar position="static" elevation={0} color="inherit">
