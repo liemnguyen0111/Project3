@@ -18,7 +18,19 @@ const User = new Schema({
       ref: "Item",
     },
   ],
+  shipItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
   soldItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
+  watchItems: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item",

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    maxWidth: "95%",
+    maxWidth: "100%",
     overflow: "scroll",
     minHeight : '60vh',
     maxHeight : '60vh',
