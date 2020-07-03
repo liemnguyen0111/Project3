@@ -4,10 +4,10 @@ import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
 import SearchButton from "../../components/SearchButton";
 import Divider from '@material-ui/core/Divider'
 import Drawer from './Drawer'
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,13 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const Navbar = () => {
+  
   const classes = useStyles()
   
-
-
-
   return (
     <div className={classes.root}>
         <AppBar position="static" elevation={0} color="inherit">
