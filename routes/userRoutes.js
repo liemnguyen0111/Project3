@@ -9,10 +9,11 @@ router.post("/users", (req, res) => {
     lastName,
     address,
     age,
+    email,
     username,
     password,
   } = req.body;
-  User.create(firstName, lastName, address, age, username, password)
+  User.create(firstName, lastName, address, age, email, username, password)
     .then((data) => console.log(data))
     .catch((err) => console.error(err));
 });
