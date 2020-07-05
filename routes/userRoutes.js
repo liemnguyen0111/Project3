@@ -3,21 +3,6 @@ const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
-router.post("/users", (req, res) => {
-  const {
-    firstName,
-    lastName,
-    address,
-    age,
-    email,
-    username,
-    password,
-  } = req.body;
-  User.create(firstName, lastName, address, age, email, username, password)
-    .then((data) => console.log(data))
-    .catch((err) => console.error(err));
-});
-
 // Register Route
 router.post("/users/register", (req, res) => {
   const {
@@ -55,7 +40,7 @@ router.post("/users/register", (req, res) => {
 
 // Login Route
 router.post("/users/login", (req, res) => {
-  User.authenticate()(req.body.email, req.body.password, (err, user) => {
+  User.authenticate()(req.body.username, req.body.password, (err, user) => {
     if (err) {
       console.error(err);
     }
