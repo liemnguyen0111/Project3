@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,56 +44,82 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ItemsGrid() {
+export default function ItemsGrid(props) {
   const classes = useStyles();
+  // const [products, setProducts] = useState([])
+
+  // const fetchProds = async (url) => {
+  //   const result = await axios.get(url);
+
+  //   const mydata = result.then((myresult) => {
+  //     return myresult.data;
+
+  //   });
+
+  //   return mydata
+
+  // }
+
+  /*  useEffect(() => {
+     const myprods = fetchProds('path/to/your/API');
+     setProducts((products) => {
+       return [...products, myprods];
+      })
+     
+   }, []) */
+
+
+
+  const hideGrid = { display: 'none', visibility: 'hidden' }
+  const showGrid = { display: 'block', visibility: 'visible' }
 
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
 
-        <Grid item xs={6} sm={3}>
+        <Grid style={props.artCat ? showGrid : hideGrid} item xs={6} sm={3}>
           <a href="https://google.com" className={classes.textLink}>
             <Paper className={classes.paper}>
               <Grid item xs={12}>
                 <Typography className={classes.date}>Ends Jul 3</Typography>
               </Grid>
               <Grid item xs={12}>
-                <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt=""/>
+                <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
               </Grid>
               <Grid item xs={12} className={classes.title}>
                 <Typography><strong>Air Jordan 5 Retro 'Top 3'</strong></Typography>
               </Grid>
               <Grid item xs={12} className={classes.price}>
                 <Typography>
-                    $230
-                </Typography>
-              </Grid>
-            </Paper>
-          </a>
-        </Grid>
-        
-        <Grid item xs={6} sm={3}>
-          <a href="https://google.com" className={classes.textLink}>
-            <Paper className={classes.paper}>
-              <Grid item xs={12}>
-                <Typography className={classes.date}>Ends Jul 3</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <img className={classes.thumbnail} src="https://www.breville.com/content/dam/breville/us/assets/blenders/finished-goods/bbl920/bbl920bss1bus1/images/pdp0.jpg.transform/breville-med/image.jpg" alt=""/>
-              </Grid>
-              <Grid item xs={12} className={classes.title}>
-                <Typography><strong>Air Jordan 5 Retro 'Top 3'</strong></Typography>
-              </Grid>
-              <Grid item xs={12} className={classes.price}>
-                <Typography>
-                    $230
+                  $230
                 </Typography>
               </Grid>
             </Paper>
           </a>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid style={props.collectablesCat ? showGrid : hideGrid} item xs={6} sm={3}>
+          <a href="https://google.com" className={classes.textLink}>
+            <Paper className={classes.paper}>
+              <Grid item xs={12}>
+                <Typography className={classes.date}>Ends Jul 3</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <img className={classes.thumbnail} src="https://www.breville.com/content/dam/breville/us/assets/blenders/finished-goods/bbl920/bbl920bss1bus1/images/pdp0.jpg.transform/breville-med/image.jpg" alt="" />
+              </Grid>
+              <Grid item xs={12} className={classes.title}>
+                <Typography><strong>Air Jordan 5 Retro 'Top 3'</strong></Typography>
+              </Grid>
+              <Grid item xs={12} className={classes.price}>
+                <Typography>
+                  $230
+                </Typography>
+              </Grid>
+            </Paper>
+          </a>
+        </Grid>
+
+        <Grid style={props.fashionCat ? showGrid : hideGrid} item xs={6} sm={3}>
           <a href="https://google.com" className={classes.textLink}>
             <Paper className={classes.paper}>
               <Grid item xs={12}>
@@ -113,7 +140,7 @@ export default function ItemsGrid() {
           </a>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid style={props.homegardenCat ? showGrid : hideGrid} item xs={6} sm={3}>
           <a href="https://google.com" className={classes.textLink}>
             <Paper className={classes.paper}>
               <Grid item xs={12}>
@@ -134,7 +161,7 @@ export default function ItemsGrid() {
           </a>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid style={props.servicesCat ? showGrid : hideGrid} item xs={6} sm={3}>
           <a href="https://google.com" className={classes.textLink}>
             <Paper className={classes.paper}>
               <Grid item xs={12}>
@@ -155,7 +182,7 @@ export default function ItemsGrid() {
           </a>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid style={props.artCat ? showGrid : hideGrid} item xs={6} sm={3}>
           <a href="https://google.com" className={classes.textLink}>
             <Paper className={classes.paper}>
               <Grid item xs={12}>
@@ -175,7 +202,27 @@ export default function ItemsGrid() {
             </Paper>
           </a>
         </Grid>
-  
+
+        <Grid style={props.collectablesCat ? showGrid : hideGrid} item xs={6} sm={3}>
+          <a href="https://google.com" className={classes.textLink}>
+            <Paper className={classes.paper}>
+              <Grid item xs={12}>
+                <Typography className={classes.date}>Ends Jul 3</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <img className={classes.thumbnail} src="https://www.breville.com/content/dam/breville/us/assets/blenders/finished-goods/bbl920/bbl920bss1bus1/images/pdp0.jpg.transform/breville-med/image.jpg" alt="" />
+              </Grid>
+              <Grid item xs={12} className={classes.title}>
+                <Typography><strong>Air Jordan 5 Retro 'Top 3'</strong></Typography>
+              </Grid>
+              <Grid item xs={12} className={classes.price}>
+                <Typography>
+                  $230
+                </Typography>
+              </Grid>
+            </Paper>
+          </a>
+        </Grid>
 
       </Grid>
     </div>
