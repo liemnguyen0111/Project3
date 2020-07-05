@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -12,8 +13,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     flexGrow : '1',
     overflow: "auto",
-    minHeight : '65vh',
-    // padding : '0px',
     backgroundColor: theme.palette.background.paper,
   },
   bigAvatar: {
@@ -29,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
     borderStyle : "solid",
     borderRadius : "5px",
     marginBottom : '5px',
-    overflow : 'hidden !important',
-    whiteSpace: "nowrap",
   }
 }));
 
@@ -71,161 +68,10 @@ export default function BidSection(props) {
         </ListItemIcon>
         <ListItemText primary="Alan L" secondary="Offer : 2016 Hyyndai" />
       </ListItem>
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem> 
+    
+  
+    
 
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem> 
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem> 
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem> 
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem> 
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem> 
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem> 
-{/* 
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem>
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem>
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem>
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem>
-
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item2')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem>
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item3')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem>
-
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item4')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://images.complex.com/complex/image/upload/c_fill,dpr_auto,f_auto,fl_lossy,g_face,q_auto,w_1280/nqyq1tt3zvpcrgyaiaiw.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="User" secondary=" 123321Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ut  consectetur quas, blanditiis sint veritatis ratione molestiae quo nesciunt perspiciatis culpa ipsam. Vero saepe provident, labore modi natus tempore." />
-      </ListItem>
-      */}
-     
     </List>
     </>
   );

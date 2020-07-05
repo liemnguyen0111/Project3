@@ -31,7 +31,7 @@ export default function FormDialog() {
       lastName: event.target.lastName.value,
       address: event.target.address.value,
       age: event.target.age.value,
-      email: event.target.email.value,
+      username: event.target.email.value,
       // username: event.target.username.value,
       password: event.target.password.value,
     }

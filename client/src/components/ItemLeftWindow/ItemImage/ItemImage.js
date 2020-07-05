@@ -22,27 +22,26 @@ const useStyles = makeStyles((theme) =>
     }
   },
   thumbnail: {
-    minHeight: '85vh',
+    // height : '100%',
+    minHeight: '90vh',
     width: '95%',
     objectFit: 'contain',
   },
 }))
 
-const ItemImage = () => {
+const ItemImage = ({photos}) => {
   const classes = useStyles()
-
+  // console.log(props)
   return(
     <div className={classes.root}>
       <Grid item xs={12}>
 
-        <img className={classes.thumbnail} src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit.jpg" alt="" />
-        <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
-        <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
-        <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
-        <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
-        <img className={classes.thumbnail} src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit.jpg" alt="" />
-      
-
+        {photos?photos.map(photo =>
+          <>
+            {console.log(photo)}
+            <img className={classes.thumbnail} src={photo} alt="1" />
+            </>
+          ) : null}
       </Grid>
     </div>
   )

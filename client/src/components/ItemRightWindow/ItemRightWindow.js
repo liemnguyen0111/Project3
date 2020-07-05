@@ -64,19 +64,20 @@ const useStyles = makeStyles((theme) => ({
   body: {
     display : 'flex',
     flexFlow : 'column',
-    position: 'relative',
+    // position: 'absolute',
     height : '90vh',
     backgroundColor: theme.palette.background.paper, 
   },
   view:{
+    height :'100%',
     '&::-webkit-scrollbar': {
       display: 'none'
     }
   },
   bottomNav : 
   {
-    position : 'absolute',
-    bottom : '0',
+    // position : 'sticky',
+    // bottom : '0',
   },
   topNav : 
   {
@@ -89,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputForm:
   {
-    margin : '0px 5px 20px 5px'
+    margin : '0px 5px 25px 5px'
   }
 }));
 
@@ -97,7 +98,7 @@ export default function ItemRightWindow() {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-  const [messages, setMessage] = React.useState([])
+  const [messages, setMessage] = React.useState(['1'])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -122,6 +123,7 @@ export default function ItemRightWindow() {
     }
   }
 
+
   return (
     <div className={classes.root}>
      <div className={classes.body}>
@@ -140,13 +142,11 @@ export default function ItemRightWindow() {
         <TabPanel value={value} index={1} dir={theme.direction}>
 
         <ChatSection messages={messages} />
-        
-          
 
         </TabPanel>
+       
       </SwipeableViews>
-    
-    
+      
       {value? 
       <div className={classes.inputForm}>
         <form onSubmit={handleOnSubmitMessage}>
@@ -182,10 +182,9 @@ export default function ItemRightWindow() {
       :
        null
       }
-      
+
       <BottomNav className={classes.bottomNav} handleChange={handleChange} value={value}/>
    </div> 
- 
    </div>
   );
 }
