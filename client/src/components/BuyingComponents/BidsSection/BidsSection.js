@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import ListSubheader from "@material-ui/core/ListSubheader";
@@ -11,9 +11,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import LoginContext from "../../../utils/LoginContext";
-import UserAPI from '../../../utils/UserAPI'
+import UserAPI from "../../../utils/UserAPI";
 
-const { getUser } = UserAPI
+const { getUser } = UserAPI;
 
 const defaultProps = {
   bgcolor: "background.paper",
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BidsSection(props, {items}) {
+export default function BidsSection(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const { loginState, setLoginState } = useContext(LoginContext);
@@ -84,6 +84,16 @@ export default function BidsSection(props, {items}) {
       setOpen(true);
     }
   };
+  useEffect(
+    () =>
+      getUser()
+        .then(({ data }) => {
+          console.log(data)
+          console.log(data.buyItems)
+        })
+        .catch((err) => console.log(err)),
+    []
+  );
   return (
     <>
       <Typography className={classes.title}>
@@ -106,35 +116,30 @@ export default function BidsSection(props, {items}) {
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          <Link
-            onClick={handleOnClick}
-            to={loginState ? `/ItemView/:search?${items.item._id}` : "/"}
-            className={classes.link}
-          >
-            <ListItem button className={classes.item}>
-              <Grid container spacing={1}>
-                <Grid item xs={3} className={classes.imageArea}>
-                  <img
-                    className={classes.thumbnail}
-                    src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png"
-                    alt=""
-                  />
-                  <Typography className={classes.itemPrice}>$230</Typography>
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography>Item Title</Typography>
-                  <Typography className={classes.detailText}>
-                    Item description goes here. Look at these features!
-                  </Typography>
-                  <hr />
-                  <Typography>Your Offer</Typography>
-                  <Typography className={classes.detailText}>
-                    2 Twinkies and a Donut
-                  </Typography>
-                </Grid>
+          <ListItem button className={classes.item}>
+            
+            <Grid container spacing={1}>
+              <Grid item xs={3} className={classes.imageArea}>
+                <img
+                  className={classes.thumbnail}
+                  src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png"
+                  alt=""
+                />
+                <Typography className={classes.itemPrice}>$230</Typography>
               </Grid>
-            </ListItem>
-          </Link>
+              <Grid item xs={8}>
+                <Typography>Item Title</Typography>
+                <Typography className={classes.detailText}>
+                  Item description goes here. Look at these features!
+                </Typography>
+                <hr />
+                <Typography>Your Offer</Typography>
+                <Typography className={classes.detailText}>
+                  2 Twinkies and a Donut
+                </Typography>
+              </Grid>
+            </Grid>
+          </ListItem>
         </List>
       </Box>
     </>
