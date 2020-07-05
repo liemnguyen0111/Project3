@@ -24,26 +24,24 @@ router.get("/items/:id", (req, res) => {
 
 // creating new item for sale
 router.post("/items", passport.authenticate("jwt"), async (req, res) => {
+
   let path = []
   const url = req.protocol + '://' + req.get('host')
   if (req.files) {
   const file = req.files.imgCollection
-  const length = file.length || 1
-   for(let i = 0; i < length; i++ )
+   for(let i = 0; i < file.length; i++ )
   {
-     await (file.length?file[i]:file).mv(
-      `./client/public/images/` + (file.length?file[i]:file).name.split(' ').join('_'),
+     await file[i].mv(
+      `./client/public/images/` + file[i].name,
         (err) => {
         if (err) {
           console.log('failed to upload')
         } else {
-        
           isImage = true;
         }
       }
     ); 
-     path.push(`/images/` + (file.length?file[i]:file).name.split(' ').join('_'))
-     console.log(path)
+     path.push(`/images/` + file[i].name)
   }
 }
 
