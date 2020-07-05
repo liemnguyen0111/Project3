@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Jumbotron from '../../components/Jumbotron'
 import Category from '../../components/Category'
+import Grid from "@material-ui/core/Grid";
 import ItemsGrid from '../../components/ItemsGrid'
 import ItemAPI from '../../utils/ItemAPI'
 
@@ -38,8 +39,7 @@ const Home = ({loginState, setLoginState}) => {
   return (
     <div className={classes.root}>
       <Jumbotron loginState={loginState} setLoginState={setLoginState}/>
-      <Category setCategory={handleCategory}/>
-      <ItemsGrid items={items}/>
+      <Category />
     </div>
   )
 }

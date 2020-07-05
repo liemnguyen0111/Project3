@@ -3,6 +3,20 @@ const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
+router.post("/users", (req, res) => {
+  const {
+    firstName,
+    lastName,
+    address,
+    age,
+    username,
+    password,
+  } = req.body;
+  User.create(firstName, lastName, address, age, username, password)
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err));
+});
+
 // Register Route
 router.post("/users/register", (req, res) => {
   const {
