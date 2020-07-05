@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     alignSelf: 'center',
     color: '#616161',
+    textDecoration: 'none',
   },
   icon: {
     alignSelf: 'center',
@@ -46,9 +47,9 @@ const Navbar = () => {
     <div className={classes.root}>
         <AppBar position="static" elevation={0} color="inherit">
         <Toolbar className={classes.toolbar}>
-          <Typography className={classes.title} variant="h4">
+          <Typography className={classes.title} variant="h4"><a href="/" className={classes.title}>
             C A C H E
-          </Typography>
+          </a></Typography>
           <IconButton className={classes.icon} aria-label="search">
             <SearchButton />
           </IconButton>

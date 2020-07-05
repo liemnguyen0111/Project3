@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     position : 'absolute',
     height : '60px',
-    width: '95%',
+    width: '100%',
     bottom: '0'
   },
   footer: {
