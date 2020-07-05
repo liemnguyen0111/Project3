@@ -25,7 +25,7 @@ const Item = new Schema({
   },
   auctionOn: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   dateTimeStart: {
     type: String

@@ -8,7 +8,7 @@ const User = new Schema({
     type: String,
     default: "",
   },
-  email: {
+  username: {
     type: String,
     unique: true,
   },
@@ -50,6 +50,6 @@ const User = new Schema({
   ],
 });
 
-User.plugin(require("passport-local-mongoose"), { usernameField: "email" });
+User.plugin(require("passport-local-mongoose"));
 
 module.exports = model("User", User);

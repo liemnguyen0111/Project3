@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -22,9 +23,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-start',
   },
   title: {
-    flexGrow: 1,
     alignSelf: 'center',
     color: '#616161',
+    textDecoration :'none'
+  },
+  space: {
+    flexGrow: 1,
   },
   icon: {
     alignSelf: 'center',
@@ -46,8 +50,17 @@ const Navbar = () => {
     <div className={classes.root}>
         <AppBar position="static" elevation={0} color="inherit">
         <Toolbar className={classes.toolbar}>
-          <Typography className={classes.title} variant="h4">
+        <Typography 
+          className={classes.title} 
+          variant="h4"
+          component={Link}
+          to='/'
+          >
             C A C H E
+          </Typography>
+          <Typography 
+          className={classes.space} 
+          >
           </Typography>
           <IconButton className={classes.icon} aria-label="search">
             <SearchButton />

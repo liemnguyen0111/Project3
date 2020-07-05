@@ -6,23 +6,31 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import axios from 'axios'
+import LoginContext from '../../utils/LoginContext'
+import SignInDialog from "../../components/Jumbotron/SignInModal/SignInDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    margin:'15px',
     '& > *': {
       // margin: theme.spacing(1),
     },
   },
-  textLink: {
-    textDecoration: 'none',
-  },
   paper: {
-    padding: theme.spacing(2),
+    position: 'relative',
+    padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    margin: '15px',
-    // borderStyle: 'solid',
+    '&:hover':
+    {
+      cursor : 'pointer'
+    },
+  },
+  link:{
+    textDecoration : 'none',
+    // padding: theme.spacing(1),
+    marginTop  : '10px'
   },
   date: {
     float: 'left',
@@ -37,11 +45,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: '20px',
     color: 'black',
+    '&:hover':
+    {
+      textDecoration : 'underline'
+    }
   },
   price: {
-    marginTop: '20px',
-    marginBottom: '10px'
-  },
+    marginTop : '15px',
+    marginBottom: '10px',
+  }
 }));
 
 export default function ItemsGrid(props) {
@@ -73,6 +85,16 @@ export default function ItemsGrid(props) {
   const hideGrid = { display: 'none', visibility: 'hidden' }
   const showGrid = { display: 'block', visibility: 'visible' }
 
+  const [open, setOpen] = React.useState(false);
+  const { loginState, setLoginState } = useContext(LoginContext)
+  
+  const handleOnClick = () =>
+  {
+    if(!loginState)
+    {
+      setOpen(true)
+    }
+  }
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
@@ -164,23 +186,26 @@ export default function ItemsGrid(props) {
         <Grid style={props.servicesCat ? showGrid : hideGrid} item xs={6} sm={3}>
           <a href="https://google.com" className={classes.textLink}>
             <Paper className={classes.paper}>
+       <SignInDialog open={open} setOpen={setOpen}/>
+      <Grid container spacing={2} >
+
+      {props.items.map((item) =>
+        <Grid item xs={6} sm={3}>
+          <Link 
+          onClick={handleOnClick}
+          to={loginState? `/ItemView/:search?${item._id}` : '/' }
+          className={classes.link}
+          >
+            <Paper  
+            className={classes.paper}
+            >
               <Grid item xs={12}>
-                <Typography className={classes.date}>Ends Jul 3</Typography>
+      <Typography className={classes.date}>Ends {item.dateTimeStop.split(','[0])}</Typography>
               </Grid>
               <Grid item xs={12}>
-                <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
+                <img className={classes.thumbnail} src={item.photos[0]} alt="IMG"/>
               </Grid>
               <Grid item xs={12} className={classes.title}>
-                <Typography><strong>Air Jordan 5 Retro 'Top 3'</strong></Typography>
-              </Grid>
-              <Grid item xs={12} className={classes.price}>
-                <Typography>
-                  $230
-                </Typography>
-              </Grid>
-            </Paper>
-          </a>
-        </Grid>
 
         <Grid style={props.artCat ? showGrid : hideGrid} item xs={6} sm={3}>
           <a href="https://google.com" className={classes.textLink}>
@@ -190,17 +215,14 @@ export default function ItemsGrid(props) {
               </Grid>
               <Grid item xs={12}>
                 <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
+          <Typography noWrap><strong>{item.title}</strong></Typography>
               </Grid>
-              <Grid item xs={12} className={classes.title}>
-                <Typography><strong>Air Jordan 5 Retro 'Top 3'</strong></Typography>
+              <Grid item xs={12} >
+                <Typography className={classes.price}>  ${item.price}</Typography>
               </Grid>
-              <Grid item xs={12} className={classes.price}>
-                <Typography>
-                  $230
-                </Typography>
-              </Grid>
-            </Paper>
-          </a>
+             
+            </Paper> 
+            </Link>
         </Grid>
 
         <Grid style={props.collectablesCat ? showGrid : hideGrid} item xs={6} sm={3}>
@@ -224,6 +246,8 @@ export default function ItemsGrid(props) {
           </a>
         </Grid>
 
+      )}
+      
       </Grid>
     </div>
   );
