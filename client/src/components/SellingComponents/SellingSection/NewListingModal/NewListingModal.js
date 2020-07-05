@@ -47,7 +47,8 @@ export default function FormDialog() {
   const classes = useStyles();
 
   const [category, setCategory] = useState("Art");
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -60,8 +61,19 @@ export default function FormDialog() {
       dateTimeStart: event.target.dateTimeStart.value,
       dateTimeStop: event.target.dateTimeStop.value,
     };
-    formData.append('hi', files);
-    createItem(formData);
+
+    if(files)
+      {
+        for (const key of Object.keys(files)) {
+      formData.append('imgCollection', files[key])}
+        }
+
+        for (const key of Object.keys(NewListingInfo)) {
+          formData.append(key,NewListingInfo[key])
+        }
+   
+    createItem(formData)
+    .then(data=>console.log(data));
   };
 
   const handleFilesOnChange = (event) => {

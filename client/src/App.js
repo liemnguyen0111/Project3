@@ -39,7 +39,7 @@ function App() {
           />
           <Route path="/howitworks" component={HowItWorks} />
           <Route path="/buying" component={Buying} />
-          <Route path="/watching" component={ItemView} />
+          <Route path="/ItemView/:search?" name='search' component={ItemView} />
           <Route path="/selling" component={Selling} />
         </Switch>
         <Footer />

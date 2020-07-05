@@ -25,11 +25,11 @@ router.post("/users/register", (req, res) => {
     lastName,
     address,
     age,
-    email,
+    username,
     password,
   } = req.body;
   User.register(
-    new User({ firstName, lastName, address, age, email}),
+    new User({ firstName, lastName, address, age, username}),
     req.body.password,
     (err, response) => {
       if (err) {
@@ -37,7 +37,7 @@ router.post("/users/register", (req, res) => {
         res.json(err);
       } else {
         User.authenticate()(
-          req.body.email,
+          req.body.username,
           req.body.password,
           (err, user) => {
             if (err) {
