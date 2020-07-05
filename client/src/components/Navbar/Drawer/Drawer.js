@@ -36,6 +36,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Drawer = () => {
+  const handleOnClick = () => {
+    if (!loginState) {
+      setOpen(true);
+    }
+  };
+
   const [open, setOpen] = useState(false);
 
   const { loginState, setLoginState } = useContext(LoginContext);
@@ -85,23 +91,60 @@ const Drawer = () => {
     >
       <SignInDialog
         onClick={(event) => {
-          event.stopPropagation()
+          event.stopPropagation();
         }}
         open={open}
         setOpen={setOpen}
       />
       <List>
-        {drawerList.map((item, index) => (
-          <ListItem button key={item.name} component={Link} to={item.link}  onClick={toggleDrawer(anchor, false)}>
-            <ListItemIcon>
-              {index === 0 && <HomeIcon />}
-              {index === 1 && <HelpIcon />}
-              {index === 2 && <VisibilityIcon />}
-              {index === 3 && <MonetizationOnIcon />}
-            </ListItemIcon>
-            <ListItemText primary={item.name} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          key="home"
+          component={Link}
+          to="/"
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItem>
+        <ListItem
+          button
+          key="howitworks"
+          component={Link}
+          to="/howitworks"
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <ListItemIcon>
+            <HelpIcon />
+          </ListItemIcon>
+          <ListItemText primary="How it Works" />
+        </ListItem>
+        <ListItem
+          button
+          key="buying"
+          component={Link}
+          to="/buying"
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <ListItemIcon>
+            <VisibilityIcon />
+          </ListItemIcon>
+          <ListItemText primary="Buying" />
+        </ListItem>
+        <ListItem
+          button
+          key="selling"
+          component={Link}
+          to="/selling"
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <ListItemIcon>
+            <MonetizationOnIcon />
+          </ListItemIcon>
+          <ListItemText primary="Selling" />
+        </ListItem>
       </List>
       <Divider />
       <List>
