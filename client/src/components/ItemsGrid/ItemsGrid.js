@@ -222,7 +222,7 @@ export default function ItemsGrid(props) {
               </Grid>
              
             </Paper> 
-            </Link>
+         
         </Grid>
 
         <Grid style={props.collectablesCat ? showGrid : hideGrid} item xs={6} sm={3}>
