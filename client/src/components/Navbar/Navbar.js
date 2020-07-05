@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -22,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-start',
   },
   title: {
-    flexGrow: 1,
     alignSelf: 'center',
     color: '#616161',
     textDecoration: 'none',

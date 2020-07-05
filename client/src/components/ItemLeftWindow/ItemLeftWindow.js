@@ -36,14 +36,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ItemLeftWindow = () => {
+const ItemLeftWindow = ({info}) => {
   const classes = useStyles();
-
+  const data = info[0]
+  if(data)
+  {
+    console.log(data.photos)
+  }
   return (
     <div className={classes.root}>
       <Box textAlign="center" className={classes.body} borderColor="text.primary" {...defaultProps}>
        <Timer/>
-        <ItemImage />
+        <ItemImage photos={data?data.photos:[]}/>
         <Grid item xs={12} style={{bottom: '0', left :'0',right:'0', position :'absolute'}}>
           <Typography className={classes.title}>
             <strong>Air Jordan 5 Retro 'Top 3'</strong>

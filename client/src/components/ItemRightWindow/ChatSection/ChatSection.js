@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow : '1',
     overflow: "auto",
-    minHeight : '55vh',
     backgroundColor: theme.palette.background.paper,
     
   },
@@ -32,13 +31,6 @@ export default function ChatSection({messages}) {
 
   const classes = useStyles();
 
-  // const messagesEndRef = useRef(null);
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-  // };
- 
-  // useEffect(scrollToBottom, [messages]);
-
   return (
    <List
       component="nav"
@@ -54,7 +46,7 @@ export default function ChatSection({messages}) {
       <ListItemText primary="User" secondary={message}/>
     </ListItem>
       )}
-      {/* <div ref={messagesEndRef} /> */}
+
     </List>
   );
 }

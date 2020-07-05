@@ -1,65 +1,58 @@
 const router = require("express").Router();
 const { Item, User, Bid, Comment } = require("../models");
+const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 
 // returns all items signed in or not
 router.get("/items", (req, res) => {
-  Item.find()
+  Item.find({isBought : false})
     .populate("user")
     .then((items) => res.json(items))
     .catch((err) => console.error(err));
 });
 
-// signed in
-// router.get("/items", passport.authenticate("jwt"), (req, res) => {
-//   Item.find()
-//     .populate("author")
-//     .then((items) => res.json(items))
-//     .catch((err) => console.error(err));
-// });
+
+// returns all items signed in or not
+router.get("/items/:id", (req, res) => {
+  Item.find({_id : req.params.id})
+    .populate("user")
+    .then((items) => res.json(items))
+    .catch((err) => console.error(err));
+});
+
 
 // creating new item for sale
 router.post("/items", passport.authenticate("jwt"), async (req, res) => {
 
-  let isImage = false
-  let filename
   let path = []
+  const url = req.protocol + '://' + req.get('host')
   if (req.files) {
-    const file = req.files.filename
-    for(let i = 0; i < file.length; i++ )
+  const file = req.files.imgCollection
+   for(let i = 0; i < file.length; i++ )
   {
-    await file[i].mv(
-      `./assets/Image/` + file[i].name,
-      async (err) => {
+     await file[i].mv(
+      `./client/public/images/` + file[i].name,
+        (err) => {
         if (err) {
-          res.send(err)
+          console.log('failed to upload')
         } else {
-          res.send("sucessfully to uploaded");
-          path.push(`./assets/Image/` + filename.name)
           isImage = true;
         }
       }
     ); 
+     path.push(`/images/` + file[i].name)
   }
-  }
+}
 
-  path = isImage? path : "#"
+  req.body['photos'] = path
+  req.body['user'] = req.user._id
 
-  const newItem = {
-    title: req.body.title,
-    description: req.body.body,
-    user: req.user._id,
-    price: req.body.price,
-    category: req.body.category,
-    photos: path,
-    keywords: req.body.keywords,
-  };
-  Item.create(newItem)
+  Item.create(req.body)
     .then((item) => {
       User.findByIdAndUpdate(req.user._id, { $push: { sellItems: item._id } })
         .then(() =>
-          res.json(newItem)
+          res.json(req.body)
         )
         .catch((err) => console.error(err))
     })
@@ -67,11 +60,11 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
 });
 
 // update created auction item
-router.put('/items/:id', passport.authenticate("jwt"), (req, res) => {
-  Item.findByIdAndUpdate(req.params.id, { $set: req.body })
-    .then(data => res.json(data))
-    .catch(err => console.error(err))
-})
+// router.put('/items/:id', passport.authenticate("jwt"), (req, res) => {
+//   Item.findByIdAndUpdate(req.params.id, { $set: req.body })
+//     .then(data => res.json(data))
+//     .catch(err => console.error(err))
+// })
 
 // // delete item by id
 // router.delete('/items/:id', passport.authenticate("jwt"), (req, res) => {
