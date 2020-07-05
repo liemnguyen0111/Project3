@@ -67,8 +67,8 @@ const Drawer = () => {
       link: "/howItWorks",
     },
     {
-      name: "Watching",
-      link: "/watching",
+      name: "Buying",
+      link: "/buying",
     },
     {
       name: "Selling",
