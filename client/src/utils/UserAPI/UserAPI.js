@@ -6,7 +6,7 @@ const UserAPI = {
   authorizeUser: () => axios.get('/api/users/authorize',  {headers: {
       'Authorization': `Bearer ${localStorage.getItem("user")}`,
     }}),
-  // getUser: () => axios.get("/api/user/:id"),
+  getUser: () => axios.get("/api/user/:id"),
   // deleteUser: (id) => axios.delete(`/api/users/${id}`),
   // updateUser: (id, updates) => axios.put(`/api/users/${id}`, updates)
 }

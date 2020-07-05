@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ItemsGrid(props) {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
+  const [ open, setOpen ] = React.useState(false);
   const { loginState, setLoginState } = useContext(LoginContext)
   
   const handleOnClick = () =>
