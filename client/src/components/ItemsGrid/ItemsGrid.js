@@ -97,7 +97,7 @@ export default function ItemsGrid(props) {
               </Grid>
              
             </Paper> 
-         
+         </Link>
         </Grid>
       )}
       
