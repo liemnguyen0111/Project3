@@ -32,7 +32,6 @@ const Selling = () => {
   {
       getUser()
       .then(({data}) => {
-        console.log(data)
         setItems(data)
       })
       .catch(err => console.error(err))
