@@ -6,12 +6,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography'
-
+import ItemDialog from '../ItemDialog'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'block',
-    flexGrow : '1',
+    flexGrow: '1',
     overflow: "auto",
     backgroundColor: theme.palette.background.paper,
   },
@@ -23,20 +23,20 @@ const useStyles = makeStyles((theme) => ({
   item:
   {
     flex: 0.5,
-    border : "1px",
+    border: "1px",
     top: '0',
-    borderStyle : "solid",
-    borderRadius : "5px",
-    marginBottom : '5px',
+    borderStyle: "solid",
+    borderRadius: "5px",
+    marginBottom: '5px',
   }
 }));
 
-export default function BidSection(props) {
-  
+export default function BidSection({ bid }) {
+
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
-  const [current, setCurrent] = React.useState('');
+  const [current, setCurrent] = React.useState([]);
 
   const handleClickOpen = (itemInfo) => {
     setCurrent(itemInfo)
@@ -45,34 +45,55 @@ export default function BidSection(props) {
 
   const handleClose = () => {
     setOpen(false);
-  };
-  
+  }
+
   return (
     <>
-    {/* <DetailsDialog/> */}
-   
-   <List
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      className={classes.root}
-    >
-       
+      <ItemDialog
+        info={current}
+        handleClickOpen={handleClickOpen}
+        handleClose={handleClose}
+        open={open}
+      />
 
-      <ListItem 
-      button 
-      onClick={()=>{handleClickOpen('item1')}} 
-      className={classes.item}>
-     
-        <ListItemIcon >
-        <Avatar alt="Remy Sharp" src="https://www.extremetech.com/wp-content/uploads/2019/12/SONATA-hero-option1-764A5360-edit.jpg" className={classes.bigAvatar} />
-        </ListItemIcon>
-        <ListItemText primary="Alan L" secondary="Offer : 2016 Hyyndai" />
-      </ListItem>
-    
-  
-    
+      <List
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+        className={classes.root}
+      >
+        {bid.map(bidItem =>
+          (
+            <>
+              <ListItem
+                button
+                onClick={() => { handleClickOpen(bidItem) }}
+                className={classes.item}>
 
-    </List>
+                <ListItemIcon >
+                  {console.log(bidItem.photos[0])}
+                  {bidItem.photos[0] ? < Avatar alt={bidItem.photos[0]}
+                    src={`${bidItem.photos[0]}`}
+                    className={classes.bigAvatar} /> : <Avatar alt="N/A"
+                      src={bidItem.photos[0]}
+                      className={classes.bigAvatar} />}
+
+
+
+                </ListItemIcon>
+                <Typography noWrap>
+                  <ListItemText primary={`${bidItem.user.firstName} ${bidItem.user.lastName}`} secondary={bidItem.description} />
+
+                </Typography>
+              </ListItem>
+            </>
+          ))}
+
+
+
+
+
+
+      </List>
     </>
   );
 }

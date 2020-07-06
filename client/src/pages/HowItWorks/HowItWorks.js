@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import './HowItWorks.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,8 +21,6 @@ const useStyles = makeStyles((theme) => ({
     color: '#616161',
     fontWeight: '300',
     fontSize: '40px',
-    borderTop: '1px solid gray',
-    borderBottom: '1px solid gray',
     marginTop: '10px',
     padding: '5px',
   },
@@ -80,12 +79,15 @@ export default function HowItWorks() {
     <div className={classes.root}>
       <Grid container spacing={3} >
         <Grid item xs={12}>
-          <Typography className={classes.title}>
-            How It Works
-          </Typography>
+          <div className={'fade-in one'}>
+            <Typography className={classes.title}>
+              How It Works
+            </Typography>
+          </div>
         </Grid>
         <Grid item xs> </Grid>
         <Grid item xs={10}>
+          <div className={'fade-in two'}>
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((label, index) => (
               <Step key={label}>
@@ -115,6 +117,7 @@ export default function HowItWorks() {
               </Step>
             ))}
           </Stepper>
+          </div>
           {activeStep === steps.length && (
             <Paper square elevation={0} className={classes.resetContainer}>
               <Typography>You&apos;re ready to use C A C H E!</Typography>

@@ -1,10 +1,11 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios'
 import ItemAPI from '../../utils/ItemAPI'
 import ItemLeftWindow from "../../components/ItemLeftWindow";
 import ItemRightWindow from "../../components/ItemRightWindow";
+import './ItemView.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,68 +21,79 @@ class ItemView extends Component {
   //  let classes = useStyles();
   // const id = location
   state = {
-    leftWindow : {
-      title : '',
-      photos : [],
-      timeStart : '',
-      timeEnd : '',
+    leftWindow: {
+      title: '',
+      photos: [],
+      timeStart: '',
+      timeEnd: '',
     },
-    rightWindow : {
-      price : [],
-      isUserItem : []
+    rightWindow: {
+      price: '',
+      isUserItem: false,
+      bid: [],
+      topBid: [],
+      comment: [],
+      isWatch : false
     }
   }
 
-  componentWillMount()
-  {
+  componentWillMount() {
     const id = this.props.location.search.split('?')[1]
     getItem(id)
-    .then(({data}) => {
-      // let leftWindow = JSON.parse(JSON.stringify(this.state.leftWindow))
-      let leftWindow = {
-        title : data[0].title,
-        photos : data[0].photos,
-        timeStart : data[0].dateTimeStart,
-        timeEnd : data[0].dateTimeEnd,
-      }
-      console.log(this.state)
-      // let rightWindow = JSON.parse(JSON.stringify(this.state.rightWindow))
-  
-      let rightWindow = {
-        price : data[0].price,
-        isUserItem : data[1].isUserItem
-      }
+      .then(({ data }) => {
+        // let leftWindow = JSON.parse(JSON.stringify(this.state.leftWindow))
+        let leftWindow = {
+          title: data[0].title,
+          description: data[0].description,
+          photos: data[0].photos,
+          timeStart: data[0].dateTimeStart,
+          timeEnd: data[0].dateTimeEnd,
+        }
+
+        // let rightWindow = JSON.parse(JSON.stringify(this.state.rightWindow))
+
+        let rightWindow = {
+          price: data[0].price,
+          isUserItem: data[1].isUserItem,
+          bid: data[0].bid,
+          topBid: data[0].topBid,
+          comment: data[0].comment,
+          isWatch : data[2].isWatch
+        }
         console.log(data)
-      this.setState({
-        leftWindow, rightWindow
+        this.setState({
+          leftWindow, rightWindow
+        })
+        console.log(rightWindow)
       })
-      console.log(this.state)
-    })
-    .catch(err => console.error(err))
+      .catch(err => console.error(err))
   }
-  render()
-  {
+  render() {
     return (
       <>
         <div style={{
-       
-            flexGrow: 1,
-            margin: "15px 15px 0px 15px",
-            paddingBottom: "75px",
+
+          flexGrow: 1,
+          margin: "15px 15px 0px 15px",
+          paddingBottom: "75px",
         }}>
           <Grid container >
             <Grid item xs={12} sm={6}>
-              <ItemLeftWindow info={this.state.leftWindow}/>
+              <div className={'fade-in one'}>
+                <ItemLeftWindow info={this.state.leftWindow}/>
+              </div>  
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow}/>
+              <div className={'fade-in two'}>
+                <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow}/>
+              </div>  
             </Grid>
           </Grid>
         </div>
       </>
     );
   }
-  
+
 };
 
 export default ItemView;

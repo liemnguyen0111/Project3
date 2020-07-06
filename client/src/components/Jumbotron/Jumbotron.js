@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     fontSize: "40px",
     textAlign: "center",
-    lineHeight: "120%",
+    lineHeight: "120%", 
   },
   background: {
     background: "linear-gradient(#c9caca, #373737)",
@@ -48,11 +48,12 @@ export default function Jumbotron() {
   const { loginState, setLoginState } = useContext(LoginContext)
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root}
+    >
       <Box className={classes.background}>
         <Grid direction="column" alignItems="center" container spacing={1}>
           <Grid item xs={12} direction="row">
-            <Typography variant="h5" className={classes.headline}>
+            <Typography variant="h5" className={classes.headline} noWrap>
               Buy, sell, barter, trade... anything.
             </Typography>
           </Grid>

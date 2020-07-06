@@ -92,7 +92,6 @@ export default function SoldSection({soldItems, setOnShip, onShip}) {
     <>
       <Typography className={classes.title}>
         Sold
-        <Divider />
         <p className={classes.subtitle}>
           Contact the buyer to arrange payment/delivery. Click 'Shipped' to move
           item to the Shipped column.

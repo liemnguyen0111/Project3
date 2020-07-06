@@ -13,6 +13,9 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import ItemAPI from '../../utils/ItemAPI'
+
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,55 +53,56 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
-    display : 'flex',
-    flexFlow : 'column',
+    display: 'flex',
+    flexFlow: 'column',
     backgroundColor: theme.palette.background.paper,
-    border : '1px solid #bdbdbd',
-    borderLeft : 'none',
-    height : '90vh',
+    border: '1px solid #bdbdbd',
+    borderLeft: 'none',
+    height: '90vh',
     [theme.breakpoints.down('xs')]: {
-      borderLeft : '1px solid #bdbdbd',
-      marginTop :'15px'
-  }
+      borderLeft: '1px solid #bdbdbd',
+      marginTop: '15px'
+    }
   },
   body: {
-    display : 'flex',
-    flexFlow : 'column',
+    display: 'flex',
+    flexFlow: 'column',
     // position: 'absolute',
-    height : '90vh',
-    backgroundColor: theme.palette.background.paper, 
+    height: '90vh',
+    backgroundColor: theme.palette.background.paper,
   },
-  view:{
-    height :'100%',
+  view: {
+    height: '100%',
     '&::-webkit-scrollbar': {
       display: 'none'
     }
   },
-  bottomNav : 
+  bottomNav:
   {
     // position : 'sticky',
     // bottom : '0',
   },
-  topNav : 
+  topNav:
   {
     height: '20px',
-    marginLeft : '0',
-    marginRight : '0',
+    marginLeft: '0',
+    marginRight: '0',
     whiteSpace: 'nowrap',
-    width : '100%',
-     
+    width: '100%',
+
   },
   inputForm:
   {
-    margin : '0px 5px 25px 5px'
+    margin: '0px 5px 25px 5px'
   }
 }));
+
+const { createComment } = ItemAPI
 
 export default function ItemRightWindow(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-  const [messages, setMessage] = React.useState(['1'])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -108,85 +112,85 @@ export default function ItemRightWindow(props) {
     setValue(index);
   };
 
-  const handleOnSubmitMessage = event =>
-  {
+  const handleOnSubmitMessage = event => {
     event.preventDefault()
-    if(event.keycode === 13  && messages || !event.keycode && messages)
-    {
-      // let messages = JSON.parse(JSON.stringify(message.messages))
-
-      // messages.push(event.target.message.value)
-      // setMessage({ ...message, messages, temp: '' })
-      setMessage(m => [...m, event.target.message.value]);
+    if (event.keycode === 13 && event.target.message.value || !event.keycode && event.target.message.value) {
+      createComment({
+        body: event.target.message.value,
+        item: props.id
+      })
+        .then(data => console.log(data))
+        .catch(err => console.error(err))
       event.target.message.focus()
       event.target.reset()
     }
   }
 
 
+
   return (
     <div className={classes.root}>
-     <div className={classes.body}>
-     <TopBid/>
-   
-     {props.info.isUserItem?  null : 
-     <TopNav className={classes.topNav} id={props.id} info={props.info}/>
-     }
-    
-     <SwipeableViews  className={classes.view}
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <BidSection/>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+      <div className={classes.body}>
+        <TopBid topBid={props.info.topBid} />
 
-        <ChatSection messages={messages} />
+        {props.info.isUserItem ? null :
+          <TopNav className={classes.topNav} id={props.id} info={props.info} />
+        }
 
-        </TabPanel>
-       
-      </SwipeableViews>
-      
-      {value? 
-      <div className={classes.inputForm}>
-        <form onSubmit={handleOnSubmitMessage}>
-  
-        <TextField
-          id="outlined-full-width"
-          name="message"
-          style={{ height: "5vh" }}
-          placeholder="Send a message"
-          fullWidth
-          variant="outlined"
-         
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="start">
-                  <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        endIcon={<Icon>send</Icon>}
-      >
-        Send
-      </Button>
-              </InputAdornment>
-            ),
-          }}
-          
-        />  
-        
-     </form>
-      </div> 
-      :
-       null
-      }
+        <SwipeableViews className={classes.view}
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <BidSection bid={props.info.bid} />
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
 
-      <BottomNav className={classes.bottomNav} handleChange={handleChange} value={value}/>
-   </div> 
-   </div>
+            <ChatSection messages={props.info.comment} />
+
+          </TabPanel>
+
+        </SwipeableViews>
+
+        {value ?
+          <div className={classes.inputForm}>
+            <form onSubmit={handleOnSubmitMessage}>
+
+              <TextField
+                id="outlined-full-width"
+                name="message"
+                style={{ height: "5vh" }}
+                placeholder="Send a message"
+                fullWidth
+                variant="outlined"
+
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        endIcon={<Icon>send</Icon>}
+                      >
+                        Send
+                      </Button>
+                    </InputAdornment>
+                  ),
+                }}
+
+              />
+
+            </form>
+          </div>
+          :
+          null
+        }
+
+        <BottomNav className={classes.bottomNav} handleChange={handleChange} value={value} />
+      </div>
+    </div>
   );
 }

@@ -11,45 +11,46 @@ import Timer from './Timer'
 
 const defaultProps = {
   bgcolor: 'background.paper',
-  style: { width: '100%', height: '100%'},
+  style: { width: '100%', height: '100%' },
 };
 
 const useStyles = makeStyles((theme) => ({
   root:
   {
-    display : 'flex',
-    flexFlow : 'column',
+    display: 'flex',
+    flexFlow: 'column',
     backgroundColor: theme.palette.background.paper,
-    border : '1px solid #bdbdbd',
-    height : '90vh',
+    border: '1px solid #bdbdbd',
+    height: '90vh',
   },
   body: {
-    display : 'flex',
-    flexFlow : 'column',
+    display: 'flex',
+    flexFlow: 'column',
     position: 'relative',
-    height : '90vh',
-    backgroundColor: theme.palette.background.paper, 
+    height: '90vh',
+    backgroundColor: theme.palette.background.paper,
   },
   title: {
     marginTop: '10px',
     color: '#616161',
+
   }
 }));
 
-const ItemLeftWindow = ({info}) => {
+const ItemLeftWindow = ({ info }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Box textAlign="center" className={classes.body} borderColor="text.primary" {...defaultProps}>
-       <Timer/>
-        <ItemImage photos={info.photos}/>
-        <Grid item xs={12} style={{bottom: '0', left :'0',right:'0', position :'absolute'}}>
+        <Timer />
+        <ItemImage photos={info.photos} />
+        <Grid item xs={12} style={{ bottom: '0', left: '0', right: '0', position: 'absolute' }}>
           <Typography className={classes.title} noWrap>
-                    <strong>{info.title}</strong>
+            <strong>{info.title}</strong>
           </Typography>
           <Button>
-            <DetailsDialog />
+            <DetailsDialog info={info} />
           </Button>
         </Grid>
       </Box>

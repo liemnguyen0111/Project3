@@ -8,6 +8,7 @@ import ItemsGrid from '../../components/ItemsGrid'
 import PaginationRange from '../../components/PaginationRange'
 import ItemAPI from '../../utils/ItemAPI'
 import ItemContext from '../../utils/ItemContext'
+import './Home.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,8 +28,11 @@ const Home = ({loginState, setLoginState}) => {
   const classes = useStyles();
 
   return (
+    
     <div className={classes.root}>
-       <Jumbotron loginState={loginState} setLoginState={setLoginState}/>
+      <div className={'fade-in one'}>
+      <Jumbotron loginState={loginState} setLoginState={setLoginState} />
+      </div>
      
       <ItemContext.Consumer>
         {
@@ -36,11 +40,14 @@ const Home = ({loginState, setLoginState}) => {
           ( 
             <>
 
-            <Category setCategory={handleCategory} category={category}/>
+            <div className={'fade-in two'}>
+              <Category setCategory={handleCategory} category={category}/>
+            </div>
         
-            <ItemsGrid items={items} />
-            {/* <PaginationRange pages={pages} setNewPage={setNewPage} newPage={newPage}/> */}
-      
+            <div className={'fade-in three'}>
+              <ItemsGrid items={items} />
+              {/* <PaginationRange pages={pages} setNewPage={setNewPage} newPage={newPage}/> */}
+            </div>
 
             </>
           )

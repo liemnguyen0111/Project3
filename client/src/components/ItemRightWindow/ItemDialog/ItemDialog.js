@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,8 +9,8 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
+import ItemPhoto from './ItemPhoto'
 
 const styles = (theme) => ({
   root: {
@@ -51,33 +52,27 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-const DetailsDialog = ({ info }) => {
-  const [open, setOpen] = React.useState(false);
+// const [ info, setInfo ] = useState([])
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+export default function ItemDialog(props) {
 
   return (
     <div>
-      <Button size="medium" color="default" onClick={handleClickOpen}>
-        Details <KeyboardArrowUpIcon />
-      </Button>
-      <Dialog fullWidth={true} maxWidth={"md"} onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle style={{ marginRight: '18px', textAlign: 'center' }} id="customized-dialog-title" onClose={handleClose}>
-          {info.title}
+      <ItemPhoto />
+      <Dialog
+        fullWidth={true}
+        maxWidth={"md"}
+        onClose={props.handleClose} aria-labelledby="customized-dialog-title" open={props.open}>
+        <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
+
+          {props.info.user ? `${props.info.user.firstName} ${props.info.user.lastName}` : ''}
         </DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            {info.description}
+            {props.info.description}
           </Typography>
         </DialogContent>
       </Dialog>
-    </div >
+    </div>
   );
 }
-
-export default DetailsDialog

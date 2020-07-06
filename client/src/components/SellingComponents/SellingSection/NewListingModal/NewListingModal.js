@@ -103,11 +103,11 @@ export default function FormDialog() {
     (today.getMonth() < 10 ? "0" : "") +
     (today.getMonth() + 1) +
     "/" +
-    ((today.getDate() < 10 ? "0" : "") + (today.getDate() + 5)) +
+    (((today.getDate() + 5) < 10 ? "0" : "") + (today.getDate() + 5)) +
     "/" +
     today.getFullYear();
   const time =
-    ((today.getHours() < 10 ? "0" : "") + (today.getHours() % 12) || 12) +
+    ((today.getHours() < 10 ? "0" : "") + (today.getHours() % 12 || 12)) +
     ":" +
     ((today.getMinutes() < 10 ? "0" : "") + today.getMinutes());
   const hours = today.getHours();
