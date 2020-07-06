@@ -5,8 +5,55 @@ const passport = require("passport");
 
 router.get("/users", passport.authenticate("jwt"), (req, res) => {
 
+  // .populate({ 
+  //   path: 'boughtItems',
+  //   populate: {
+  //     path: 'bid',
+  //     model: 'Bid',
+  //     populate : {
+  //       path :'item',
+  //       model : 'Item',
+  //        populate: {
+  //          path : 'topBid',
+  //          model : 'Bid'
+  //        }
+  //     }
+  //   } 
+  // })
+
 User.findById(req.user._id)
-  .populate(["watchItems", "buyItems", "boughtItems", "sellItems", "soldItems", "shipItems"])
+  .populate(["watchItems", "sellItems", "shipItems"])
+  .populate({ 
+    path: 'buyItems',
+    populate: {
+      path: 'bid',
+      model: 'Bid'
+    } 
+ })
+ .populate({ 
+  path: 'boughtItems',
+  populate: [{
+    path: 'topBid',
+    model: 'Bid',
+  },
+  {
+    path: 'user',
+    model: 'User',
+  }
+ ]
+})
+.populate({ 
+  path: 'soldItems',
+  populate: [{
+    path: 'topBid',
+    model: 'Bid',
+  },
+  {
+    path: 'user',
+    model: 'User',
+  }
+ ]
+})
   .then(data => 
     {
       console.log(data)

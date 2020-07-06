@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import UserAPI from '../../utils/UserAPI'
 import SellingSection from '../../components/SellingComponents/SellingSection'
 import SoldSection from '../../components/SellingComponents/SoldSection'
 import ShippedSection from '../../components/SellingComponents/ShippedSection'
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,8 +14,28 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const { getUser } = UserAPI
+
 const Selling = () => {
   const classes = useStyles();
+
+  const [ items, setItems ] = useState({
+    sellItems : [],
+    soldItems : [],
+    shipItems : []
+  })
+
+  const [ onShip , setOnShip ] = useState(false)
+
+  useEffect(() =>
+  {
+      getUser()
+      .then(({data}) => {
+        console.log(data)
+        setItems(data)
+      })
+      .catch(err => console.error(err))
+  },[onShip])
 
   return (
     <>
@@ -23,13 +43,13 @@ const Selling = () => {
         <Grid container spacing={0}>
 
           <Grid item xs={12} sm={4}>
-            <SellingSection />
+            <SellingSection sellItems={items.sellItems}/>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <SoldSection />
+          <Grid item xs={12} sm={4} >
+            <SoldSection soldItems={items.soldItems} setOnShip={setOnShip} onShip={onShip}/>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <ShippedSection />
+          <Grid item xs={12} sm={4} >
+            <ShippedSection shipItems={items.shipItems}/>
           </Grid>
 
         </Grid>

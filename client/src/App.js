@@ -20,6 +20,9 @@ function App() {
   const [loginState, setLoginState] = useState(false);
   const [items, setItems] = useState([]);
   const [category, setCategory] = useState('All');
+  const [pages, setPages ] = useState(2)
+  const [newPage, setNewPage ] = useState(1)
+  const [onPageChange, setOnPageChange] = useState(false);
 
   useEffect(() => {
     authorizeUser()
@@ -30,30 +33,38 @@ function App() {
         console.error(err);
       });
 
-      getAllItems(category)
+      getAllItems({category, page : newPage - 1})
       .then(({data}) => {
-        setItems(data)
+       
+        setPages(Math.ceil(data.count / 12))
+        setItems(data.items)
       })
       .catch(err => console.error(err))
 
-  }, [category]);
+  }, [category,onPageChange,newPage]);
 
   const handleCategory = (event) =>
   {
     event.preventDefault()
+   setNewPage(0)
    setCategory(event.target.value)
   }
 
   const handleSearch = (event) =>
   {
     event.preventDefault()
-    console.log(event.target.value)
   }
   
   return (
   
     <LoginContext.Provider value={{loginState, setLoginState}}>
-      <ItemContext.Provider value={{items, setItems, category, handleCategory}}>
+      <ItemContext.Provider value={{
+        items, setItems, 
+        category, handleCategory , setCategory,
+        onPageChange, setOnPageChange,
+        pages , setPages,
+        newPage , setNewPage
+        }}>
       <Router>
         <Navbar />
         <Switch>

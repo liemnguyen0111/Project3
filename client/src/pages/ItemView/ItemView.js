@@ -20,8 +20,16 @@ class ItemView extends Component {
   //  let classes = useStyles();
   // const id = location
   state = {
-    leftWindow : [],
-    rightWindow : []
+    leftWindow : {
+      title : '',
+      photos : [],
+      timeStart : '',
+      timeEnd : '',
+    },
+    rightWindow : {
+      price : [],
+      isUserItem : []
+    }
   }
 
   componentWillMount()
@@ -29,16 +37,25 @@ class ItemView extends Component {
     const id = this.props.location.search.split('?')[1]
     getItem(id)
     .then(({data}) => {
-      let leftWindow = JSON.parse(JSON.stringify(this.state.leftWindow))
-      leftWindow.push({
+      // let leftWindow = JSON.parse(JSON.stringify(this.state.leftWindow))
+      let leftWindow = {
         title : data[0].title,
         photos : data[0].photos,
         timeStart : data[0].dateTimeStart,
-        timeEnd : data[0].dateTimeEnd
-      })
+        timeEnd : data[0].dateTimeEnd,
+      }
+      console.log(this.state)
+      // let rightWindow = JSON.parse(JSON.stringify(this.state.rightWindow))
+  
+      let rightWindow = {
+        price : data[0].price,
+        isUserItem : data[1].isUserItem
+      }
+        console.log(data)
       this.setState({
-        leftWindow
+        leftWindow, rightWindow
       })
+      console.log(this.state)
     })
     .catch(err => console.error(err))
   }
@@ -57,7 +74,7 @@ class ItemView extends Component {
               <ItemLeftWindow info={this.state.leftWindow}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ItemRightWindow id={this.props.location.search.split('?')[1]}/>
+              <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow}/>
             </Grid>
           </Grid>
         </div>

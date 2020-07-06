@@ -47,10 +47,10 @@ const Item = new Schema({
     type: Schema.Types.ObjectId, 
     ref: "Bid" 
   },
-  comment: {
+  comment: [{
     type: Schema.Types.ObjectId,
     ref: "Comment",
-  },
+  }],
 });
 
 module.exports = model("Item", Item);

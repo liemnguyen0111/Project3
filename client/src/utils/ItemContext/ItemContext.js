@@ -4,5 +4,9 @@ export default createContext({
   category : 'All',
   items: [],
   setItems: () => {},
-  setCategory: () => {}
+  setCategory: () => {},
+  pages : 0,
+  setPages : () => {},
+  newPages : 0,
+  setNewPages : () => {}
 })
