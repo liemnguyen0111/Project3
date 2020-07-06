@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Category = () => {
+const Category = (props) => {
   const classes = useStyles();
   const list = [
     "Art",
@@ -28,8 +28,6 @@ const Category = () => {
     "Tech",
   ];
 
-  const handleOnChange = (event) => {};
-
   return (
     <>
       <Grid container direction="row" justify="flex-end" alignItems="center">
@@ -37,8 +35,8 @@ const Category = () => {
           <InputLabel shrink htmlFor="age-native-label-placeholder">
             Categories
           </InputLabel>
-          <NativeSelect onChange={handleOnChange}>
-            <option value="">All</option>
+          <NativeSelect onChange={props.setCategory} value={props.category}>
+            <option value="All">All</option>
             {list.map((item) => (
               <option key={item} value={item}>
                 {item}

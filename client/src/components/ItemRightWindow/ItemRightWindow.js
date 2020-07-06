@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ItemRightWindow() {
+export default function ItemRightWindow(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -128,7 +128,7 @@ export default function ItemRightWindow() {
     <div className={classes.root}>
      <div className={classes.body}>
      <TopBid/>
-     <TopNav className={classes.topNav}/>
+     <TopNav className={classes.topNav} id={props.id}/>
    
 
      <SwipeableViews  className={classes.view}
