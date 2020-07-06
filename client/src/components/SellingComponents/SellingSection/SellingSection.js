@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import NewListingModal from "./NewListingModal";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import DeleteListingModal from "./DeleteListingModal";
 
 const defaultProps = {
   bgcolor: "background.paper",
@@ -103,6 +104,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#4d4d4d",
     fontSize: "14px",
   },
+  deleteButton: {
+    marginTop: '10px',
+    float: 'right',
+  }
 }));
 
 export default function SellingSection({sellItems}) {
@@ -118,7 +123,7 @@ export default function SellingSection({sellItems}) {
         Selling
         <br />
         <p className={classes.subtitle}>
-          Click an item to go to the detail page. There you can chat with buyers
+          Click an item's image to go to the detail page. There you can chat with buyers
           and accept offers.
         </p>
       </Typography>
@@ -144,25 +149,28 @@ export default function SellingSection({sellItems}) {
           className={classes.root}
         >
             {sellItems.map(item =>  
-              <ListItem button 
+              <ListItem 
               className={classes.item}
-              component={Link}
-              to={`/ItemView/:search?${item._id}`}
               >
               <Grid container spacing={1}>
                 <Grid item xs={3}>
-                  <img
-                    className={classes.thumbnail}
-                    src={item.photos[0]}
-                    alt={'No Image'}
-                  />
-                  <Typography className={classes.itemPrice}>{item.price}</Typography>
+                  <ListItem button
+                      component={Link}
+                      to={`/ItemView/:search?${item._id}`}>
+                    <img
+                      className={classes.thumbnail}
+                      src={item.photos[0]}
+                      alt={'No Image'}
+                    />
+                  </ListItem>
+                  <Typography className={classes.itemPrice}>${item.price}</Typography>
                 </Grid>
                 <Grid item xs={8}>
                   <Typography noWrap>{item.title}</Typography>
                   <Typography className={classes.detailText} noWrap>
                     {item.description}
                   </Typography>
+                    <DeleteListingModal />
                 </Grid>
               </Grid>
             </ListItem>
