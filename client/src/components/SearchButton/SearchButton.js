@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +7,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import ItemContext from '../../utils/ItemContext'
 import { makeStyles } from "@material-ui/core/styles";
 
 // const useStyles = makeStyles((theme) => ({
@@ -19,12 +20,11 @@ export default function SearchButton() {
   // const classes = useStyles()
   const [open, setOpen] = React.useState(false);
 
-
-
   const [searchState, setSearchState] = React.useState({})
 
   const handleInputChange = (event) => {
     setSearchState({ ...searchState, [event.target.name]: event.target.value })
+
   };
 
   const handleClickOpen = () => {

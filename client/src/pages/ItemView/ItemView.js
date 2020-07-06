@@ -57,7 +57,7 @@ class ItemView extends Component {
               <ItemLeftWindow info={this.state.leftWindow}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ItemRightWindow />
+              <ItemRightWindow id={this.props.location.search.split('?')[1]}/>
             </Grid>
           </Grid>
         </div>
