@@ -9,10 +9,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     position : 'absolute',
     height : '60px',
-    width: '99%',
-    bottom: '0',
-    left:'0',
-    right:'0'
+    width: '100%',
+    bottom: '0'
   },
   footer: {
     width: 'auto',
