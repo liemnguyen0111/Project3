@@ -10,7 +10,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import LoginContext from "../../../utils/LoginContext";
+import Divider from "@material-ui/core/Divider";
 import UserAPI from "../../../utils/UserAPI";
 
 const { getUser } = UserAPI;
@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     borderStyle: "solid",
     borderRadius: "5px",
     marginBottom: "5px",
+    textDecoration : 'none'
   },
   imageArea: {
     marginRight: "10px",
@@ -73,31 +74,17 @@ const useStyles = makeStyles((theme) => ({
     color: "gray",
     fontSize: "14px",
   },
+  itemPrice:{
+    textAlign: 'center',
+  }
 }));
 
-export default function BidsSection(props) {
+export default function BidsSection({bidItems}) {
   const classes = useStyles();
-  const [ buyItems, setBuyItems ] = useState(null)
-  const [open, setOpen] = React.useState(false);
-  const { loginState, setLoginState } = useContext(LoginContext);
-  const handleOnClick = () => {
-    if (!loginState) {
-      setOpen(true);
-    }
-  };
-  useEffect(
-    () =>
-      getUser()
-        .then(({ data }) => {
-          // console.log(data)
-          setBuyItems(data.buyItems)
-          console.log(data)
-        })
-        .catch((err) => console.log(err)),
-    []
-  );
+
   return (
     <>
+    {console.log(bidItems)}
       <Typography className={classes.title}>
         Bids
         <br />
@@ -118,27 +105,30 @@ export default function BidsSection(props) {
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          {buyItems && buyItems.map(buyItem => {
+          {bidItems.map(item => {
             return (
-              <ListItem button className={classes.item}>
+              <ListItem button 
+              component={Link}
+              to={`/ItemView/:search?${item._id}`}
+              className={classes.item}
+              >
                 <Grid container spacing={1}>
                   <Grid item xs={3} className={classes.imageArea}>
-                    <img
-                      className={classes.thumbnail}
-                      src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png"
-                      alt=""
-                    />
-                    <Typography className={classes.itemPrice}>{buyItem.price}</Typography>
+                  <img className={classes.thumbnail} src={item.photos[0]} alt="" />
+                <Typography className={classes.itemPrice}>
+                  {item.price? `$${item.price}`: null}
+                </Typography>
                   </Grid>
+
                   <Grid item xs={8}>
-                    <Typography>Item Title</Typography>
-                    <Typography className={classes.detailText}>
-                      Item description goes here. Look at these features!
+                <Typography noWrap>{item.title}</Typography>
+                    <Typography className={classes.detailText} noWrap>
+                      {item.description}
                     </Typography>
-                    <hr />
-                    <Typography>Your Offer</Typography>
+                    <Divider />
+                    <Typography>Your Latest Offer</Typography>
                     <Typography className={classes.detailText}>
-                      2 Twinkies and a Donut
+                      {item.bid[item.bid.length - 1 ].description}
                     </Typography>
                   </Grid>
                 </Grid>

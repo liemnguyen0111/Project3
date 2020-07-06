@@ -10,6 +10,7 @@ import SignInDialog from "../../components/Jumbotron/SignInModal/SignInDialog";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    height : '100%',
     margin:'15px',
     '& > *': {
       // margin: theme.spacing(1),
@@ -85,7 +86,17 @@ export default function ItemsGrid(props) {
       <Typography className={classes.date}>Ends {item.dateTimeStop.split(','[0])}</Typography>
               </Grid>
               <Grid item xs={12}>
-                <img className={classes.thumbnail} src={item.photos[0]} alt="IMG"/>
+                {(item.photos.length > 0)?
+                   <img className={classes.thumbnail} src={item.photos[0]} 
+                   onError={(e)=>{ if (e.target.src !== `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`) 
+                   { e.target.src=`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`; } }}
+                    alt='IMG'/>
+                :
+                <img className={classes.thumbnail} src={`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`}
+               
+                 alt='IMG'/>
+                }
+              
               </Grid>
               <Grid item xs={12} className={classes.title}>
 

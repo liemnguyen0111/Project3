@@ -1,6 +1,9 @@
   body 
   {
+    display : 'flex';
     position : relative;
+    flex-grow: 1;
+    flex-flow : 'column';
     min-height: 100vh;
     overflow-x: hidden;
   }

@@ -27,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'center',
     color: '#616161',
     textDecoration: 'none',
+    '&:hover':
+    {
+      cursor : 'pointer'
+    }
+  },
+  space:
+  {
+    flexGrow : 1
   },
   icon: {
     alignSelf: 'center',
@@ -49,18 +57,37 @@ const Navbar = () => {
   
   return (
     <div className={classes.root}>
-        <AppBar position="static" elevation={0} color="inherit">
+        <ItemContext.Consumer>
+        {
+          ({ onPageChange , setOnPageChange, setCategory }) =>
+          ( 
+            <>
+             <AppBar position="static" elevation={0} color="inherit">
         <Toolbar className={classes.toolbar}>
-          <Typography className={classes.title} variant="h4"><a href="/" className={classes.title}>
+          <Typography 
+          component={Link}
+          to='/'
+          className={classes.title} 
+          variant="h4"
+          onClick={() => {
+            setOnPageChange(!onPageChange)
+            setCategory('All')
+          }}
+          >
             C A C H E
-          </a></Typography>
+          </Typography>
+          <Typography className={classes.space}/>
           <IconButton className={classes.icon} aria-label="search">
             <SearchButton />
           </IconButton>
-          <Drawer />
+          <Drawer setOnPageChange={setOnPageChange} onPageChange={onPageChange} setCategory={setCategory}/>
         </Toolbar>
       </AppBar>
       <Divider/>
+           </>
+          )}
+          </ItemContext.Consumer>
+       
     </div>
   )
 }

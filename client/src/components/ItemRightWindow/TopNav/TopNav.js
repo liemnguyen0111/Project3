@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const { userWatch } = ItemAPI
+const { userWatch, itemSold } = ItemAPI
 
 export default function TopNav(props) {
   const classes = useStyles();
@@ -35,7 +35,6 @@ export default function TopNav(props) {
    const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    console.log('open')
     setOpen(true);
   };
 
@@ -45,9 +44,17 @@ export default function TopNav(props) {
 
   const handleOnClickWatch = () =>
   {
+    console.log('watching')
     userWatch({ postId : props.id })
     .then(data => console.log(data))
     .catch(err => console.error(err))
+  }
+
+  const handleOnBuyOut = () =>
+  {
+      itemSold({price : props.info[0].price, postId : props.id})
+      .then(data => console.log(data))
+      .catch(err => console.error(err))
   }
 
   return (
@@ -88,6 +95,7 @@ export default function TopNav(props) {
         size="small"
         className={classes.button}
         startIcon={<LocalAtmIcon />}
+        onClick={handleOnBuyOut}
       >
         Buy Out
       </Button>

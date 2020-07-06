@@ -128,9 +128,11 @@ export default function ItemRightWindow(props) {
     <div className={classes.root}>
      <div className={classes.body}>
      <TopBid/>
-     <TopNav className={classes.topNav} id={props.id}/>
    
-
+     {props.info.isUserItem?  null : 
+     <TopNav className={classes.topNav} id={props.id} info={props.info}/>
+     }
+    
      <SwipeableViews  className={classes.view}
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}

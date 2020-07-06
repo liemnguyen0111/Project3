@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Drawer = () => {
+const Drawer = (props) => {
 
 
   const [open, setOpen] = useState(false);
@@ -79,7 +79,13 @@ const Drawer = () => {
           key="home"
           component={Link}
           to="/"
-          onClick={toggleDrawer(anchor, false)}
+          onClick={(event)=>
+            {
+              toggleDrawer(anchor, false)(event)
+              props.setOnPageChange(!props.onPageChange)
+              props.setCategory('All')
+            }
+          }
         >
           <ListItemIcon>
             <HomeIcon />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -57,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     borderStyle : "solid",
     borderRadius : "5px",
     marginBottom : '5px',
+    textDecoration : 'none'
   },
   thumbnail: {
     marginTop: '10px',
@@ -69,19 +71,17 @@ const useStyles = makeStyles((theme) => ({
   detailText: {
     color: 'gray',
     fontSize: '14px',
-  },
+  }
 }));
 
-export default function WatchingSection(props) {
+export default function WatchingSection({watchItems}) {
   
   const classes = useStyles();
 
-  const handleOnClick = itemId =>
-  {
-    console.log(itemId)
-  }
   return (
     <>
+    
+      
       <Typography className={classes.title}>
         Watching
           <br />
@@ -90,69 +90,38 @@ export default function WatchingSection(props) {
       
       <Box textAlign="center" borderColor="text.primary" {...defaultProps} className={classes.root}>
 
+
         <List
           component="nav"
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-
-          <ListItem button className={classes.item}>  
+       {watchItems.map(item=> 
+         
+        <ListItem button 
+        component={Link}
+        to={`/ItemView/:search?${item._id}`}
+        className={classes.item}>  
             <Grid container spacing={1}>
               <Grid item xs={3}>
-                <img className={classes.thumbnail} src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png" alt="" />
+                <img className={classes.thumbnail} src={item.photos[0]} alt="" />
                 <Typography className={classes.itemPrice}>
-                  $230
+                  {item.price? `$${item.price}`: null}
                 </Typography>
               </Grid>
               <Grid item xs={8}>
-                <Typography>
-                  Item Title
+                <Typography noWrap>
+                  {item.title}
                 </Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features! 
+                <Typography className={classes.detailText} noWrap>
+                  {item.description}
                 </Typography>
               </Grid>
             </Grid>
           </ListItem>  
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img className={classes.thumbnail} src="https://secure.img1-fg.wfcdn.com/im/55776803/resize-h600-w600%5Ecompr-r85/4366/43669260/King+Tutankhamen%2527s+Life+Size+Sarcophagus+Statue.jpg" alt="" />
-                <Typography className={classes.itemPrice}>
-                  $230
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>
-                  Item Title
-                </Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>  
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img className={classes.thumbnail} src="https://images.homedepot-static.com/productImages/797b0135-79ff-4196-9644-483ed8ca0a72/svn/paint-buckets-lids-rg580-12-64_1000.jpg" alt="" />
-                <Typography className={classes.itemPrice}>
-                  $230
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>
-                  Item Title
-                </Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-                    
+        
+          )}
+          
         </List>
       </Box> 
     </> 
