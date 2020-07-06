@@ -111,18 +111,10 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
   let path = []
   const url = req.protocol + '://' + req.get('host')
   if (req.files) {
-<<<<<<< HEAD
-  const file = req.files.imgCollection
-   for(let i = 0; i < file.length; i++ )
-  {
-     await (file.length?file[i]:file).mv(
-      `./client/public/images/` + (file.length?file[i]:file).name.split(' ').join('_'),
-=======
     const file = req.files.imgCollection
     for (let i = 0; i < file.length; i++) {
       await (file.length ? file[i] : file).mv(
         `./client/public/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
->>>>>>> chatandbid
         (err) => {
           if (err) {
             console.log('failed to upload')

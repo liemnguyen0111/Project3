@@ -79,7 +79,6 @@ class ItemView extends Component {
         }}>
           <Grid container >
             <Grid item xs={12} sm={6}>
-<<<<<<< HEAD
               <div className={'fade-in one'}>
                 <ItemLeftWindow info={this.state.leftWindow}/>
               </div>  
@@ -88,12 +87,6 @@ class ItemView extends Component {
               <div className={'fade-in two'}>
                 <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow}/>
               </div>  
-=======
-              <ItemLeftWindow info={this.state.leftWindow} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow} />
->>>>>>> chatandbid
             </Grid>
           </Grid>
         </div>
