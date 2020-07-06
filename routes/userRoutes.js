@@ -4,7 +4,14 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 router.get("/users", passport.authenticate("jwt"), (req, res) => {
-  res.json(req.user)
+User.findById(req.user._id)
+  .then(data => 
+    {
+      console.log(data)
+      res.json(data)
+    })
+  .catch(err => console.log(err))
+  
 })
 
 // Register Route

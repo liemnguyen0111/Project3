@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BidsSection(props) {
   const classes = useStyles();
+  const [ buyItems, setBuyItems ] = useState(null)
   const [open, setOpen] = React.useState(false);
   const { loginState, setLoginState } = useContext(LoginContext);
   const handleOnClick = () => {
@@ -88,8 +89,9 @@ export default function BidsSection(props) {
     () =>
       getUser()
         .then(({ data }) => {
+          // console.log(data)
+          setBuyItems(data.buyItems)
           console.log(data)
-          console.log(data.buyItems)
         })
         .catch((err) => console.log(err)),
     []
@@ -116,30 +118,36 @@ export default function BidsSection(props) {
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          <ListItem button className={classes.item}>
-            
-            <Grid container spacing={1}>
-              <Grid item xs={3} className={classes.imageArea}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png"
-                  alt=""
-                />
-                <Typography className={classes.itemPrice}>$230</Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-                <hr />
-                <Typography>Your Offer</Typography>
-                <Typography className={classes.detailText}>
-                  2 Twinkies and a Donut
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
+          {buyItems && buyItems.map(buyItem => {
+            return (
+              <ListItem button className={classes.item}>
+                <Grid container spacing={1}>
+                  <Grid item xs={3} className={classes.imageArea}>
+                    <img
+                      className={classes.thumbnail}
+                      src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png"
+                      alt=""
+                    />
+                    <Typography className={classes.itemPrice}>{buyItem.price}</Typography>
+                  </Grid>
+                  <Grid item xs={8}>
+                    <Typography>Item Title</Typography>
+                    <Typography className={classes.detailText}>
+                      Item description goes here. Look at these features!
+                    </Typography>
+                    <hr />
+                    <Typography>Your Offer</Typography>
+                    <Typography className={classes.detailText}>
+                      2 Twinkies and a Donut
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
+            );
+          })
+
+         
+          }
         </List>
       </Box>
     </>
