@@ -10,19 +10,19 @@ import ItemAPI from '../../../utils/ItemAPI'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-      whiteSpace: 'nowrap',
-      width : '100%',
-      marginLeft : '0',
-      marginRight : '0',
+    whiteSpace: 'nowrap',
+    width: '100%',
+    marginLeft: '0',
+    marginRight: '0',
   },
   button: {
     width: '28%',
     // whiteSpace: "nowrap",
     margin: theme.spacing(1),
-    backgroundColor :'#757575',
+    backgroundColor: '#757575',
     '&:hover':
     {
-      backgroundColor :'#424242'
+      backgroundColor: '#424242'
     }
   },
 }));
@@ -32,7 +32,7 @@ const { userWatch, itemSold } = ItemAPI
 export default function TopNav(props) {
   const classes = useStyles();
 
-   const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -42,65 +42,63 @@ export default function TopNav(props) {
     setOpen(false);
   };
 
-  const handleOnClickWatch = () =>
-  {
-    console.log('watching')
-    userWatch({ postId : props.id })
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
+  const handleOnClickWatch = () => {
+    userWatch({ postId: props.id , isWatch : props.info.isWatch})
+      .then(data => console.log(data))
+      .catch(err => console.error(err))
   }
 
-  const handleOnBuyOut = () =>
-  {
-      itemSold({price : props.info[0].price, postId : props.id})
+  const handleOnBuyOut = () => {
+    console.log(props.info.price)
+    itemSold({ price: props.info.price, postId: props.id })
       .then(data => console.log(data))
       .catch(err => console.error(err))
   }
 
   return (
-  
+
     <div className={classes.root}>
-  <BidDialog  handleClickOpen={handleClickOpen} handleClose={handleClose} open={open} id={props.id}/>
-  <Grid
-  container
-  direction="row"
-  justify="space-evenly"
-  alignItems="center"
->
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.button}
-        startIcon={<VisibilityIcon />}
-        onClick={handleOnClickWatch}
+      <BidDialog handleClickOpen={handleClickOpen} handleClose={handleClose} open={open} id={props.id} />
+      <Grid
+        container
+        direction="row"
+        justify="space-evenly"
+        alignItems="center"
       >
-        Watch
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          className={classes.button}
+          startIcon={<VisibilityIcon />}
+          onClick={handleOnClickWatch}
+        >
+          {props.info.isWatch? 'Watched' : 'Watch'}
       </Button>
 
-     <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.button}
-        startIcon={<ReceiptIcon />}
-        onClick={handleClickOpen}
-      >
-        Place Bid
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          className={classes.button}
+          startIcon={<ReceiptIcon />}
+          onClick={handleClickOpen}
+        >
+          Place Bid
       </Button>
-  
-      <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.button}
-        startIcon={<LocalAtmIcon />}
-        onClick={handleOnBuyOut}
-      >
-        Buy Out
+
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          className={classes.button}
+          startIcon={<LocalAtmIcon />}
+          onClick={handleOnBuyOut}
+        >
+          Buy Out
       </Button>
       </Grid>
     </div>
-    
+
   );
 }

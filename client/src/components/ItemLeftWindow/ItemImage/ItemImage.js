@@ -6,51 +6,52 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) =>
-({
-  root: {
-    display: 'block',
-    flexGrow : '1',
-    overflow: "auto",
-    // minHeight : '100%',
-    marginLeft: "auto",
-    marginRight: "auto",
-    maxWidth: "80%",
-    overflow: "auto",
-    backgroundColor: theme.palette.background.paper,
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
-  },
-  thumbnail: {
-    // height : '100%',
-    minHeight: '90vh',
-    width: '95%',
-    objectFit: 'contain',
-  },
-}))
+  ({
+    root: {
+      display: 'block',
+      flexGrow: '1',
+      overflow: "auto",
+      // minHeight : '100%',
+      marginLeft: "auto",
+      marginRight: "auto",
+      maxWidth: "80%",
+      overflow: "auto",
+      backgroundColor: theme.palette.background.paper,
+      '&::-webkit-scrollbar': {
+        display: 'none'
+      }
+    },
+    thumbnail: {
+      // height : '100%',
+      minHeight: '90vh',
+      width: '95%',
+      objectFit: 'contain',
+    },
+  }))
 
-const ItemImage = ({photos}) => {
+const ItemImage = ({ photos }) => {
   const classes = useStyles()
   // console.log(props)
-  return(
+  return (
     <div className={classes.root}>
       <Grid item xs={12}>
 
-        {(photos.length > 0)?
-        photos.map(photo =>
-          <>
-         
-            <img className={classes.thumbnail} src={photo} alt='IMAGE' 
-            onError={(e)=>{ if (e.target.src !== `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`) 
-            { e.target.src=`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`; } }}/>
-         </>
-          ) : 
-         
-         <img className={classes.thumbnail} src={`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`}
-        
-          alt='IMG'/>
+        {(photos.length > 0) ?
+          photos.map(photo =>
+            <>
+
+              <img className={classes.thumbnail} src={photo} alt='IMAGE'
+                onError={(e) => {
+                  if (e.target.src !== `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`) { e.target.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`; }
+                }} />
+            </>
+          ) :
+
+          <img className={classes.thumbnail} src={`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`}
+
+            alt='IMG' />
         }
-          
+
       </Grid>
     </div>
   )
