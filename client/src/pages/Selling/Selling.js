@@ -5,6 +5,7 @@ import UserAPI from '../../utils/UserAPI'
 import SellingSection from '../../components/SellingComponents/SellingSection'
 import SoldSection from '../../components/SellingComponents/SoldSection'
 import ShippedSection from '../../components/SellingComponents/ShippedSection'
+import './Selling.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,13 +44,19 @@ const Selling = () => {
         <Grid container spacing={0}>
 
           <Grid item xs={12} sm={4}>
-            <SellingSection sellItems={items.sellItems}/>
+            <div className={'fade-in one'}>
+              <SellingSection sellItems={items.sellItems}/>
+            </div>
           </Grid>
           <Grid item xs={12} sm={4} >
-            <SoldSection soldItems={items.soldItems} setOnShip={setOnShip} onShip={onShip}/>
+            <div className={'fade-in two'}>
+              <SoldSection soldItems={items.soldItems} setOnShip={setOnShip} onShip={onShip}/>
+            </div>
           </Grid>
           <Grid item xs={12} sm={4} >
-            <ShippedSection shipItems={items.shipItems}/>
+            <div className={'fade-in three'}>
+              <ShippedSection shipItems={items.shipItems}/>
+            </div>
           </Grid>
 
         </Grid>

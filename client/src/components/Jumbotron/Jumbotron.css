@@ -1,9 +1,0 @@
-
-.jumbotron
-{
-    animation : zoomout 3s
-}
-@keyframes zoomout {
-    0%  {opacity:0;}
-    100%  {opacity:1;}
-  }

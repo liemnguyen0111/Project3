@@ -111,7 +111,7 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
    for(let i = 0; i < file.length; i++ )
   {
      await (file.length?file[i]:file).mv(
-      `./client/images/` + (file.length?file[i]:file).name.split(' ').join('_'),
+      `./client/public/images/` + (file.length?file[i]:file).name.split(' ').join('_'),
         (err) => {
         if (err) {
           console.log('failed to upload')

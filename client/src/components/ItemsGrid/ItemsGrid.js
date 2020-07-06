@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import './itemGrid.css'
 import LoginContext from '../../utils/LoginContext'
 import SignInDialog from "../../components/Jumbotron/SignInModal/SignInDialog";
 
@@ -69,7 +68,6 @@ export default function ItemsGrid(props) {
     }
   }
   return (
-    <div className={'itemgrid'}>
     <div className={classes.root}>
        <SignInDialog open={open} setOpen={setOpen}/>
       <Grid container spacing={2} >
@@ -114,7 +112,6 @@ export default function ItemsGrid(props) {
       )}
       
       </Grid>
-    </div>
     </div>
   );
 }
