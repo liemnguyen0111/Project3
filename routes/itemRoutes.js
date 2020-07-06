@@ -5,11 +5,22 @@ const passport = require("passport");
 
 
 // returns all items signed in or not
-router.get("/items", (req, res) => {
-  Item.find({isBought : false})
+router.post("/items/category", (req, res) => {
+  if(req.body.category === 'All' )
+  {
+    Item.find({isBought : false})
     .populate("user")
     .then((items) => res.json(items))
     .catch((err) => console.error(err));
+  }
+  else
+  {
+    Item.find({isBought : false, category : req.body.category})
+    .populate("user")
+    .then((items) => res.json(items))
+    .catch((err) => console.error(err));
+  }
+ 
 });
 
 
@@ -17,7 +28,16 @@ router.get("/items", (req, res) => {
 router.get("/items/:id", (req, res) => {
   Item.find({_id : req.params.id})
     .populate("user")
-    .then((items) => res.json(items))
+    .then((items) => 
+    {
+      // if(req.user._id === items[0].user._id)
+      // {
+      //   console.log('true')
+      // }
+      // console.log(items)
+      res.json(items)
+    }
+    )
     .catch((err) => console.error(err));
 });
 
@@ -32,7 +52,7 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
    for(let i = 0; i < length; i++ )
   {
      await (file.length?file[i]:file).mv(
-      `./client/public/images/` + (file.length?file[i]:file).name.split(' ').join('_'),
+      `./client/images/` + (file.length?file[i]:file).name.split(' ').join('_'),
         (err) => {
         if (err) {
           console.log('failed to upload')
@@ -77,17 +97,50 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
 
 
 // create new bid on item
-router.post("/bids", passport.authenticate("jwt"), (req, res) => {
-  const newBid = {
-    body: req.body.body,
-    photos: req.body.photo,
-    user: req.user._id,
-    item: req.body.item
-  };
+router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
+
+  let path = []
+  const url = req.protocol + '://' + req.get('host')
+  if (req.files) {
+  const file = req.files.imgCollection
+  const length = file.length || 1
+   for(let i = 0; i < length; i++ )
+  {
+     await (file.length?file[i]:file).mv(
+      `./client/images/` + (file.length?file[i]:file).name.split(' ').join('_'),
+        (err) => {
+        if (err) {
+          console.log('failed to upload')
+        } else {
+        
+          isImage = true;
+        }
+      }
+    ); 
+     path.push(`/images/` + (file.length?file[i]:file).name.split(' ').join('_'))
+  }
+}
+
+
+const newBid = {
+  price: req.body.price,
+  description: req.body.description,
+  user: req.user._id,
+  item: req.body.postId,
+  photos : path
+};
+
   Bid.create(newBid)
     .then((bid) => {
-      Item.findByIdAndUpdate(req.body.item, { $push: { bid: bid._id } })
-        .then(() => res.json(newBid))
+      Item.findByIdAndUpdate(req.body.postId, { $push: { bid: bid._id } })
+        .then(() => {
+            if(!req.user.buyItems.indexOf(req.body.postId))
+            {
+              User.findByIdAndUpdate(req.user._id,{ $push: { buyItems: req.body.postId }})
+              .then(data => res.json(data))
+              .catch(err => console.error(err))
+            }
+        })
         .catch((err) => console.error(err))
     })
     .catch((err) => console.error(err))
@@ -107,6 +160,17 @@ router.post("/comments", passport.authenticate("jwt"), (req, res) => {
         .catch((err) => console.error(err))
     })
     .catch((err) => console.error(err))
+})
+
+
+// watch on item
+router.post("/item/watch", passport.authenticate("jwt"), async (req, res) => {
+  await User.findByIdAndUpdate(req.user._id,{ $push: { watchItems: req.body.postId }}, {new:true}, async (err, data) => 
+  {
+  if(err)console.error(err)
+   res.sendStatus(200)
+  }
+  )
 })
 
 module.exports = router
