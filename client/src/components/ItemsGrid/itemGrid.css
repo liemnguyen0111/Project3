@@ -1,0 +1,9 @@
+.itemgrid
+{
+    animation-delay: 3s;
+    animation : itemgrid 3s
+}
+@keyframes itemgrid {
+    0%  {opacity:0;}
+    100%  {opacity:1;}
+  }
