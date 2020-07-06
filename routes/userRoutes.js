@@ -4,7 +4,9 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 router.get("/users", passport.authenticate("jwt"), (req, res) => {
+
 User.findById(req.user._id)
+  .populate(["watchItems", "buyItems", "boughtItems", "sellItems", "soldItems", "shipItems"])
   .then(data => 
     {
       console.log(data)
