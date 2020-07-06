@@ -5,7 +5,7 @@ import UserAPI from '../../utils/UserAPI'
 import WatchingSection from '../../components/BuyingComponents/WatchingSection'
 import BidsSection from '../../components/BuyingComponents/BidsSection'
 import WonSection from '../../components/BuyingComponents/WonSection'
-
+import './Buying.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,13 +40,19 @@ const Buying = () => {
         <Grid container spacing={0}>
 
           <Grid item xs={12} sm={4}>
-            <WatchingSection watchItems={items.watchItems}/>
+            <div className={'fade-in one'}>
+              <WatchingSection watchItems={items.watchItems}/>
+            </div>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <BidsSection bidItems={items.buyItems}/>
+            <div className={'fade-in two'}>
+              <BidsSection bidItems={items.buyItems}/>
+            </div>
           </Grid>
           <Grid item xs={12} sm={4} >
-            <WonSection boughtItems={items.boughtItems}/>
+            <div className={'fade-in three'}>
+              <WonSection boughtItems={items.boughtItems}/>
+            </div>
           </Grid>
 
         </Grid>

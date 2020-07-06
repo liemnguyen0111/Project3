@@ -5,6 +5,7 @@ import axios from 'axios'
 import ItemAPI from '../../utils/ItemAPI'
 import ItemLeftWindow from "../../components/ItemLeftWindow";
 import ItemRightWindow from "../../components/ItemRightWindow";
+import './ItemView.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,10 +72,14 @@ class ItemView extends Component {
         }}>
           <Grid container >
             <Grid item xs={12} sm={6}>
-              <ItemLeftWindow info={this.state.leftWindow}/>
+              <div className={'fade-in one'}>
+                <ItemLeftWindow info={this.state.leftWindow}/>
+              </div>  
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow}/>
+              <div className={'fade-in two'}>
+                <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow}/>
+              </div>  
             </Grid>
           </Grid>
         </div>

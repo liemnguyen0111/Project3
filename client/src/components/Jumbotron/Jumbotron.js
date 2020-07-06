@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import SignUpModal from "./SignUpModal";
 import SignInModal from "./SignInModal";
-import './Jumbotron.css'
 import UserAPI from "../../utils/UserAPI"
 import LoginContext from '../../utils/LoginContext'
 
@@ -49,7 +48,6 @@ export default function Jumbotron() {
   const { loginState, setLoginState } = useContext(LoginContext)
 
   return (
-    <div className={'jumbotron'}>
     <div className={classes.root}
     >
       <Box className={classes.background}>
@@ -69,7 +67,6 @@ export default function Jumbotron() {
           </Grid>
         </Grid>
       </Box>
-    </div>
     </div>
   )
 }
