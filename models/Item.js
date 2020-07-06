@@ -3,7 +3,7 @@ const { model, Schema } = require("mongoose");
 const Item = new Schema({
   title: String,
   description: String,
-  price: Number,
+  price: String,
   category: {
     type: String,
     default: "Miscellaneous",
@@ -47,10 +47,10 @@ const Item = new Schema({
     type: Schema.Types.ObjectId, 
     ref: "Bid" 
   },
-  comment: {
+  comment: [{
     type: Schema.Types.ObjectId,
     ref: "Comment",
-  },
+  }],
 });
 
 module.exports = model("Item", Item);

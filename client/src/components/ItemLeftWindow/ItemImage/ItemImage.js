@@ -36,12 +36,21 @@ const ItemImage = ({photos}) => {
     <div className={classes.root}>
       <Grid item xs={12}>
 
-        {photos?photos.map(photo =>
+        {(photos.length > 0)?
+        photos.map(photo =>
           <>
-            {console.log(photo)}
-            <img className={classes.thumbnail} src={photo} alt="1" />
-            </>
-          ) : null}
+         
+            <img className={classes.thumbnail} src={photo} alt='IMAGE' 
+            onError={(e)=>{ if (e.target.src !== `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`) 
+            { e.target.src=`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`; } }}/>
+         </>
+          ) : 
+         
+         <img className={classes.thumbnail} src={`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`}
+        
+          alt='IMG'/>
+        }
+          
       </Grid>
     </div>
   )

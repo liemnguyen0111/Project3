@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
@@ -9,6 +9,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Grid from "@material-ui/core/Grid";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
+import ItemAPI from '../../../utils/ItemAPI'
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -57,12 +58,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const { userBid } = ItemAPI
+
 export default function BidDialog(props) {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
     numberformat: "",
   });
+
+  const [files, setFiles] = useState();
 
   const handleChange = (event) => {
     setValues({
@@ -73,15 +78,34 @@ export default function BidDialog(props) {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.files.value);
     const fd = new FormData(event.target);
-    console.log(fd);
+    const formData = new FormData();
+    const newBid = 
+    {
+      price : event.target.numberformat.value,
+      description : event.target.description.value,
+      postId : props.id
+    }
+
+    if(files)
+    {
+      for (const key of Object.keys(files)) {
+    formData.append('imgCollection', files[key])}
+      }
+
+      for (const key of Object.keys(newBid)) {
+        formData.append(key,newBid[key])
+      }
+
+    userBid(formData)
+
+    event.target.reset()
     props.handleClose();
   };
 
   const handleFilesOnChange = (event) => {
     event.preventDefault();
-    console.log(event.target.files);
+    setFiles(event.target.files);
   };
 
   return (
@@ -121,6 +145,7 @@ export default function BidDialog(props) {
 
               <TextField
                 id="outlined-multiline-static"
+                name='description'
                 label="Description (Optional)"
                 style={{ marginTop: "20px", width: "100%" }}
                 multiline

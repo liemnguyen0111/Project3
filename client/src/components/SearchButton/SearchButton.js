@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -7,37 +7,47 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles } from "@material-ui/core/styles";
+import ItemAPI from '../../utils/ItemAPI'
+import ItemContext from '../../utils/ItemContext'
 
-// const useStyles = makeStyles((theme) => ({
-//   itemSearch: {
-//     color: "black",
-//   },
-// }));
-
+const { itemSearch } = ItemAPI
 export default function SearchButton() {
   // const classes = useStyles()
   const [open, setOpen] = React.useState(false);
 
-
-
   const [searchState, setSearchState] = React.useState({})
 
-  const handleInputChange = (event) => {
-    setSearchState({ ...searchState, [event.target.name]: event.target.value })
+  const handleInputChange = (event,items) => {
+    setSearchState(event.target.value)
   };
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = event => {
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSearch = setItems => {
+    itemSearch(searchState)
+    .then(({data})=> {
+      setItems(data)
+      setSearchState({})
+    })
+    .catch(err => {})
+    
     setOpen(false);
   };
 
   return (
     <div>
-      <SearchIcon
+      <ItemContext.Consumer>
+      {
+          ({ setItems , items}) =>
+          ( 
+            <>
+            <SearchIcon
         variant="outlined"
         color="default"
         onClick={handleClickOpen}
@@ -55,7 +65,7 @@ export default function SearchButton() {
           <TextField
             autoFocus
             name='itemSearch'
-            onChange={handleInputChange}
+            onChange={(event) => handleInputChange(event, items)}
             // InputProps={{
             //   className: classes.itemSearch,
             // }}
@@ -70,11 +80,17 @@ export default function SearchButton() {
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="default">
+          <Button onClick={()=> handleSearch(setItems)} color="default">
             Search
           </Button>
         </DialogActions>
       </Dialog>
+            
+            </>
+          )
+        }
+     
+      </ItemContext.Consumer>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import ListSubheader from "@material-ui/core/ListSubheader";
+import { Link } from 'react-router-dom'
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SellingSection(props) {
+export default function SellingSection({sellItems}) {
   const classes = useStyles();
 
   const handleOnClick = (itemId) => {
@@ -143,119 +143,31 @@ export default function SellingSection(props) {
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png"
-                  alt=""
-                />
-                <Typography className={classes.itemPrice}>$230</Typography>
+            {sellItems.map(item =>  
+              <ListItem button 
+              className={classes.item}
+              component={Link}
+              to={`/ItemView/:search?${item._id}`}
+              >
+              <Grid container spacing={1}>
+                <Grid item xs={3}>
+                  <img
+                    className={classes.thumbnail}
+                    src={item.photos[0]}
+                    alt={'No Image'}
+                  />
+                  <Typography className={classes.itemPrice}>{item.price}</Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Typography noWrap>{item.title}</Typography>
+                  <Typography className={classes.detailText} noWrap>
+                    {item.description}
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://secure.img1-fg.wfcdn.com/im/55776803/resize-h600-w600%5Ecompr-r85/4366/43669260/King+Tutankhamen%2527s+Life+Size+Sarcophagus+Statue.jpg"
-                  alt=""
-                />
-                <Typography className={classes.itemPrice}>$230</Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://images.homedepot-static.com/productImages/797b0135-79ff-4196-9644-483ed8ca0a72/svn/paint-buckets-lids-rg580-12-64_1000.jpg"
-                  alt=""
-                />
-                <Typography className={classes.itemPrice}>$230</Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png"
-                  alt=""
-                />
-                <Typography className={classes.itemPrice}>$230</Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://secure.img1-fg.wfcdn.com/im/55776803/resize-h600-w600%5Ecompr-r85/4366/43669260/King+Tutankhamen%2527s+Life+Size+Sarcophagus+Statue.jpg"
-                  alt=""
-                />
-                <Typography className={classes.itemPrice}>$230</Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-
-          <ListItem button className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://images.homedepot-static.com/productImages/797b0135-79ff-4196-9644-483ed8ca0a72/svn/paint-buckets-lids-rg580-12-64_1000.jpg"
-                  alt=""
-                />
-                <Typography className={classes.itemPrice}>$230</Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
+            </ListItem>
+              )}
+         
         </List>
       </Box>
     </>

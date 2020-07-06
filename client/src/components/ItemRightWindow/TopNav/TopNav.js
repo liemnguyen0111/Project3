@@ -6,6 +6,7 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Grid from '@material-ui/core/Grid';
 import BidDialog from '../BidDialog'
+import ItemAPI from '../../../utils/ItemAPI'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,13 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TopNav() {
+const { userWatch, itemSold } = ItemAPI
+
+export default function TopNav(props) {
   const classes = useStyles();
 
    const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    console.log('open')
     setOpen(true);
   };
 
@@ -40,10 +42,25 @@ export default function TopNav() {
     setOpen(false);
   };
 
+  const handleOnClickWatch = () =>
+  {
+    console.log('watching')
+    userWatch({ postId : props.id })
+    .then(data => console.log(data))
+    .catch(err => console.error(err))
+  }
+
+  const handleOnBuyOut = () =>
+  {
+      itemSold({price : props.info[0].price, postId : props.id})
+      .then(data => console.log(data))
+      .catch(err => console.error(err))
+  }
+
   return (
   
     <div className={classes.root}>
-  <BidDialog  handleClickOpen={handleClickOpen} handleClose={handleClose} open={open}/>
+  <BidDialog  handleClickOpen={handleClickOpen} handleClose={handleClose} open={open} id={props.id}/>
   <Grid
   container
   direction="row"
@@ -56,6 +73,7 @@ export default function TopNav() {
         size="small"
         className={classes.button}
         startIcon={<VisibilityIcon />}
+        onClick={handleOnClickWatch}
       >
         Watch
       </Button>
@@ -77,6 +95,7 @@ export default function TopNav() {
         size="small"
         className={classes.button}
         startIcon={<LocalAtmIcon />}
+        onClick={handleOnBuyOut}
       >
         Buy Out
       </Button>

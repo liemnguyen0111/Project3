@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ItemRightWindow() {
+export default function ItemRightWindow(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -128,9 +128,11 @@ export default function ItemRightWindow() {
     <div className={classes.root}>
      <div className={classes.body}>
      <TopBid/>
-     <TopNav className={classes.topNav}/>
    
-
+     {props.info.isUserItem?  null : 
+     <TopNav className={classes.topNav} id={props.id} info={props.info}/>
+     }
+    
      <SwipeableViews  className={classes.view}
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}

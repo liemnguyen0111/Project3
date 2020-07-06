@@ -25,12 +25,13 @@ export default function SignInDialog({open, setOpen}) {
     // console.log(event);
     event.preventDefault();
     const userSigninInfo = {
-      email: event.target.email.value,
+      username: event.target.username.value,
       password: event.target.password.value,
     };
     // console.log(userSigninInfo)
     loginUser(userSigninInfo)
       .then(({ data }) => {
+        console.log(data)
         if (data) {
           localStorage.setItem("user", data)
           setLoginState(true)
@@ -59,7 +60,7 @@ export default function SignInDialog({open, setOpen}) {
             <TextField
               autoFocus
               margin="dense"
-              name="email"
+              name="username"
               label="Email Address"
               type="email"
               fullWidth

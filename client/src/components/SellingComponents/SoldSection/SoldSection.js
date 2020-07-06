@@ -1,14 +1,17 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from 'react-router-dom'
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import ItemAPI from '../../../utils/ItemAPI'
 
 const defaultProps = {
   bgcolor: "background.paper",
@@ -74,17 +77,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SoldSection(props) {
+const { itemShipped } = ItemAPI
+
+export default function SoldSection({soldItems, setOnShip, onShip}) {
   const classes = useStyles();
 
-  const handleOnClick = (itemId) => {
-    console.log(itemId);
+  const handleOnClickShip = (itemId) => {
+  
+    itemShipped({postId : itemId})
+    .then(() => setOnShip(!onShip))
+    .catch(err => console.error(err))
   };
   return (
     <>
       <Typography className={classes.title}>
         Sold
-        <br />
+        <Divider />
         <p className={classes.subtitle}>
           Contact the buyer to arrange payment/delivery. Click 'Shipped' to move
           item to the Shipped column.
@@ -102,98 +110,47 @@ export default function SoldSection(props) {
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          <ListItem className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3} className={classes.imageArea}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://image.goat.com/crop/750/attachments/product_template_pictures/images/037/815/978/original/551059_00.png.png"
-                  alt=""
-                />
-                <Button size="small" className={classes.shippedButton}>
-                  Shipped
-                </Button>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-                <hr />
-                <Typography>Sale Terms</Typography>
-                <Typography className={classes.detailText}>
-                  2 Twinkies and a Donut
-                </Typography>
-                <hr />
-                <Typography>Buyer Info</Typography>
-                <Typography className={classes.detailText}>
-                  FirstName Last Name, email@email.com
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
+          { console.log(soldItems)}
+          {soldItems.map(item => {
+           
+            return (
 
           <ListItem className={classes.item}>
+            
             <Grid container spacing={1}>
               <Grid item xs={3} className={classes.imageArea}>
                 <img
                   className={classes.thumbnail}
-                  src="https://secure.img1-fg.wfcdn.com/im/55776803/resize-h600-w600%5Ecompr-r85/4366/43669260/King+Tutankhamen%2527s+Life+Size+Sarcophagus+Statue.jpg"
+                  src={item.photos[0]}
                   alt=""
                 />
-                <Button size="small" className={classes.shippedButton}>
-                  Shipped
+                <Button size="small" 
+                onClick={()=> handleOnClickShip(item._id)}
+                className={classes.shippedButton}
+                >
+                  Ship
                 </Button>
               </Grid>
               <Grid item xs={8}>
-                <Typography>Item Title</Typography>
+            <Typography>{item.title}</Typography>
                 <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
+                  {item.description}
                 </Typography>
-                <hr />
+                <Divider />
                 <Typography>Sale Terms</Typography>
                 <Typography className={classes.detailText}>
-                  A Ham Sandwich
+                  {`${item.topBid.price} | ${item.topBid.description}`}
                 </Typography>
-                <hr />
+                <Divider />
                 <Typography>Buyer Info</Typography>
                 <Typography className={classes.detailText}>
-                  FirstName Last Name, email@email.com
+                     {`${item.user.firstName} ${item.user.lastName} | ${item.user.username}`}
                 </Typography>
               </Grid>
             </Grid>
           </ListItem>
+            )})}
 
-          <ListItem className={classes.item}>
-            <Grid container spacing={1}>
-              <Grid item xs={3} className={classes.imageArea}>
-                <img
-                  className={classes.thumbnail}
-                  src="https://images.homedepot-static.com/productImages/797b0135-79ff-4196-9644-483ed8ca0a72/svn/paint-buckets-lids-rg580-12-64_1000.jpg"
-                  alt=""
-                />
-                <Button size="small" className={classes.shippedButton}>
-                  Shipped
-                </Button>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography>Item Title</Typography>
-                <Typography className={classes.detailText}>
-                  Item description goes here. Look at these features!
-                </Typography>
-                <hr />
-                <Typography>Sale Terms</Typography>
-                <Typography className={classes.detailText}>
-                  A Ham Sandwich
-                </Typography>
-                <hr />
-                <Typography>Buyer Info</Typography>
-                <Typography className={classes.detailText}>
-                  FirstName Last Name, email@email.com
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
         </List>
       </Box>
     </>

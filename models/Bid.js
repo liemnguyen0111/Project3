@@ -1,8 +1,8 @@
 const { model, Schema } = require("mongoose");
 
 const Bid = new Schema({
-  body: String,
-  price: String
+  price : String,
+  description : String,
   photos: [{
     type: String
   }],

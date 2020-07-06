@@ -11,7 +11,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
 import HelpIcon from "@material-ui/icons/Help";
-import VisibilityIcon from "@material-ui/icons/Visibility";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import IconButton from "@material-ui/core/IconButton";
@@ -35,7 +35,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Drawer = () => {
+const Drawer = (props) => {
+
+
   const [open, setOpen] = useState(false);
 
   const { loginState, setLoginState } = useContext(LoginContext);
@@ -57,25 +59,6 @@ const Drawer = () => {
 
   const classes = useStyles();
 
-  const drawerList = [
-    {
-      name: "Home",
-      link: "/",
-    },
-    {
-      name: "How it Works",
-      link: "/howItWorks",
-    },
-    {
-      name: "Watching",
-      link: "/watching",
-    },
-    {
-      name: "Selling",
-      link: "/selling",
-    },
-  ];
-
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -85,24 +68,72 @@ const Drawer = () => {
     >
       <SignInDialog
         onClick={(event) => {
-          event.stopPropagation()
+          event.stopPropagation();
         }}
         open={open}
         setOpen={setOpen}
       />
       <List>
-        {drawerList.map((item, index) => (
-          <ListItem button key={item.name} component={Link} to={item.link}  onClick={toggleDrawer(anchor, false)}>
-            <ListItemIcon>
-              {index === 0 && <HomeIcon />}
-              {index === 1 && <HelpIcon />}
-              {index === 2 && <VisibilityIcon />}
-              {index === 3 && <MonetizationOnIcon />}
-            </ListItemIcon>
-            <ListItemText primary={item.name} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          key="home"
+          component={Link}
+          to="/"
+          onClick={(event)=>
+            {
+              toggleDrawer(anchor, false)(event)
+              props.setOnPageChange(!props.onPageChange)
+              props.setCategory('All')
+            }
+          }
+        >
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItem>
+        <ListItem
+          button
+          key="howitworks"
+          component={Link}
+          to="/howitworks"
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <ListItemIcon>
+            <HelpIcon />
+          </ListItemIcon>
+          <ListItemText primary="How it Works" />
+        </ListItem>
+        {!loginState ? null : (
+          <>
+            <ListItem
+              button
+              key="buying"
+              component={Link}
+              to="/buying"
+              onClick={toggleDrawer(anchor, false)}
+            >
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Buying" />
+            </ListItem>
+            <ListItem
+              button
+              key="selling"
+              component={Link}
+              to="/selling"
+              onClick={toggleDrawer(anchor, false)}
+            >
+              <ListItemIcon>
+                <MonetizationOnIcon />
+              </ListItemIcon>
+              <ListItemText primary="Selling" />
+            </ListItem>
+          </>
+        )}
       </List>
+
       <Divider />
       <List>
         {!loginState ? (
