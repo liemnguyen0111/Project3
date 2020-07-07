@@ -93,7 +93,7 @@ export default function FormDialog() {
     const NewListingInfo = {
       title: event.target.itemTitle.value,
       description: event.target.itemDescription.value,
-      price: event.target.numberformat.value,
+      price: event.target.number.value,
       category: category,
       keywords: event.target.itemKeywords.value,
       dateTimeStart: event.target.dateTimeStart.value,

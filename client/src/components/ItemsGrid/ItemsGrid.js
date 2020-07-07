@@ -83,6 +83,9 @@ export default function ItemsGrid(props) {
             className={classes.paper}
             >
               <Grid item xs={12}>
+                <div>
+                  
+                </div>
       <Typography className={classes.date}>Ends {item.dateTimeStop.split(','[0])}</Typography>
               </Grid>
               <Grid item xs={12}>
