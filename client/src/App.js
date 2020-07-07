@@ -51,8 +51,9 @@ function App() {
   }
 
   return (
-  
-    <LoginContext.Provider value={{loginState, setLoginState}}>
+
+      <Router>
+      <LoginContext.Provider value={{loginState, setLoginState}}>
       <ItemContext.Provider value={{
         items, setItems, 
         category, handleCategory , setCategory,
@@ -60,15 +61,12 @@ function App() {
         pages , setPages,
         newPage , setNewPage
         }}>
-      <Router>
         <Navbar />
         <Switch>
           <Route
             exact
             path="/"
-            component={() => (
-              <Home />
-            )}
+            component={Home}
           />
           <Route path="/howitworks" component={HowItWorks} />
           <Route path="/buying" component={Buying} />
@@ -76,9 +74,9 @@ function App() {
           <Route path="/selling" component={Selling} />
         </Switch>
         <Footer />
-      </Router>
-      </ItemContext.Provider>
+        </ItemContext.Provider>
     </LoginContext.Provider>
+      </Router>
   );
 }
 
