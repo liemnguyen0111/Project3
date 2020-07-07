@@ -162,7 +162,6 @@ export default function BidDialog(props) {
             </Grid>
 
             <input
-              required="true"
               accept="image/*"
               className={classes.input}
               id="contained-button-file"

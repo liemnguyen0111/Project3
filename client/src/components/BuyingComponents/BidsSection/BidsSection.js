@@ -104,6 +104,12 @@ export default function BidsSection({bidItems}) {
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
+          <Grid
+  container
+  direction="column-reverse"
+  justify="center"
+  alignItems="center"
+>
           {bidItems.map(item => {
             return (
               <ListItem button 
@@ -115,7 +121,7 @@ export default function BidsSection({bidItems}) {
                   <Grid item xs={3} className={classes.imageArea}>
                   <img className={classes.thumbnail} src={item.photos[0]} alt="" />
                 <Typography className={classes.itemPrice}>
-                  {item.price? `$${item.price}`: null}
+                  {item.price? `${item.price}`: null}
                 </Typography>
                   </Grid>
 
@@ -134,9 +140,8 @@ export default function BidsSection({bidItems}) {
               </ListItem>
             );
           })
-
-         
-          }
+          }  
+          </Grid>
         </List>
       </Box>
     </>

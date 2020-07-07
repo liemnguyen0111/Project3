@@ -93,7 +93,7 @@ export default function FormDialog() {
     const NewListingInfo = {
       title: event.target.itemTitle.value,
       description: event.target.itemDescription.value,
-      price: event.target.number.value,
+      price: event.target.numberformat.value,
       category: category,
       keywords: event.target.itemKeywords.value,
       dateTimeStart: event.target.dateTimeStart.value,
@@ -110,8 +110,9 @@ export default function FormDialog() {
           formData.append(key,NewListingInfo[key])
         }
    
-    createItem(formData)
-    .then(data=>console.log(data));
+     createItem(formData)
+    .then(data=>{setOpen(false)})
+    .catch(err=>{})
   };
 
   const handleFilesOnChange = (event) => {
@@ -238,7 +239,6 @@ export default function FormDialog() {
               <Grid item xs={12}>
                 <label htmlFor="upload-photo">
                   <input
-                    required="true"
                     style={{ display: "none" }}
                     id="upload-photo"
                     name="upload-photo"

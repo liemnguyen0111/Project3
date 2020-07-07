@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,8 +8,9 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
-
 import ItemPhotos from "./ItemPhotos";
+import ItemAPI from '../../../utils/ItemAPI'
+
 
 const styles = (theme) => ({
   root: {
@@ -56,7 +56,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-const [info, setInfo] = useState([]);
+const { makeTopBid, itemSold } = ItemAPI
 
 export default function ItemDialog(props) {
   const topBid = () => {
@@ -65,8 +65,7 @@ export default function ItemDialog(props) {
       bidId: props.info._id,
     })
       .then((data) => {
-        
-        console.log(data)
+        props.update()
       })
       .catch((err) => console.error(err));
   };
@@ -77,7 +76,7 @@ export default function ItemDialog(props) {
       postId: props.info._id,
       user: props.info.user._id
     })
-      .then(() => {})
+      .then(() => {props.update()})
       .catch(err => console.error(err))
   }
   console.log(props);
@@ -91,7 +90,7 @@ export default function ItemDialog(props) {
         open={props.open}
       >
         <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
-          {props.info.user
+          {props.info.user 
             ? `${props.info.user.firstName} ${props.info.user.lastName}`
             : ""}
         </DialogTitle>
@@ -100,17 +99,22 @@ export default function ItemDialog(props) {
           <Typography gutterBottom>{props.info.description}</Typography>
           {props.info.photos ? <ItemPhotos photos={props.info.photos} /> : null}
         </DialogContent>
+        {props.auctionOn && props.isUserItem ?
         <DialogActions>
-          <Button onClick={topBid} autoFocus color="default">
-            Make Top Bid
-          </Button>
-          <Button autoFocus onClick={acceptBid} color="default">
-            Accept Offer
-          </Button>
-          <Button autoFocus onClick={props.handleClose} color="default">
-            Close
-          </Button>
+ 
+        <Button autoFocus onClick={props.handleClose} color="default">
+          Close
+        </Button>
+        <Button onClick={topBid} autoFocus color="default">
+          Make Top Bid
+        </Button>
+        <Button autoFocus onClick={acceptBid} color="default">
+          Accept Offer
+        </Button>
         </DialogActions>
+        :
+        null}
+        
       </Dialog>
     </div>
   );
