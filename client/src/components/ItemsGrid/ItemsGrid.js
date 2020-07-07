@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   date: {
     float: 'left',
     fontSize: 'small',
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
   thumbnail: {
     height: '9rem',
@@ -59,7 +59,6 @@ export default function ItemsGrid(props) {
   const classes = useStyles();
   const [ open, setOpen ] = React.useState(false);
   const { loginState, setLoginState } = useContext(LoginContext)
-  
   const handleOnClick = () =>
   {
     if(!loginState)
@@ -69,51 +68,63 @@ export default function ItemsGrid(props) {
   }
   return (
     <div className={classes.root}>
-       <SignInDialog open={open} setOpen={setOpen}/>
-      <Grid container spacing={2} >
-
-      {props.items.map((item) =>
-        <Grid item xs={6} sm={3}>
-          <Link 
-          onClick={handleOnClick}
-          to={loginState? `/ItemView/:search?${item._id}` : '/' }
-          className={classes.link}
-          >
-            <Paper  
-            className={classes.paper}
+      <SignInDialog open={open} setOpen={setOpen} />
+      <Grid container spacing={2}>
+        {props.items.map((item) => (
+          <Grid item xs={6} sm={3}>
+            <Link
+              onClick={handleOnClick}
+              to={loginState ? `/ItemView/:search?${item._id}` : "/"}
+              className={classes.link}
             >
-              <Grid item xs={12}>
-                <div>
-                  
-                </div>
-      <Typography className={classes.date}>Ends {item.dateTimeStop.split(','[0])}</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                {(item.photos.length > 0)?
-                   <img className={classes.thumbnail} src={item.photos[0]} 
-                   onError={(e)=>{ if (e.target.src !== `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`) 
-                   { e.target.src=`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`; } }}
-                    alt='IMG'/>
-                :
-                <img className={classes.thumbnail} src={`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`}
-               
-                 alt='IMG'/>
-                }
-              
-              </Grid>
-              <Grid item xs={12} className={classes.title}>
-
-          <Typography noWrap><strong>{item.title}</strong></Typography>
-              </Grid>
-              <Grid item xs={12} >
-                <Typography className={classes.price}>  {item.price}</Typography>
-              </Grid>
-             
-            </Paper> 
-         </Link>
-        </Grid>
-      )}
-      
+              <Paper className={classes.paper}>
+                <Grid container justify='center' item xs={12}>
+                  <Typography className={classes.date}>
+                    Ends at
+                    <div>
+                    {item.dateTimeStop.split(', '[0])}
+                   
+                    </div>
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  {item.photos.length > 0 ? (
+                    <img
+                      className={classes.thumbnail}
+                      src={item.photos[0]}
+                      onError={(e) => {
+                        if (
+                          e.target.src !==
+                          `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`
+                        ) {
+                          e.target.src = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`;
+                        }
+                      }}
+                      alt="IMG"
+                    />
+                  ) : (
+                    <img
+                      className={classes.thumbnail}
+                      src={`https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png`}
+                      alt="IMG"
+                    />
+                  )}
+                </Grid>
+                <Grid item xs={12} className={classes.title}>
+                  <Typography noWrap>
+                    <strong>{item.title}</strong>
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography className={classes.price}>
+                    {" "}
+                    {item.price}
+                  </Typography>
+                </Grid>
+              </Paper>
+            </Link>
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
