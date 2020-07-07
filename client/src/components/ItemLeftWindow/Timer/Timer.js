@@ -23,13 +23,14 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     textAlign : 'center',
     color: '#616161',
+    fontSize: 15
   },
   title:
   {
     textAlign : 'center',
     fontWeight: 'bold',
     fontstyle: 'italic',
-    fontSize: 20,
+    fontSize: 15,
     textDecorationLine: 'underline',
   },
   ended:
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TopBid(props) {
   const classes = useStyles();
+  // console.log(props)
 
   return (
     <div  className={classes.root} >
@@ -51,7 +53,12 @@ export default function TopBid(props) {
         :
         <Typography variant='h4' className={classes.item}>
         <strong>Ends at {props.timeEnd.split(',').join(' ')}</strong>
+        <p>
+
+        {props.price}
+        </p>
       </Typography>
+  
     }
     </div>
   );

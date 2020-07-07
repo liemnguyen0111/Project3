@@ -79,43 +79,43 @@ export default function ItemDialog(props) {
       .then(() => {props.update()})
       .catch(err => console.error(err))
   }
-  console.log(props);
   return (
-    <div>
       <Dialog
         fullWidth={true}
         maxWidth={"md"}
         onClose={props.handleClose}
         aria-labelledby="customized-dialog-title"
         open={props.open}
+        justify="center"
+        alignItems="center"
       >
         <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
-          {props.info.user 
-            ? `${props.info.user.firstName} ${props.info.user.lastName}`
+          {props.info.user
+            ? `Bidder: ${props.info.user.firstName} ${props.info.user.lastName} Offer:${props.info.price}` 
             : ""}
         </DialogTitle>
 
         <DialogContent dividers>
-          <Typography gutterBottom>{props.info.description}</Typography>
-          {props.info.photos ? <ItemPhotos photos={props.info.photos} /> : null}
+          <Typography gutterBottom>
+            Description: {props.info.description}
+          </Typography>
+          {props.info.photos 
+          ? <ItemPhotos  photos={props.info.photos} /> 
+          : null}
         </DialogContent>
-        {props.auctionOn && props.isUserItem ?
-        <DialogActions>
- 
-        <Button autoFocus onClick={props.handleClose} color="default">
-          Close
-        </Button>
-        <Button onClick={topBid} autoFocus color="default">
-          Make Top Bid
-        </Button>
-        <Button autoFocus onClick={acceptBid} color="default">
-          Accept Offer
-        </Button>
-        </DialogActions>
-        :
-        null}
-        
+        {props.auctionOn && props.isUserItem ? (
+          <DialogActions>
+            <Button autoFocus onClick={props.handleClose} color="default">
+              Close
+            </Button>
+            <Button onClick={topBid} autoFocus color="default">
+              Make Top Bid
+            </Button>
+            <Button autoFocus onClick={acceptBid} color="default">
+              Accept Offer
+            </Button>
+          </DialogActions>
+        ) : null}
       </Dialog>
-    </div>
   );
 }
