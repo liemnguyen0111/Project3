@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 const { getItem } = ItemAPI
 
 let socket;
-const ENDPOINT = 'http://localhost:3001'
+const ENDPOINT = 'https://nameless-coast-00674.herokuapp.com/'
 socket = io(ENDPOINT)
 
 const ItemView = () => {
