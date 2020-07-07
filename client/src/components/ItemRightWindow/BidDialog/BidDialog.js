@@ -136,6 +136,7 @@ export default function BidDialog(props) {
               alignItems="flex-start"
             >
               <TextField
+                required="true"
                 label="$ Your Price"
                 value={values.numberformat}
                 onChange={handleChange}
@@ -148,8 +149,9 @@ export default function BidDialog(props) {
               />
 
               <TextField
+                required="true"
                 id="outlined-multiline-static"
-                name='description'
+                name="description"
                 label="Description (Optional)"
                 style={{ marginTop: "20px", width: "100%" }}
                 multiline
@@ -160,6 +162,7 @@ export default function BidDialog(props) {
             </Grid>
 
             <input
+              required="true"
               accept="image/*"
               className={classes.input}
               id="contained-button-file"
