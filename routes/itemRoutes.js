@@ -112,7 +112,8 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
   const url = req.protocol + '://' + req.get('host')
   if (req.files) {
     const file = req.files.imgCollection
-    for (let i = 0; i < file.length; i++) {
+    const length = file.length || 1
+    for (let i = 0; i < length; i++) {
       await (file.length ? file[i] : file).mv(
         `./client/build/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
         (err) => {
