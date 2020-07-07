@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "5px",
     marginBottom: "5px",
     textDecoration: 'none',
+    color: 'black'
   },
   thumbnail: {
     marginTop: "10px",
@@ -96,6 +97,8 @@ export default function WonSection({boughtItems}) {
           className={classes.root}
         >
           {boughtItems.map((item) => (
+            <a style={{textDecoration: 'none'}}>
+
             <ListItem
               component={Link}
               to={`/ItemView/:search?${item._id}`}
@@ -127,6 +130,7 @@ export default function WonSection({boughtItems}) {
                 </Grid>
               </Grid>
             </ListItem>
+            </a>
           ))}
         </List>
       </Box>
