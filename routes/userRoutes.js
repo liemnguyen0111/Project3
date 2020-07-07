@@ -23,43 +23,69 @@ router.get("/users", passport.authenticate("jwt"), (req, res) => {
 
 User.findById(req.user._id)
   .populate(["watchItems", "sellItems", "shipItems"])
-  .populate({ 
-    path: 'buyItems',
+  .populate({
+    path: "buyItems",
     populate: {
-      path: 'bid',
-      model: 'Bid'
-    } 
- })
- .populate({ 
-  path: 'boughtItems',
-  populate: [{
-    path: 'topBid',
-    model: 'Bid',
-  },
-  {
-    path: 'user',
-    model: 'User',
-  }
- ]
-})
-.populate({ 
-  path: 'soldItems',
-  populate: [{
-    path: 'topBid',
-    model: 'Bid',
-  },
-  {
-    path: 'user',
-    model: 'User',
-  }
- ]
-})
-  .then(data => 
-    {
-      console.log(data)
-      res.json(data)
-    })
-  .catch(err => console.log(err))
+      path: "bid",
+      model: "Bid",
+    },
+  })
+  .populate({
+    path: "boughtItems",
+    populate: [
+      {
+        path: "topBid",
+        model: "Bid",
+      },
+      {
+        path: "user",
+        model: "User",
+      },
+    ],
+  })
+  .populate({
+    path: "shipItems",
+    populate: [
+      {
+        path: "topBid",
+        model: "Bid",
+        populate: [
+          {
+            path: "user",
+            model: "User",
+          },
+        ],
+      },
+      {
+        path: "user",
+        model: "User",
+      },
+    ],
+  })
+  .populate({
+    path: "soldItems",
+    populate: [
+      {
+        path: "topBid",
+        model: "Bid",
+        populate: [
+          {
+            path: "user",
+            model: "User",
+          },
+        ],
+      },
+      {
+        path: "user",
+        model: "User",
+      },
+    ],
+  })
+  .then((data) => {
+    console.log(data);
+    res.json(data);
+  })
+  .catch((err) => console.log(err));
   
 })
 

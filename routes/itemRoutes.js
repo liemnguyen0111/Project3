@@ -10,11 +10,10 @@ router.post("/items/category", (req, res) => {
 
   let info = req.body
   let limit = 12
-  console.log(info)
   let skip = (info.page) * 12
   if (req.body.category === 'All') {
 
-    Item.find({ isBought: false }, null, { limit: limit, skip: skip })
+    Item.find({ isBought: false, auctionOn: true }, null, { limit: limit, skip: skip })
       .populate("user")
       .then((items) => {
         Item.countDocuments().exec(function (err, count) {
