@@ -93,7 +93,7 @@ export default function SoldSection({soldItems, setOnShip, onShip}) {
       <Typography className={classes.title}>
         Sold
         <p className={classes.subtitle}>
-          Contact the buyer to arrange payment/delivery. Click 'Shipped' to move
+          Contact the buyer to arrange payment/delivery. Click 'Ship' to move
           item to the Shipped column.
         </p>
       </Typography>
@@ -112,6 +112,7 @@ export default function SoldSection({soldItems, setOnShip, onShip}) {
           {soldItems.map(item => {
            
             return (
+
               <ListItem className={classes.item}>
                 <Grid container spacing={1}>
                   <Grid item xs={3} className={classes.imageArea}>
@@ -147,7 +148,6 @@ export default function SoldSection({soldItems, setOnShip, onShip}) {
                 </Grid>
               </ListItem>
             );})}
-
         </List>
       </Box>
     </>
