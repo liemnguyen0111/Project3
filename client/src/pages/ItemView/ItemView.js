@@ -59,11 +59,6 @@ const ItemView = () => {
     },[])
   
 
- const handleUpdate = () => 
- {
-   console.log('on update')
- }
-
   const handleOnUpdate = () =>
   {
     socket.emit('update','update')
@@ -73,23 +68,25 @@ const ItemView = () => {
   {
     getItem(state.room)  
     .then(({ data }) => {
+      console.log(data)
     let leftWindow = {
       title: data[0].title,
       description: data[0].description,
       photos: data[0].photos,
       timeStart: data[0].dateTimeStart,
-      timeEnd: data[0].dateTimeEnd,
+      timeEnd: data[0].dateTimeStop,
+      auctionOn : data[0].auctionOn
     }
-
     let rightWindow = {
+      user : data[3].user,
       price: data[0].price,
       isUserItem: data[1].isUserItem,
       bid: data[0].bid,
       topBid: data[0].topBid,
       comment: data[0].comment,
-      isWatch : data[2].isWatch
+      isWatch : data[2].isWatch,
+      auctionOn : data[0].auctionOn
     }
-
     setState({
       leftWindow, 
       rightWindow, 

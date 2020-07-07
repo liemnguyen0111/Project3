@@ -84,7 +84,6 @@ export default function BidsSection({bidItems}) {
 
   return (
     <>
-    {console.log(bidItems)}
       <Typography className={classes.title}>
         Bids
         <br />

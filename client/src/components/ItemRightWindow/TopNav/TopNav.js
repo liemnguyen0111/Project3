@@ -42,7 +42,7 @@ const { userWatch, itemSold } = ItemAPI
 
 export default function TopNav(props) {
   const classes = useStyles();
-
+  
   const [open, setOpen] = React.useState(false);
   const [isWatch, setIsWatch ] = React.useState(props.info.isWatch)
 
@@ -62,8 +62,8 @@ export default function TopNav(props) {
   }
 
   const handleOnBuyOut = () => {
-    console.log(props.info.price)
-    itemSold({ price: props.info.price, postId: props.id })
+   
+    itemSold({ price: props.info.price, description: 'Bought out', postId: props.id, user: props.info.user })
       .then(data => props.update())
       .catch(err => console.error(err))
   }

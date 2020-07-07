@@ -76,8 +76,6 @@ export default function BidSection({ bid }) {
                       src={bidItem.photos[0]}
                       className={classes.bigAvatar} />}
 
-
-
                 </ListItemIcon>
                 <Typography noWrap>
                   <ListItemText primary={`${bidItem.user.firstName} ${bidItem.user.lastName}`} secondary={bidItem.description} />

@@ -19,6 +19,11 @@ const ItemAPI = {
       'Authorization': `Bearer ${localStorage.getItem("user")}`
     }
   }),
+  makeTopBid: (data) => axios.post('/api/item/maketopbid', data, {
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem("user")}`
+    }
+  }),
   userWatch: (data) => axios.put('/api/item/watch', data, {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem("user")}`

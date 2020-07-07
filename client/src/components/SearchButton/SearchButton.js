@@ -84,8 +84,7 @@ export default function SearchButton() {
             Search
           </Button>
         </DialogActions>
-      </Dialog>
-            
+      </Dialog>    
             </>
           )
         }
