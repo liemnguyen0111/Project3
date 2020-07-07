@@ -24,48 +24,48 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     maxWidth: "95%",
     overflow: "scroll",
-    minHeight : '70vh',
-    maxHeight : '70vh',
+    minHeight: "70vh",
+    maxHeight: "70vh",
     backgroundColor: theme.palette.background.paper,
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   title: {
-    textAlign: 'center',
-    color: '#616161',
-    fontWeight: '300',
-    fontSize: '40px',
-    padding: '10px',
-    marginTop: '10px',
+    textAlign: "center",
+    color: "#616161",
+    fontWeight: "300",
+    fontSize: "40px",
+    padding: "10px",
+    marginTop: "10px",
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
     maxWidth: "86%",
   },
   subtitle: {
-    textAlign: 'center',
-    color: '#616161',
-    fontWeight: '300',
-    fontSize: '14px',
-    marginTop: '-6px'
+    textAlign: "center",
+    color: "#616161",
+    fontWeight: "300",
+    fontSize: "14px",
+    marginTop: "-6px",
   },
-  item:
-  {
+  item: {
     flex: 0.5,
-    border : "1px",
-    borderStyle : "solid",
-    borderRadius : "5px",
-    marginBottom : '5px',
-    textDecoration : 'none'
+    border: "1px",
+    borderStyle: "solid",
+    borderRadius: "5px",
+    marginBottom: "5px",
+    textDecoration: 'none',
+    color: 'black'
   },
   thumbnail: {
-    marginTop: '10px',
-    width: '90%',
+    marginTop: "10px",
+    width: "90%",
   },
   detailText: {
-    color: 'gray',
-    fontSize: '14px',
+    color: "gray",
+    fontSize: "14px",
   },
 }));
 
@@ -75,62 +75,65 @@ export default function WonSection({boughtItems}) {
 
   return (
     <>
-    {console.log(boughtItems)}
+      {console.log(boughtItems)}
       <Typography className={classes.title}>
         Won
-          <br />
-        <p className={classes.subtitle}>When you've won an item, it will appear here. Contact the seller to arrange payment/delivery. </p>
+        <br />
+        <p className={classes.subtitle}>
+          When you've won an item, it will appear here. Contact the seller to
+          arrange payment/delivery.{" "}
+        </p>
       </Typography>
-      
-      <Box textAlign="center" borderColor="text.primary" {...defaultProps} className={classes.root}>
 
+      <Box
+        textAlign="center"
+        borderColor="text.primary"
+        {...defaultProps}
+        className={classes.root}
+      >
         <List
           component="nav"
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          {
-            boughtItems.map(item =>
-              <ListItem 
+          {boughtItems.map((item) => (
+            <a style={{textDecoration: 'none'}}>
+
+            <ListItem
               component={Link}
               to={`/ItemView/:search?${item._id}`}
               className={classes.item}
-              >  
+            >
               <Grid container spacing={1}>
                 <Grid item xs={3} className={classes.imageArea}>
-                  <img className={classes.thumbnail} src={item.photos[item.photos.length - 1]} alt={item.photos[item.photos.length - 1]} />
+                  <img
+                    className={classes.thumbnail}
+                    src={item.photos[item.photos.length - 1]}
+                    alt={item.photos[item.photos.length - 1]}
+                  />
                 </Grid>
                 <Grid item xs={8}>
-                  <Typography noWrap>
-                    {item.title}
-                  </Typography >
+                  <Typography noWrap>{item.title}</Typography>
                   <Typography className={classes.detailText} noWrap>
                     {item.description}
                   </Typography>
                   <Divider />
-                  <Typography noWrap>
-                    Sale Terms
-                  </Typography>
+                  <Typography noWrap>Sale Terms</Typography>
                   <Typography className={classes.detailText} noWrap>
-                    {`${item.topBid.price} | ${item.topBid.description}`}
-              
+                    ${`${item.topBid.price} | ${item.topBid.description}`}
                   </Typography>
                   <Divider />
-                  <Typography>
-                    Seller Info
-                  </Typography>
+                  <Typography>Seller Info</Typography>
                   <Typography className={classes.detailText}>
-                      {`${item.user.firstName} ${item.user.lastName} | ${item.user.username}`}
+                    {`${item.user.firstName} ${item.user.lastName} | ${item.user.username}`}
                   </Typography>
                 </Grid>
               </Grid>
-            </ListItem>  
-
-              )
-          }
-      
+            </ListItem>
+            </a>
+          ))}
         </List>
-      </Box> 
-    </> 
+      </Box>
+    </>
   );
 }

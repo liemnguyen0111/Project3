@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TopBid({ topBid }) {
-  console.log(topBid)
+  // console.log(topBid)
   const classes = useStyles();
   const [isTop, setIsTop] = useState(true)
 
