@@ -103,7 +103,7 @@ export default function ItemsGrid(props) {
           <Typography noWrap><strong>{item.title}</strong></Typography>
               </Grid>
               <Grid item xs={12} >
-                <Typography className={classes.price}>  ${item.price}</Typography>
+                <Typography className={classes.price}>  {item.price}</Typography>
               </Grid>
              
             </Paper> 

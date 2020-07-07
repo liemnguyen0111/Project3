@@ -15,6 +15,36 @@ import Grid from "@material-ui/core/Grid";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Category from "../Category";
 import ItemAPI from "../../../../utils/ItemAPI";
+import PropTypes from "prop-types";
+import NumberFormat from "react-number-format";
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix="$"
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 const useStyles = makeStyles({
   modal: {
@@ -45,7 +75,15 @@ const { createItem } = ItemAPI;
 
 export default function FormDialog() {
   const classes = useStyles();
-
+  const [values, setValues] = React.useState({
+    numberformat: "",
+  });
+  const handleChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    })
+  }
   const [category, setCategory] = useState("Art");
   const [files, setFiles] = useState();
 
@@ -55,7 +93,7 @@ export default function FormDialog() {
     const NewListingInfo = {
       title: event.target.itemTitle.value,
       description: event.target.itemDescription.value,
-      price: event.target.itemPrice.value,
+      price: event.target.numberformat.value,
       category: category,
       keywords: event.target.itemKeywords.value,
       dateTimeStart: event.target.dateTimeStart.value,
@@ -103,7 +141,7 @@ export default function FormDialog() {
     (today.getMonth() < 10 ? "0" : "") +
     (today.getMonth() + 1) +
     "/" +
-    (((today.getDate() + 5) < 10 ? "0" : "") + (today.getDate() + 5)) +
+    (((today.getDate() + 5) < 10 ? "0" : "") + (today.getDate() + 7)) +
     "/" +
     today.getFullYear();
   const time =
@@ -168,13 +206,19 @@ export default function FormDialog() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  margin="dense"
-                  name="itemPrice"
-                  id="itemPrice"
-                  label="Price $"
-                  type="number"
+                  
+                  label="$ Price"
+                  value={values.numberformat}
+                  onChange={handleChange}
+                  name="numberformat"
+                  id="formatted-numberformat-input"
+                  style={{ width: "100%" }}
+                  InputProps={{
+                    inputComponent: NumberFormatCustom,
+                  }}
                   fullWidth
                 />
+               
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Category setCategory={setCategory} />
@@ -249,3 +293,5 @@ export default function FormDialog() {
     </>
   );
 }
+
+
