@@ -76,7 +76,7 @@ export default function WonSection({boughtItems}) {
   return (
     <>
     {console.log(boughtItems)}
-      <Typography className={classes.title}>
+      <Typography  className={classes.title}>
         Won
           <br />
         <p className={classes.subtitle}>When you've won an item, it will appear here. Contact the seller to arrange payment/delivery. </p>

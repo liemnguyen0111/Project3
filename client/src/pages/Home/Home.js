@@ -27,6 +27,8 @@ const { getAllItems } = ItemAPI
 const Home = ({loginState, setLoginState}) => {
   const classes = useStyles();
 
+  const [updateClass, setUpdateClass] = useState('')
+  
   return (
     
     <div className={classes.root}>

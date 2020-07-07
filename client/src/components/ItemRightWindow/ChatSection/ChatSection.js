@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ChatSection({ messages }) {
 
   const classes = useStyles();
-  console.log(messages)
   return (
     <List
       component="nav"
