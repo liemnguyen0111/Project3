@@ -75,7 +75,7 @@ export default function WonSection({boughtItems}) {
 
   return (
     <>
-      {console.log(boughtItems)}
+
       <Typography className={classes.title}>
         Won
         <br />

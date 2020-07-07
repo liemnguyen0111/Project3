@@ -70,7 +70,6 @@ export default function BidSection({ bid }) {
                 className={classes.item}>
 
                 <ListItemIcon >
-                  {console.log(bidItem.photos[0])}
                   {bidItem.photos[0] ? < Avatar alt={bidItem.photos[0]}
                     src={`${bidItem.photos[0]}`}
                     className={classes.bigAvatar} /> : <Avatar alt="N/A"

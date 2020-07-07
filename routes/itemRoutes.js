@@ -13,6 +13,7 @@ router.post("/items/category", (req, res) => {
   let skip = (info.page) * 12
   if (req.body.category === 'All') {
 
+
     Item.find({ isBought: false, auctionOn: true }, null, { limit: limit, skip: skip })
       .populate("user")
       .then((items) => {
@@ -28,7 +29,7 @@ router.post("/items/category", (req, res) => {
       .catch((err) => console.error(err));
   }
   else {
-    Item.find({ isBought: false, category: req.body.category }, null, { limit: limit, skip: skip })
+    Item.find({ isBought: false, category: req.body.category })
       .populate("user")
       .then((items) => {
         Item.countDocuments().exec(function (err, count) {
@@ -53,7 +54,8 @@ router.get("/items/:id", passport.authenticate("jwt"), (req, res) => {
       populate: {
         path: 'user',
         model: 'User'
-      }
+      },
+      options: { sort: { _id: -1 } } 
     })
     .populate({
       path: 'comment',
@@ -69,8 +71,8 @@ router.get("/items/:id", passport.authenticate("jwt"), (req, res) => {
         model: 'User'
       }
     })
-    .then((item) => {
-
+    .exec((err, item) => {
+    
       if (JSON.stringify(req.user._id) === JSON.stringify(item[0].user._id)) {
         item.push({ isUserItem: true })
       }
@@ -79,9 +81,9 @@ router.get("/items/:id", passport.authenticate("jwt"), (req, res) => {
       }
        req.user.watchItems.includes(item[0]._id) ? item.push({isWatch : true}) : item.push({isWatch : false})
         res.json(item)
-}
+      }
     )
-    .catch((err) => console.error(err));
+    // .catch((err) => console.error(err));
 });
 
 router.get('/items/search/:search', (req, res) => {
@@ -231,8 +233,8 @@ router.post("/item/comments", passport.authenticate("jwt"), (req, res) => {
 router.put("/item/watch", passport.authenticate("jwt"), (req, res) => {
   // console.log(req.body.isWatch)
   User.findByIdAndUpdate(req.user._id, (req.body.isWatch ?
-    { $pull: { watchItems: req.body.postId } } :
-    { $addToSet: { watchItems: req.body.postId } }), (err, data) => {
+    { $addToSet: { watchItems: req.body.postId } } :
+    { $pull: { watchItems: req.body.postId } }), (err, data) => {
       if (err) console.error(err)
       res.sendStatus(200)
     }

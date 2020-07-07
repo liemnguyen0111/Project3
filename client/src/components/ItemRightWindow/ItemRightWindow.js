@@ -15,8 +15,6 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import ItemAPI from '../../utils/ItemAPI'
 
-
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -103,7 +101,7 @@ export default function ItemRightWindow(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -119,7 +117,7 @@ export default function ItemRightWindow(props) {
         body: event.target.message.value,
         item: props.id
       })
-        .then(data => console.log(data))
+        .then(data => {props.update()})
         .catch(err => console.error(err))
       event.target.message.focus()
       event.target.reset()
@@ -132,6 +130,7 @@ export default function ItemRightWindow(props) {
     <div className={classes.root}>
       <div className={classes.body}>
         <TopBid topBid={props.info.topBid} />
+
 
         {props.info.isUserItem || props.info.auctionOn ? null :
           <TopNav className={classes.topNav} id={props.id} info={props.info} />
