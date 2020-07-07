@@ -171,7 +171,6 @@ router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
           if (err) {
             console.log('failed to upload')
           } else {
-
             isImage = true;
           }
         }

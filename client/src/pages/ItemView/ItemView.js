@@ -64,7 +64,7 @@ class ItemView extends Component {
         this.setState({
           leftWindow, rightWindow
         })
-        console.log(rightWindow)
+        // console.log(rightWindow)
       })
       .catch(err => console.error(err))
   }
