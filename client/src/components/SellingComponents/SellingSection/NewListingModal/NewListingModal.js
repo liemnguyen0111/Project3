@@ -186,6 +186,7 @@ export default function FormDialog() {
               <Grid item xs={12}>
                 <TextField
                   autoFocus
+                  required="true"
                   margin="dense"
                   name="itemTitle"
                   id="itemTitle"
@@ -196,6 +197,7 @@ export default function FormDialog() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  required="true"
                   margin="dense"
                   name="itemDescription"
                   id="itemDescription"
@@ -206,7 +208,7 @@ export default function FormDialog() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  
+                  required="true"
                   label="$ Price"
                   value={values.numberformat}
                   onChange={handleChange}
@@ -218,13 +220,13 @@ export default function FormDialog() {
                   }}
                   fullWidth
                 />
-               
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Category setCategory={setCategory} />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  required="true"
                   margin="dense"
                   name="itemKeywords"
                   id="itemKeywords"
@@ -236,6 +238,7 @@ export default function FormDialog() {
               <Grid item xs={12}>
                 <label htmlFor="upload-photo">
                   <input
+                    required="true"
                     style={{ display: "none" }}
                     id="upload-photo"
                     name="upload-photo"
@@ -251,6 +254,7 @@ export default function FormDialog() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  required="true"
                   margin="dense"
                   name="dateTimeStart"
                   id="dateTimeStart"
@@ -265,6 +269,7 @@ export default function FormDialog() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  required="true"
                   margin="dense"
                   name="dateTimeStop"
                   id="dateTimeStop"
