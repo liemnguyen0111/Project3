@@ -231,7 +231,7 @@ router.post("/item/comments", passport.authenticate("jwt"), (req, res) => {
 
 // watch on item
 router.put("/item/watch", passport.authenticate("jwt"), (req, res) => {
-  console.log(req.body.isWatch)
+  // console.log(req.body.isWatch)
   User.findByIdAndUpdate(req.user._id, (req.body.isWatch ?
     { $pull: { watchItems: req.body.postId } } :
     { $addToSet: { watchItems: req.body.postId } }), (err, data) => {
@@ -255,34 +255,35 @@ router.put('/item/sold', passport.authenticate("jwt"), (req, res) => {
   Bid.create(newBid)
     .then(({ _id }) => {
 
-      Item.findByIdAndUpdate(req.body.postId, { $set: { topBid: _id } })
+      Item.findByIdAndUpdate(req.body.postId, { $set: { topBid: _id, auctionOn: false, isBought: true } })
         .populate('user')
         .then(({ user }) => {
-          User.findByIdAndUpdate(req.user._id,
-            {
-              $addToSet: { boughtItems: req.body.postId },
-              $pull: { buyItems: req.body.postId }
-            })
+          User.findByIdAndUpdate(req.user._id, {
+            $addToSet: { boughtItems: req.body.postId },
+            $pull: { buyItems: req.body.postId },
+            $pull: { watchItems: req.body.postId }
+          })
             .then(() => {
-              User.findByIdAndUpdate(user._id,
-                {
-                  $addToSet: { soldItems: req.body.postId },
-                  $pull: { sellItems: req.body.postId }
-                })
-                .then(data => {
-                  User.updateMany({}, {
-
-                    $pull: { watchItems: req.body.postId },
-                    $pull: { buyItems: req.body.postId },
-                  })
+              User.findByIdAndUpdate(user._id, {
+                $addToSet: { soldItems: req.body.postId },
+                $pull: { sellItems: req.body.postId },
+              })
+                .then((data) => {
+                  User.updateMany(
+                    {},
+                    {
+                      $pull: { watchItems: req.body.postId },
+                      $pull: { buyItems: req.body.postId },
+                    }
+                  )
                     .then(() => {
-                      res.sendStatus(200)
+                      res.sendStatus(200);
                     })
-                    .catch(err => console.error(err))
+                    .catch((err) => console.error(err));
                 })
-                .catch(err => console.error(err))
+                .catch((err) => console.error(err));
             })
-            .catch(err => console.error(err))
+            .catch((err) => console.error(err));
         })
         .catch(err => console.error(err))
     })
