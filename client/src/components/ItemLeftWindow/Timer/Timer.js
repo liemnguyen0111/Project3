@@ -41,17 +41,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TopBid(props) {
   const classes = useStyles();
-  const [isEnd, setIsEnd] = useState(true)
 
   return (
     <div  className={classes.root} >
-    {     isEnd?   
+    { !props.auctionOn?   
         <Typography variant='h4' className={classes.item}>
-        <strong>Ended</strong>
+        <strong>Sold</strong>
       </Typography>
         :
         <Typography variant='h4' className={classes.item}>
-        <strong>End in 2 hours 24 minutes 24 seconds</strong>
+        <strong>Ends at {props.timeEnd.split(',').join(' ')}</strong>
       </Typography>
     }
     </div>

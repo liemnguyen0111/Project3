@@ -62,7 +62,6 @@ const { userBid } = ItemAPI
 
 export default function BidDialog(props) {
   const classes = useStyles();
-
   const [values, setValues] = React.useState({
     numberformat: "",
   });
@@ -99,7 +98,8 @@ export default function BidDialog(props) {
 
     userBid(formData)
     .then(()=>
-    {props.update()}
+    {
+      props.update()}
     )
     .catch(err => console.error(err))
 

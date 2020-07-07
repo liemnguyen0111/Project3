@@ -50,11 +50,6 @@ function App() {
    setCategory(event.target.value)
   }
 
-  const handleSearch = (event) =>
-  {
-    event.preventDefault()
-  }
-  
   return (
   
     <LoginContext.Provider value={{loginState, setLoginState}}>

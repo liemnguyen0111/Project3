@@ -35,7 +35,6 @@ const Buying = () => {
 
   return (
     <>
-    {console.log(items)}
       <div className={classes.root}>
         <Grid container spacing={0}>
 

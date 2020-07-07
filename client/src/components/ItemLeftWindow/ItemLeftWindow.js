@@ -43,7 +43,7 @@ const ItemLeftWindow = ({ info }) => {
   return (
     <div className={classes.root}>
       <Box textAlign="center" className={classes.body} borderColor="text.primary" {...defaultProps}>
-        <Timer />
+        <Timer auctionOn={info.auctionOn} timeEnd={info.timeEnd}/>
         <ItemImage photos={info.photos} />
         <Grid item xs={12} style={{ bottom: '0', left: '0', right: '0', position: 'absolute' }}>
           <Typography className={classes.title} noWrap>

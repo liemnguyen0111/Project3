@@ -9,12 +9,10 @@ const { route } = require("./userRoutes");
 router.post("/items/category", (req, res) => {
 
   let info = req.body
-  let limit = 12
-  let skip = (info.page) * 12
   if (req.body.category === 'All') {
 
 
-    Item.find({ isBought: false, auctionOn: true }, null, { limit: limit, skip: skip })
+    Item.find({ isBought: false, auctionOn: true })
       .populate("user")
       .then((items) => {
         Item.countDocuments().exec(function (err, count) {
@@ -80,6 +78,7 @@ router.get("/items/:id", passport.authenticate("jwt"), (req, res) => {
         item.push({ isUserItem: false })
       }
        req.user.watchItems.includes(item[0]._id) ? item.push({isWatch : true}) : item.push({isWatch : false})
+       item.push({user : req.user._id})
         res.json(item)
       }
     )
@@ -115,7 +114,7 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
     const file = req.files.imgCollection
     for (let i = 0; i < file.length; i++) {
       await (file.length ? file[i] : file).mv(
-        `./client/public/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
+        `./client/build/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
         (err) => {
           if (err) {
             console.log('failed to upload')
@@ -124,7 +123,7 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
           }
         }
       );
-      path.push(`/images/` + file[i].name)
+      path.push(`/images/` +  (file.length ? file[i] : file).name.split(' ').join('_'))
     }
   }
 
@@ -142,21 +141,6 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
     .catch((err) => console.error(err))
 });
 
-// update created auction item
-// router.put('/items/:id', passport.authenticate("jwt"), (req, res) => {
-//   Item.findByIdAndUpdate(req.params.id, { $set: req.body })
-//     .then(data => res.json(data))
-//     .catch(err => console.error(err))
-// })
-
-// // delete item by id
-// router.delete('/items/:id', passport.authenticate("jwt"), (req, res) => {
-//   Item.findByIdAndRemove(req.params.id)
-//     .then(data => res.json(data))
-//     .catch(err => console.error(err))
-// })
-
-
 // create new bid on item
 router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
 
@@ -167,7 +151,7 @@ router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
     const length = file.length || 1
     for (let i = 0; i < length; i++) {
       await (file.length ? file[i] : file).mv(
-        `./client/public/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
+        `./client/build/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
         (err) => {
           if (err) {
             console.log('failed to upload')
@@ -247,8 +231,8 @@ router.put('/item/sold', passport.authenticate("jwt"), (req, res) => {
 
   const newBid = {
     price: req.body.price,
-    description: 'Bought out',
-    user: req.user._id,
+    description: req.body.description,
+    user: req.body.user,
     item: req.body.postId
   }
 
@@ -290,6 +274,16 @@ router.put('/item/sold', passport.authenticate("jwt"), (req, res) => {
     .catch(err => console.error(err))
 
 })
+
+
+router.put('/item/maketopbid', passport.authenticate("jwt"), (req, res) => {
+  Item.findByIdAndUpdate(req.body.postId, {
+    $set: { topBid: req.body.bidId },
+  })
+    .then(() => res.sendStatus(200))
+    .catch(err => console.error(err))
+})
+
 
 router.put('/item/ship', passport.authenticate("jwt"), (req, res) => {
   User.findByIdAndUpdate(req.user._id, {

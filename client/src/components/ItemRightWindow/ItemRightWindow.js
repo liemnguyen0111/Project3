@@ -123,17 +123,14 @@ export default function ItemRightWindow(props) {
       event.target.reset()
     }
   }
-
-
-
+  
   return (
     <div className={classes.root}>
       <div className={classes.body}>
         <TopBid topBid={props.info.topBid} />
 
-
-        {props.info.isUserItem || props.info.auctionOn ? null :
-          <TopNav className={classes.topNav} id={props.id} info={props.info} />
+        {props.info.isUserItem || !props.info.auctionOn ? null :
+          <TopNav className={classes.topNav} id={props.id} info={props.info} update={props.update}/>
         }
 
         <SwipeableViews className={classes.view}

@@ -55,7 +55,6 @@ const DialogActions = withStyles((theme) => ({
 // const [ info, setInfo ] = useState([])
 
 export default function ItemDialog(props) {
-  console.log(props)
   return (
     <div>
       <Dialog
