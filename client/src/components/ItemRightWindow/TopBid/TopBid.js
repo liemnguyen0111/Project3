@@ -13,8 +13,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     whiteSpace: 'nowrap',
     width: '100%',
-    borderRadius: '0',
-    backgroundColor: '#9e9e9e',
+    borderRadius: '0'
   },
   item:
   {
@@ -29,27 +28,19 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontstyle: 'italic',
     fontSize: 20,
-    textDecorationLine: 'underline',
-  },
-  isTop:
-  {
-    whiteSpace: 'nowrap',
-    width: '100%',
-    borderRadius: '0',
-    backgroundColor: '#69f0ae',
   }
 }));
 
 export default function TopBid({ topBid }) {
-  console.log(topBid)
+
   const classes = useStyles();
-  const [isTop, setIsTop] = useState(true)
 
   const handleOnclick = () => {
-    // setIsTop(!isTop)
+   
   }
+
   return (
-    <Paper elevation={3} className={topBid ? classes.isTop : classes.root}>
+    <Paper elevation={3} className={classes.root}>
       <div >
         <ThemeProvider  >
           <Typography variant='h5' className={classes.title}>Top Bid</Typography>
@@ -57,14 +48,11 @@ export default function TopBid({ topBid }) {
         {
           topBid ?
             <ListItem
-              button
               className={classes.item} onClick={handleOnclick}>
               <ListItemIcon >
                 {topBid.photos ? <Avatar alt={topBid.photos[0]}
                   src={topBid.photos[0]}
-                  className={classes.bigAvatar} /> : <Avatar alt="N/A"
-                    src=''
-                    className={classes.bigAvatar} />}
+                  className={classes.bigAvatar} /> : null }
               </ListItemIcon>
 
               <ListItemText
@@ -76,7 +64,6 @@ export default function TopBid({ topBid }) {
             </ListItem>
             :
             <ListItem
-              button
               className={classes.item}
               style={{ textAlign: 'center', fontStyle: 'italic' }}
               onClick={handleOnclick}

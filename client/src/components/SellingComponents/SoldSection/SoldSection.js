@@ -109,47 +109,45 @@ export default function SoldSection({soldItems, setOnShip, onShip}) {
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          { console.log(soldItems)}
           {soldItems.map(item => {
            
             return (
 
-          <ListItem className={classes.item}>
-            
-            <Grid container spacing={1}>
-              <Grid item xs={3} className={classes.imageArea}>
-                <img
-                  className={classes.thumbnail}
-                  src={item.photos[0]}
-                  alt=""
-                />
-                <Button size="small" 
-                onClick={()=> handleOnClickShip(item._id)}
-                className={classes.shippedButton}
-                >
-                  Ship
-                </Button>
-              </Grid>
-              <Grid item xs={8}>
-            <Typography>{item.title}</Typography>
-                <Typography className={classes.detailText} noWrap>
-                  {item.description}
-                </Typography>
-                <Divider />
-                <Typography>Sale Terms</Typography>
-                <Typography className={classes.detailText}>
-                  {`${item.topBid.price} | ${item.topBid.description}`}
-                </Typography>
-                <Divider />
-                <Typography>Buyer Info</Typography>
-                <Typography className={classes.detailText}>
-                     {`${item.user.firstName} ${item.user.lastName} | ${item.user.username}`}
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>
-            )})}
-
+              <ListItem className={classes.item}>
+                <Grid container spacing={1}>
+                  <Grid item xs={3} className={classes.imageArea}>
+                    <img
+                      className={classes.thumbnail}
+                      src={item.photos[0]}
+                      alt=""
+                    />
+                    <Button
+                      size="small"
+                      onClick={() => handleOnClickShip(item._id)}
+                      className={classes.shippedButton}
+                    >
+                      Ship
+                    </Button>
+                  </Grid>
+                  <Grid item xs={8}>
+                    <Typography>{item.title}</Typography>
+                    <Typography className={classes.detailText}>
+                      {item.description}
+                    </Typography>
+                    <Divider />
+                    <Typography>Sale Terms</Typography>
+                    <Typography className={classes.detailText}>
+                      {`${item.topBid.price} | ${item.topBid.description}`}
+                    </Typography>
+                    <Divider />
+                    <Typography>Buyer Info</Typography>
+                    <Typography className={classes.detailText}>
+                      {`${item.topBid.user.firstName} ${item.topBid.user.lastName} | ${item.topBid.user.username}`}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
+            );})}
         </List>
       </Box>
     </>

@@ -98,6 +98,10 @@ export default function BidDialog(props) {
       }
 
     userBid(formData)
+    .then(()=>
+    {props.update()}
+    )
+    .catch(err => console.error(err))
 
     event.target.reset()
     props.handleClose();

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import axios from 'axios'
+import io from 'socket.io-client'
 import ItemAPI from '../../utils/ItemAPI'
 import ItemLeftWindow from "../../components/ItemLeftWindow";
 import ItemRightWindow from "../../components/ItemRightWindow";
@@ -17,10 +17,13 @@ const useStyles = makeStyles((theme) => ({
 
 const { getItem } = ItemAPI
 
-class ItemView extends Component {
-  //  let classes = useStyles();
-  // const id = location
-  state = {
+let socket;
+const ENDPOINT = 'http://localhost:3001'
+socket = io(ENDPOINT)
+
+const ItemView = () => {
+
+  const [state, setState] = useState({
     leftWindow: {
       title: '',
       photos: [],
@@ -34,41 +37,71 @@ class ItemView extends Component {
       topBid: [],
       comment: [],
       isWatch : false
+    },
+    room : window.location.search.split('?')[1]
+  })
+
+
+    useEffect(()=>
+    {
+              handleDataUpdate()
+
+             socket.emit('joinRoom', { room : state.room }, (error) => {
+              if(error) {
+                console.log('errr');
+              }
+            });
+            
+            socket.on("update", (data) => {
+              handleDataUpdate()
+            });
+           
+    },[])
+  
+
+ const handleUpdate = () => 
+ {
+   console.log('on update')
+ }
+
+  const handleOnUpdate = () =>
+  {
+    socket.emit('update','update')
+  }
+
+  const handleDataUpdate = () =>
+  {
+    getItem(state.room)  
+    .then(({ data }) => {
+    let leftWindow = {
+      title: data[0].title,
+      description: data[0].description,
+      photos: data[0].photos,
+      timeStart: data[0].dateTimeStart,
+      timeEnd: data[0].dateTimeEnd,
     }
+
+    let rightWindow = {
+      price: data[0].price,
+      isUserItem: data[1].isUserItem,
+      bid: data[0].bid,
+      topBid: data[0].topBid,
+      comment: data[0].comment,
+      isWatch : data[2].isWatch
+    }
+
+    setState({
+      leftWindow, 
+      rightWindow, 
+      room :  window.location.search.split('?')[1]
+    })
+
+  })
+  .catch(err => console.error(err))
+
   }
 
-  componentWillMount() {
-    const id = this.props.location.search.split('?')[1]
-    getItem(id)
-      .then(({ data }) => {
-        // let leftWindow = JSON.parse(JSON.stringify(this.state.leftWindow))
-        let leftWindow = {
-          title: data[0].title,
-          description: data[0].description,
-          photos: data[0].photos,
-          timeStart: data[0].dateTimeStart,
-          timeEnd: data[0].dateTimeEnd,
-        }
 
-        // let rightWindow = JSON.parse(JSON.stringify(this.state.rightWindow))
-
-        let rightWindow = {
-          price: data[0].price,
-          isUserItem: data[1].isUserItem,
-          bid: data[0].bid,
-          topBid: data[0].topBid,
-          comment: data[0].comment,
-          isWatch : data[2].isWatch
-        }
-        console.log(data)
-        this.setState({
-          leftWindow, rightWindow
-        })
-        console.log(rightWindow)
-      })
-      .catch(err => console.error(err))
-  }
-  render() {
     return (
       <>
         <div style={{
@@ -79,27 +112,19 @@ class ItemView extends Component {
         }}>
           <Grid container >
             <Grid item xs={12} sm={6}>
-<<<<<<< HEAD
               <div className={'fade-in one'}>
-                <ItemLeftWindow info={this.state.leftWindow}/>
+                <ItemLeftWindow info={state.leftWindow}/>
               </div>  
             </Grid>
             <Grid item xs={12} sm={6}>
               <div className={'fade-in two'}>
-                <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow}/>
+                <ItemRightWindow id={state.room} info={state.rightWindow} update={handleOnUpdate}/>
               </div>  
-=======
-              <ItemLeftWindow info={this.state.leftWindow} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <ItemRightWindow id={this.props.location.search.split('?')[1]} info={this.state.rightWindow} />
->>>>>>> chatandbid
             </Grid>
           </Grid>
         </div>
       </>
     );
-  }
 
 };
 

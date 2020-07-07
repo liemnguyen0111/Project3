@@ -163,7 +163,7 @@ export default function SellingSection({sellItems}) {
                       alt={'No Image'}
                     />
                   </ListItem>
-                  <Typography className={classes.itemPrice}>${item.price}</Typography>
+                  <Typography className={classes.itemPrice}>{item.price}</Typography>
                 </Grid>
                 <Grid item xs={8}>
                   <Typography noWrap>{item.title}</Typography>

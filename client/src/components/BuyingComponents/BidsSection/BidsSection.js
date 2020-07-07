@@ -126,7 +126,7 @@ export default function BidsSection({bidItems}) {
                       {item.description}
                     </Typography>
                     <Divider />
-                    <Typography>Your Latest Offer</Typography>
+                    <Typography>Last Offer: </Typography>
                     <Typography className={classes.detailText}>
                       {item.bid[item.bid.length - 1 ].description}
                     </Typography>

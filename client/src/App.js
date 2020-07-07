@@ -41,7 +41,7 @@ function App() {
       })
       .catch(err => console.error(err))
 
-  }, [category,onPageChange,newPage]);
+  }, [category, onPageChange, newPage]);
 
   const handleCategory = (event) =>
   {

@@ -24,14 +24,19 @@ const useStyles = makeStyles((theme) => ({
   headline: {
     fontWeight: "100",
     marginTop: "10px",
-    fontSize: "40px",
+    // fontSize: "5rem",
     textAlign: "center",
-    lineHeight: "120%", 
+    lineHeight: "120%",
+    fontSize: "40px",
+    "@media (max-width:600px)": {
+      fontSize: "1.5rem",
+    },
   },
   background: {
     background: "linear-gradient(#c9caca, #373737)",
-    padding: "40px",
     height: "auto",
+    paddingTop: "40px",
+    paddingBottom: "40px",
   },
 
   button: {
@@ -39,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     borderColor: "#ffffff",
   },
-}))
+}));
 
 export default function Jumbotron() {
 

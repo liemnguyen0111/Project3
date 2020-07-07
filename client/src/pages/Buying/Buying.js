@@ -50,7 +50,7 @@ const Buying = () => {
             </div>
           </Grid>
           <Grid item xs={12} sm={4} >
-            <div className={'fade-in three'}>
+            <div  className={'fade-in three'}>
               <WonSection boughtItems={items.boughtItems}/>
             </div>
           </Grid>

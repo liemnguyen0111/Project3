@@ -10,11 +10,11 @@ router.post("/items/category", (req, res) => {
 
   let info = req.body
   let limit = 12
-  console.log(info)
   let skip = (info.page) * 12
   if (req.body.category === 'All') {
 
-    Item.find({ isBought: false }, null, { limit: limit, skip: skip })
+
+    Item.find({ isBought: false, auctionOn: true }, null, { limit: limit, skip: skip })
       .populate("user")
       .then((items) => {
         Item.countDocuments().exec(function (err, count) {
@@ -29,7 +29,7 @@ router.post("/items/category", (req, res) => {
       .catch((err) => console.error(err));
   }
   else {
-    Item.find({ isBought: false, category: req.body.category }, null, { limit: limit, skip: skip })
+    Item.find({ isBought: false, category: req.body.category })
       .populate("user")
       .then((items) => {
         Item.countDocuments().exec(function (err, count) {
@@ -54,7 +54,8 @@ router.get("/items/:id", passport.authenticate("jwt"), (req, res) => {
       populate: {
         path: 'user',
         model: 'User'
-      }
+      },
+      options: { sort: { _id: -1 } } 
     })
     .populate({
       path: 'comment',
@@ -70,8 +71,8 @@ router.get("/items/:id", passport.authenticate("jwt"), (req, res) => {
         model: 'User'
       }
     })
-    .then((item) => {
-
+    .exec((err, item) => {
+    
       if (JSON.stringify(req.user._id) === JSON.stringify(item[0].user._id)) {
         item.push({ isUserItem: true })
       }
@@ -80,9 +81,9 @@ router.get("/items/:id", passport.authenticate("jwt"), (req, res) => {
       }
        req.user.watchItems.includes(item[0]._id) ? item.push({isWatch : true}) : item.push({isWatch : false})
         res.json(item)
-}
+      }
     )
-    .catch((err) => console.error(err));
+    // .catch((err) => console.error(err));
 });
 
 router.get('/items/search/:search', (req, res) => {
@@ -111,18 +112,10 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
   let path = []
   const url = req.protocol + '://' + req.get('host')
   if (req.files) {
-<<<<<<< HEAD
-  const file = req.files.imgCollection
-   for(let i = 0; i < file.length; i++ )
-  {
-     await (file.length?file[i]:file).mv(
-      `./client/public/images/` + (file.length?file[i]:file).name.split(' ').join('_'),
-=======
     const file = req.files.imgCollection
     for (let i = 0; i < file.length; i++) {
       await (file.length ? file[i] : file).mv(
         `./client/public/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
->>>>>>> chatandbid
         (err) => {
           if (err) {
             console.log('failed to upload')
@@ -179,7 +172,6 @@ router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
           if (err) {
             console.log('failed to upload')
           } else {
-
             isImage = true;
           }
         }
@@ -239,10 +231,10 @@ router.post("/item/comments", passport.authenticate("jwt"), (req, res) => {
 
 // watch on item
 router.put("/item/watch", passport.authenticate("jwt"), (req, res) => {
-  console.log(req.body.isWatch)
+  // console.log(req.body.isWatch)
   User.findByIdAndUpdate(req.user._id, (req.body.isWatch ?
-    { $pull: { watchItems: req.body.postId } } :
-    { $addToSet: { watchItems: req.body.postId } }), (err, data) => {
+    { $addToSet: { watchItems: req.body.postId } } :
+    { $pull: { watchItems: req.body.postId } }), (err, data) => {
       if (err) console.error(err)
       res.sendStatus(200)
     }
@@ -263,34 +255,35 @@ router.put('/item/sold', passport.authenticate("jwt"), (req, res) => {
   Bid.create(newBid)
     .then(({ _id }) => {
 
-      Item.findByIdAndUpdate(req.body.postId, { $set: { topBid: _id } })
+      Item.findByIdAndUpdate(req.body.postId, { $set: { topBid: _id, auctionOn: false, isBought: true } })
         .populate('user')
         .then(({ user }) => {
-          User.findByIdAndUpdate(req.user._id,
-            {
-              $addToSet: { boughtItems: req.body.postId },
-              $pull: { buyItems: req.body.postId }
-            })
+          User.findByIdAndUpdate(req.user._id, {
+            $addToSet: { boughtItems: req.body.postId },
+            $pull: { buyItems: req.body.postId },
+            $pull: { watchItems: req.body.postId }
+          })
             .then(() => {
-              User.findByIdAndUpdate(user._id,
-                {
-                  $addToSet: { soldItems: req.body.postId },
-                  $pull: { sellItems: req.body.postId }
-                })
-                .then(data => {
-                  User.updateMany({}, {
-
-                    $pull: { watchItems: req.body.postId },
-                    $pull: { buyItems: req.body.postId },
-                  })
+              User.findByIdAndUpdate(user._id, {
+                $addToSet: { soldItems: req.body.postId },
+                $pull: { sellItems: req.body.postId },
+              })
+                .then((data) => {
+                  User.updateMany(
+                    {},
+                    {
+                      $pull: { watchItems: req.body.postId },
+                      $pull: { buyItems: req.body.postId },
+                    }
+                  )
                     .then(() => {
-                      res.sendStatus(200)
+                      res.sendStatus(200);
                     })
-                    .catch(err => console.error(err))
+                    .catch((err) => console.error(err));
                 })
-                .catch(err => console.error(err))
+                .catch((err) => console.error(err));
             })
-            .catch(err => console.error(err))
+            .catch((err) => console.error(err));
         })
         .catch(err => console.error(err))
     })

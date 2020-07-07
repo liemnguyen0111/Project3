@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 
-import ItemPhoto from './ItemPhoto'
+import ItemPhotos from './ItemPhotos'
 
 const styles = (theme) => ({
   root: {
@@ -55,22 +55,25 @@ const DialogActions = withStyles((theme) => ({
 // const [ info, setInfo ] = useState([])
 
 export default function ItemDialog(props) {
-
+  console.log(props)
   return (
     <div>
-      <ItemPhoto />
       <Dialog
         fullWidth={true}
         maxWidth={"md"}
-        onClose={props.handleClose} aria-labelledby="customized-dialog-title" open={props.open}>
+        onClose={props.handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={props.open}
+      >
         <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
-
-          {props.info.user ? `${props.info.user.firstName} ${props.info.user.lastName}` : ''}
+          {props.info.user
+            ? `${props.info.user.firstName} ${props.info.user.lastName}`
+            : ""}
         </DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            {props.info.description}
-          </Typography>
+          <Typography gutterBottom>{props.info.description}</Typography>
+          {props.info.photos ? <ItemPhotos photos={props.info.photos} /> : null}
+
         </DialogContent>
       </Dialog>
     </div>
