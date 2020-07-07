@@ -139,7 +139,12 @@ export default function ItemRightWindow(props) {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <BidSection bid={props.info.bid} />
+            <BidSection 
+            bid={props.info.bid} 
+            isUserItem={props.info.isUserItem}
+            auctionOn={props.info.auctionOn}
+            update={props.update}
+            />
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
 

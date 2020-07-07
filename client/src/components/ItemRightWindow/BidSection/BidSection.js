@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function BidSection({ bid }) {
+export default function BidSection({ bid ,isUserItem, auctionOn, update}) {
 
   const classes = useStyles();
 
@@ -46,14 +46,17 @@ export default function BidSection({ bid }) {
   const handleClose = () => {
     setOpen(false);
   }
-
+ 
   return (
     <>
       <ItemDialog
+        isUserItem={isUserItem}
+        auctionOn={auctionOn}
         info={current}
         handleClickOpen={handleClickOpen}
         handleClose={handleClose}
         open={open}
+        update={update}
       />
 
       <List
