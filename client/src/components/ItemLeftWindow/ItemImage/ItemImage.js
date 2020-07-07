@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) =>
     },
     thumbnail: {
       // height : '100%',
-      minHeight: '90vh',
-      width: '95%',
+      minHeight: '85vh',
+      width: '90%',
       objectFit: 'contain',
     },
   }))

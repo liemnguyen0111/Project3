@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ItemLeftWindow = ({ info }) => {
   const classes = useStyles();
-  
+
   return (
     <div className={classes.root}>
       <Box textAlign="center" className={classes.body} borderColor="text.primary" {...defaultProps}>
