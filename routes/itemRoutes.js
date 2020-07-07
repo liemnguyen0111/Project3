@@ -10,11 +10,11 @@ router.post("/items/category", (req, res) => {
 
   let info = req.body
   let limit = 12
-  console.log(info)
   let skip = (info.page) * 12
   if (req.body.category === 'All') {
 
-    Item.find({ isBought: false })
+
+    Item.find({ isBought: false, auctionOn: true }, null, { limit: limit, skip: skip })
       .populate("user")
       .then((items) => {
         Item.countDocuments().exec(function (err, count) {
@@ -172,7 +172,6 @@ router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
           if (err) {
             console.log('failed to upload')
           } else {
-
             isImage = true;
           }
         }
@@ -232,7 +231,7 @@ router.post("/item/comments", passport.authenticate("jwt"), (req, res) => {
 
 // watch on item
 router.put("/item/watch", passport.authenticate("jwt"), (req, res) => {
-  console.log(req.body.isWatch)
+  // console.log(req.body.isWatch)
   User.findByIdAndUpdate(req.user._id, (req.body.isWatch ?
     { $addToSet: { watchItems: req.body.postId } } :
     { $pull: { watchItems: req.body.postId } }), (err, data) => {
@@ -256,34 +255,35 @@ router.put('/item/sold', passport.authenticate("jwt"), (req, res) => {
   Bid.create(newBid)
     .then(({ _id }) => {
 
-      Item.findByIdAndUpdate(req.body.postId, { $set: { topBid: _id } })
+      Item.findByIdAndUpdate(req.body.postId, { $set: { topBid: _id, auctionOn: false, isBought: true } })
         .populate('user')
         .then(({ user }) => {
-          User.findByIdAndUpdate(req.user._id,
-            {
-              $addToSet: { boughtItems: req.body.postId },
-              $pull: { buyItems: req.body.postId }
-            })
+          User.findByIdAndUpdate(req.user._id, {
+            $addToSet: { boughtItems: req.body.postId },
+            $pull: { buyItems: req.body.postId },
+            $pull: { watchItems: req.body.postId }
+          })
             .then(() => {
-              User.findByIdAndUpdate(user._id,
-                {
-                  $addToSet: { soldItems: req.body.postId },
-                  $pull: { sellItems: req.body.postId }
-                })
-                .then(data => {
-                  User.updateMany({}, {
-
-                    $pull: { watchItems: req.body.postId },
-                    $pull: { buyItems: req.body.postId },
-                  })
+              User.findByIdAndUpdate(user._id, {
+                $addToSet: { soldItems: req.body.postId },
+                $pull: { sellItems: req.body.postId },
+              })
+                .then((data) => {
+                  User.updateMany(
+                    {},
+                    {
+                      $pull: { watchItems: req.body.postId },
+                      $pull: { buyItems: req.body.postId },
+                    }
+                  )
                     .then(() => {
-                      res.sendStatus(200)
+                      res.sendStatus(200);
                     })
-                    .catch(err => console.error(err))
+                    .catch((err) => console.error(err));
                 })
-                .catch(err => console.error(err))
+                .catch((err) => console.error(err));
             })
-            .catch(err => console.error(err))
+            .catch((err) => console.error(err));
         })
         .catch(err => console.error(err))
     })

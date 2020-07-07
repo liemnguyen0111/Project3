@@ -92,7 +92,7 @@ export default function TopNav(props) {
         >
           {isWatch? 'Watched' : 'Watch'}
       </Button>
-
+      {console.log(props.info)}
         <Button
           variant="contained"
           color="primary"

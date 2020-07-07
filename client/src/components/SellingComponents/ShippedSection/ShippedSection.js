@@ -77,52 +77,56 @@ export default function ShippedSection({shipItems}) {
     <>
       <Typography className={classes.title}>
         Shipped
-          <br />
-        <p className={classes.subtitle}>After you've clicked the 'Shipped' button on an item in the Sold column, the item will move here.</p>
+        <br />
+        <p className={classes.subtitle}>
+          After you've clicked the 'Shipped' button on an item in the Sold
+          column, the item will move here.
+        </p>
       </Typography>
-      
-      <Box textAlign="center" borderColor="text.primary" {...defaultProps} className={classes.root}>
+
+      <Box
+        textAlign="center"
+        borderColor="text.primary"
+        {...defaultProps}
+        className={classes.root}
+      >
         {console.log(shipItems)}
         <List
           component="nav"
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          {shipItems.map(item => 
-            
-          <ListItem className={classes.item}>  
-            <Grid container spacing={1}>
-              <Grid item xs={3} className={classes.imageArea}>
-                <img className={classes.thumbnail} src={item.photos[item.photos.length - 1]} alt={item.photos[item.photos.length - 1]} />
+          {shipItems.map((item) => (
+            <ListItem className={classes.item}>
+              <Grid container spacing={1}>
+                <Grid item xs={3} className={classes.imageArea}>
+                  <img
+                    className={classes.thumbnail}
+                    src={item.photos[item.photos.length - 1]}
+                    alt={item.photos[item.photos.length - 1]}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <Typography noWrap>{item.title}</Typography>
+                  <Typography className={classes.detailText} noWrap>
+                    {item.description}
+                  </Typography>
+                  <Divider />
+                  <Typography noWrap>Sale Terms</Typography>
+                  <Typography className={classes.detailText} noWrap>
+                    {`${item.topBid.price} | ${item.topBid.description}`}
+                  </Typography>
+                  <Divider />
+                  <Typography>Buyer Info</Typography>
+                  <Typography className={classes.detailText}>
+                    {item.topBid.user.firstName} {item.topBid.user.lastName} | {item.topBid.user.username}
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={8}>
-                <Typography noWrap>
-                  {item.title}
-                </Typography>
-                <Typography className={classes.detailText} noWrap>
-                  {item.description} 
-                </Typography>
-                <Divider />
-                <Typography noWrap>
-                  Sale Terms
-                </Typography>
-                <Typography className={classes.detailText} noWrap>
-                  {`${item.topBid.price} | ${item.topBid.description}`}
-                </Typography>
-                <Divider />
-                <Typography>
-                  Buyer Info
-                </Typography>
-                <Typography className={classes.detailText}>
-                    FirstName Last Name, email@email.com
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItem>  
-            )}
-
+            </ListItem>
+          ))}
         </List>
-      </Box> 
-    </> 
+      </Box>
+    </>
   );
 }

@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TopBid({ topBid }) {
+
   const classes = useStyles();
 
   const handleOnclick = () => {
