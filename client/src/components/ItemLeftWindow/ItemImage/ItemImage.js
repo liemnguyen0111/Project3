@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) =>
       // minHeight : '100%',
       marginLeft: "auto",
       marginRight: "auto",
+      maxHeight: "85%",
       maxWidth: "80%",
       overflow: "auto",
       backgroundColor: theme.palette.background.paper,
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) =>
     thumbnail: {
       // height : '100%',
       minHeight: '85vh',
-      width: '90%',
+      width: '80%',
       objectFit: 'contain',
     },
   }))
