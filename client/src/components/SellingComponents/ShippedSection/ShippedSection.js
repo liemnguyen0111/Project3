@@ -78,7 +78,7 @@ export default function ShippedSection({shipItems}) {
       <Typography className={classes.title}>
         Shipped
           <br />
-        <p className={classes.subtitle}>After you've clicked the 'Shipped' button on an item in the Sold column, the item will move here.</p>
+        <p className={classes.subtitle}>After you've clicked the 'Ship' button on an item in the Sold column, the item will move here.</p>
       </Typography>
       
       <Box textAlign="center" borderColor="text.primary" {...defaultProps} className={classes.root}>

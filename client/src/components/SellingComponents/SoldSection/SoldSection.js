@@ -93,7 +93,7 @@ export default function SoldSection({soldItems, setOnShip, onShip}) {
       <Typography className={classes.title}>
         Sold
         <p className={classes.subtitle}>
-          Contact the buyer to arrange payment/delivery. Click 'Shipped' to move
+          Contact the buyer to arrange payment/delivery. Click 'Ship' to move
           item to the Shipped column.
         </p>
       </Typography>
@@ -132,7 +132,7 @@ export default function SoldSection({soldItems, setOnShip, onShip}) {
               </Grid>
               <Grid item xs={8}>
             <Typography>{item.title}</Typography>
-                <Typography className={classes.detailText}>
+                <Typography className={classes.detailText} noWrap>
                   {item.description}
                 </Typography>
                 <Divider />
