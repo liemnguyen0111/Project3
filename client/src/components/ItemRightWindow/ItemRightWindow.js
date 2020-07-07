@@ -133,7 +133,7 @@ export default function ItemRightWindow(props) {
       <div className={classes.body}>
         <TopBid topBid={props.info.topBid} />
 
-        {props.info.isUserItem ? null :
+        {props.info.isUserItem || props.info.auctionOn ? null :
           <TopNav className={classes.topNav} id={props.id} info={props.info} />
         }
 

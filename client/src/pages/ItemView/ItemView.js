@@ -58,7 +58,8 @@ class ItemView extends Component {
           bid: data[0].bid,
           topBid: data[0].topBid,
           comment: data[0].comment,
-          isWatch : data[2].isWatch
+          isWatch : data[2].isWatch,
+          auctionOn: data[0].auctionOn
         }
         console.log(data)
         this.setState({
