@@ -17,7 +17,7 @@ import ItemAPI from '../../utils/ItemAPI'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+ 
   return (
     <div
       role="tabpanel"
@@ -41,12 +41,12 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `full-width-tab-${index}`,
+//     'aria-controls': `full-width-tabpanel-${index}`,
+//   };
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,7 +107,12 @@ export default function ItemRightWindow(props) {
   };
 
   const handleChangeIndex = (index) => {
-    setValue(index);
+    let temp = index
+    if(temp === 2)
+    {
+      temp = 1
+    }
+    setValue(temp);
   };
 
   const handleOnSubmitMessage = event => {
@@ -149,9 +154,7 @@ export default function ItemRightWindow(props) {
             />
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-
             <ChatSection messages={props.info.comment} input={input}/>
-
           </TabPanel>
         </SwipeableViews>
 

@@ -73,7 +73,7 @@ const useStyles = makeStyles({
 
 const { createItem } = ItemAPI;
 
-export default function FormDialog() {
+export default function FormDialog(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     numberformat: "",
@@ -111,7 +111,10 @@ export default function FormDialog() {
         }
    
      createItem(formData)
-    .then(data=>{setOpen(false)})
+    .then(data=>{
+      props.setUpdate(!props.update)
+      setOpen(false)
+    })
     .catch(err=>{})
   };
 

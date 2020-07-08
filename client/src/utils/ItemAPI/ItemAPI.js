@@ -45,6 +45,20 @@ const ItemAPI = {
       'Authorization': `Bearer ${localStorage.getItem("user")}`
     }
   }),
+  deleteItem: (data) => axios.delete('/api/item/delete', {
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem("user")}`
+    },
+    data : 
+    {
+      data
+    }
+  }),
+  isRead: (data) => axios.put('/api/bid/isread',data, {
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem("user")}`
+    }
+  }),
 };
 
 export default ItemAPI;

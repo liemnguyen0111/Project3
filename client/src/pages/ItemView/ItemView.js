@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import io from 'socket.io-client'
@@ -23,6 +23,21 @@ socket = io(ENDPOINT)
 
 const ItemView = () => {
 
+  const scrollTop = useRef(null)
+
+  useEffect(()=>
+  {
+    scrollToMyRef()
+  })
+
+  const scrollToMyRef = () => {
+    const scroll =
+    scrollTop.current.scrollHeight -
+    scrollTop.current.clientHeight;
+    scrollTop.current.scrollIntoView(0 ,scroll);
+  };
+
+  
   const [state, setState] = useState({
     leftWindow: {
       title: '',
@@ -47,9 +62,7 @@ const ItemView = () => {
               handleDataUpdate()
 
              socket.emit('joinRoom', { room : state.room }, (error) => {
-              if(error) {
-                console.log('errr');
-              }
+              if(error) {}
             });
             
             socket.on("update", (data) => {
@@ -68,7 +81,6 @@ const ItemView = () => {
   {
     getItem(state.room)  
     .then(({ data }) => {
-      console.log(data)
     let leftWindow = {
       title: data[0].title,
       price: data[0].price,
@@ -102,8 +114,9 @@ const ItemView = () => {
 
     return (
       <>
-        <div style={{
-
+      <div ref={scrollTop}></div>
+        <div 
+        style={{
           flexGrow: 1,
           margin: "15px 15px 0px 15px",
           paddingBottom: "75px",

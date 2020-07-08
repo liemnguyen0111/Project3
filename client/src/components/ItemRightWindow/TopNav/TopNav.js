@@ -56,7 +56,7 @@ export default function TopNav(props) {
  
   const handleOnClickWatch = () => {
        userWatch({ postId: props.id , isWatch : !isWatch})
-      .then(() =>{})
+      .then(() =>{ })
       .catch(err => console.error(err))
       setIsWatch(!isWatch)
   }
@@ -67,10 +67,6 @@ export default function TopNav(props) {
       .then(data => props.update())
       .catch(err => console.error(err))
   }
-
-  useEffect(() =>{
-    setIsWatch(props.info.isWatch)
-  }, [props])
   
   return (
 
@@ -92,7 +88,6 @@ export default function TopNav(props) {
         >
           {isWatch? 'Watched' : 'Watch'}
       </Button>
-      {console.log(props.info)}
         <Button
           variant="contained"
           color="primary"

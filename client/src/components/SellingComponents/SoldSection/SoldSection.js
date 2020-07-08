@@ -79,13 +79,13 @@ const useStyles = makeStyles((theme) => ({
 
 const { itemShipped } = ItemAPI
 
-export default function SoldSection({soldItems, setOnShip, onShip}) {
+export default function SoldSection({soldItems, setUpDate, update}) {
   const classes = useStyles();
 
   const handleOnClickShip = (itemId) => {
   
     itemShipped({postId : itemId})
-    .then(() => setOnShip(!onShip))
+    .then(() => setUpDate(!update))
     .catch(err => console.error(err))
   };
   return (

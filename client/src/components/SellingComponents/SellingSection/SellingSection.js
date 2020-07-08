@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SellingSection({sellItems}) {
+export default function SellingSection({sellItems, update , setUpdate}) {
   const classes = useStyles();
 
   const handleOnClick = (itemId) => {
@@ -134,7 +134,7 @@ export default function SellingSection({sellItems}) {
         {...defaultProps}
         className={classes.listNewItem}
       >
-        <NewListingModal />
+        <NewListingModal  setUpdate={setUpdate} update={update}/>
       </Box>
 
       <Box
@@ -170,7 +170,7 @@ export default function SellingSection({sellItems}) {
                   <Typography className={classes.detailText} noWrap>
                     {item.description}
                   </Typography>
-                    <DeleteListingModal />
+                    <DeleteListingModal postId={item._id} setUpdate={setUpdate} update={update}/>
                 </Grid>
               </Grid>
             </ListItem>

@@ -22,22 +22,20 @@ const useStyles = makeStyles({
 export default function SignInDialog({open, setOpen}) {
   const { loginState, setLoginState } = useContext(LoginContext);
   const handleLogin = (event) => {
-    // console.log(event);
     event.preventDefault();
     const userSigninInfo = {
       username: event.target.username.value,
       password: event.target.password.value,
     };
-    // console.log(userSigninInfo)
+
     loginUser(userSigninInfo)
       .then(({ data }) => {
-        console.log(data)
         if (data) {
           localStorage.setItem("user", data)
           setLoginState(true)
           handleClose()
         } else {
-          console.log("Incorrect username or password")
+          // console.log("Incorrect username or password")
         }
       })
       .catch((err) => console.error(err))

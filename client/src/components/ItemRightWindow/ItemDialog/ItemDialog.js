@@ -56,7 +56,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-const { makeTopBid, itemSold } = ItemAPI
+const { makeTopBid, itemSold, isRead } = ItemAPI
 
 export default function ItemDialog(props) {
   const topBid = () => {
@@ -91,7 +91,7 @@ export default function ItemDialog(props) {
       >
         <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
           {props.info.user
-            ? `Bidder: ${props.info.user.firstName} ${props.info.user.lastName} Offer:${props.info.price}` 
+            ? `Bidder: ${props.info.user.firstName} ${props.info.user.lastName} | Offer:${props.info.price}` 
             : ""}
         </DialogTitle>
 

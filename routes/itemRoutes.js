@@ -176,7 +176,6 @@ router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
 
   Bid.create(newBid)
     .then((bid) => {
-      console.log('bid')
       Item.findByIdAndUpdate(req.body.postId, { $push: { bid: bid._id } })
         .then(() => {
           User.findByIdAndUpdate(req.user._id,
@@ -216,7 +215,6 @@ router.post("/item/comments", passport.authenticate("jwt"), (req, res) => {
 
 // watch on item
 router.put("/item/watch", passport.authenticate("jwt"), (req, res) => {
-  // console.log(req.body.isWatch)
   User.findByIdAndUpdate(req.user._id, (req.body.isWatch ?
     { $addToSet: { watchItems: req.body.postId } } :
     { $pull: { watchItems: req.body.postId } }), (err, data) => {
@@ -294,6 +292,35 @@ router.put('/item/ship', passport.authenticate("jwt"), (req, res) => {
     .then(() => res.sendStatus(200))
     .catch(err => console.error(err))
 })
+
+router.delete('/item/delete',passport.authenticate("jwt"),(req, res) => {
+  
+  Item.findByIdAndDelete(req.body.data.postId, (err)=>
+  {
+      if(err) console.error(err)
+      User.updateMany({},
+        {
+          $pull : [{
+            soldItems : req.body.data.postId,
+            watchItems : req.body.data.postId,
+            buyItems : req.body.data.postId,
+          }]
+        }, (err)=>
+        {
+          if(err) console.error(err)
+          res.sendStatus(200)
+        })
+  })
+})
+
+router.put('/bid/isread' , passport.authenticate("jwt"),(req, res) => {
+    Bid.findByIdAndUpdate(req.body.bidId, {isRead : true}, (err)=>
+    {
+      if(err) console.error(err)
+      res.sendStatus(200)
+    })
+})
+
 
 module.exports = router
 

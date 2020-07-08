@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import ItemAPI from '../../../../utils/ItemAPI'
 
 const useStyles = makeStyles((theme) => ({
   deleteButton: {
@@ -14,7 +15,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function AlertDialog() {
+const { deleteItem } = ItemAPI
+
+export default function AlertDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -25,6 +28,16 @@ export default function AlertDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleDelete = () =>
+  {
+    deleteItem({postId : props.postId})
+    .then((data)=> {
+      props.setUpdate(!props.update)
+      setOpen(false);
+    })
+    .catch(err => console.error(err))
+  }
 
   return (
     <div>
@@ -47,7 +60,7 @@ export default function AlertDialog() {
           <Button onClick={handleClose}>
             No, Cancel
           </Button>
-          <Button onClick={handleClose} color="secondary" autoFocus>
+          <Button onClick={handleDelete} color="secondary" autoFocus>
             Yes, Delete It
           </Button>
         </DialogActions>

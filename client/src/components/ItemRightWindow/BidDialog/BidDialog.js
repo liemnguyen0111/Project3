@@ -100,7 +100,6 @@ export default function BidDialog(props) {
     .then(()=>
     {
       props.update()
-      console.log(props)
     }
     )
     .catch(err => console.error(err))

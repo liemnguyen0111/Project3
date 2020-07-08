@@ -50,7 +50,7 @@ const Item = new Schema({
   comment: [{
     type: Schema.Types.ObjectId,
     ref: "Comment",
-  }],
+  }]
 });
 
 module.exports = model("Item", Item);

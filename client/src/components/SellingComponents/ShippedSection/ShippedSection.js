@@ -87,7 +87,7 @@ export default function ShippedSection({shipItems}) {
         {...defaultProps}
         className={classes.root}
       >
-        {console.log(shipItems)}
+      
         <List
           component="nav"
           aria-labelledby="nested-list-subheader"
@@ -99,8 +99,8 @@ export default function ShippedSection({shipItems}) {
                 <Grid item xs={3} className={classes.imageArea}>
                   <img
                     className={classes.thumbnail}
-                    src={item.photos[item.photos.length - 1]}
-                    alt={item.photos[item.photos.length - 1]}
+                    src={item.photos[0]}
+                    alt={item.photos[0]}
                   />
                 </Grid>
                 <Grid item xs={8}>

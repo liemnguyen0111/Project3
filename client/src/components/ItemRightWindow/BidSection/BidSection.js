@@ -6,6 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography'
+import ItemAPI from '../../../utils/ItemAPI'
 import ItemDialog from '../ItemDialog'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,8 +29,20 @@ const useStyles = makeStyles((theme) => ({
     borderStyle: "solid",
     borderRadius: "5px",
     marginBottom: '5px',
+  },
+  isRead:
+  {
+    flex: 0.5,
+    border: "1px",
+    top: '0',
+    borderStyle: "solid",
+    borderRadius: "5px",
+    marginBottom: '5px',
+    backgroundColor : '#cfd8dc'
   }
 }));
+
+const { isRead } = ItemAPI
 
 export default function BidSection({ bid ,isUserItem, auctionOn, update}) {
 
@@ -39,6 +52,12 @@ export default function BidSection({ bid ,isUserItem, auctionOn, update}) {
   const [current, setCurrent] = React.useState([]);
 
   const handleClickOpen = (itemInfo) => {
+    if(isUserItem) 
+    {
+      isRead({bidId : itemInfo._id })
+      .then(() => update())
+      .catch(err => console.log(err))
+    }
     setCurrent(itemInfo)
     setOpen(true);
   };
@@ -70,13 +89,14 @@ export default function BidSection({ bid ,isUserItem, auctionOn, update}) {
               <ListItem
                 button
                 onClick={() => { handleClickOpen(bidItem) }}
-                className={classes.item}>
+                className={isUserItem? (bidItem.isRead? classes.item : classes.isRead) : classes.item}
+                >
 
                 <ListItemIcon >
                   {bidItem.photos[0] ? < Avatar alt={bidItem.photos[0]}
                     src={`${bidItem.photos[0]}`}
                     className={classes.bigAvatar} /> : <Avatar alt="N/A"
-                      src={bidItem.photos[0]}
+                      src='https://ssihplc.com/wp-content/uploads/no-image.png'
                       className={classes.bigAvatar} />}
 
                 </ListItemIcon>
@@ -87,11 +107,6 @@ export default function BidSection({ bid ,isUserItem, auctionOn, update}) {
               </ListItem>
             </>
           ))}
-
-
-
-
-
 
       </List>
     </>

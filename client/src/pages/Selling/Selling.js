@@ -26,7 +26,7 @@ const Selling = () => {
     shipItems : []
   })
 
-  const [ onShip , setOnShip ] = useState(false)
+  const [ update , setUpdate ] = useState(false)
 
   useEffect(() =>
   {
@@ -35,7 +35,8 @@ const Selling = () => {
         setItems(data)
       })
       .catch(err => console.error(err))
-  },[onShip])
+  },[update])
+
 
   return (
     <>
@@ -44,12 +45,12 @@ const Selling = () => {
 
           <Grid item xs={12} sm={4}>
             <div className={'fade-in one'}>
-              <SellingSection sellItems={items.sellItems}/>
+              <SellingSection sellItems={items.sellItems} setUpdate={setUpdate} update={update}/>
             </div>
           </Grid>
           <Grid item xs={12} sm={4} >
             <div className={'fade-in two'}>
-              <SoldSection soldItems={items.soldItems} setOnShip={setOnShip} onShip={onShip}/>
+              <SoldSection soldItems={items.soldItems} setUpdate={setUpdate} update={update}/>
             </div>
           </Grid>
           <Grid item xs={12} sm={4} >

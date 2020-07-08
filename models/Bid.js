@@ -13,6 +13,10 @@ const Bid = new Schema({
   item: {
     type: Schema.Types.ObjectId,
     ref: 'Item'
+  },
+  isRead: {
+    type : Boolean,
+    default : false
   }
 })
 
