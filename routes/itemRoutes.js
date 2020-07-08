@@ -241,6 +241,7 @@ router.put('/item/sold', passport.authenticate("jwt"), (req, res) => {
       Item.findByIdAndUpdate(req.body.postId, { $set: { topBid: _id, auctionOn: false, isBought: true } })
         .populate('user')
         .then(({ user }) => {
+          console.log(user)
           User.findByIdAndUpdate(req.body.user, {
             $addToSet: { boughtItems: req.body.postId },
             $pull: { buyItems: req.body.postId },
