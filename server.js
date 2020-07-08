@@ -70,7 +70,6 @@ io.on('connection', socket => {
   // Listen for new update
   socket.on('update', msg => {
     const user = getCurrentUser(socket.id);
-    console.log(user)
     io.to(user.room).emit('update', msg);
   });
 

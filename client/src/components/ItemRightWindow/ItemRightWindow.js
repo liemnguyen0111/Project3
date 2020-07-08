@@ -101,7 +101,7 @@ export default function ItemRightWindow(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-  
+  const [input, setInput ] = React.useState()
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -113,6 +113,7 @@ export default function ItemRightWindow(props) {
   const handleOnSubmitMessage = event => {
     event.preventDefault()
     if (event.keycode === 13 && event.target.message.value || !event.keycode && event.target.message.value) {
+      setInput(event.target.message.value)
       createComment({
         body: event.target.message.value,
         item: props.id
@@ -124,6 +125,7 @@ export default function ItemRightWindow(props) {
     }
   }
   
+
   return (
     <div className={classes.root}>
       <div className={classes.body}>
@@ -148,10 +150,9 @@ export default function ItemRightWindow(props) {
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
 
-            <ChatSection messages={props.info.comment} />
+            <ChatSection messages={props.info.comment} input={input}/>
 
           </TabPanel>
-
         </SwipeableViews>
 
         {value ?

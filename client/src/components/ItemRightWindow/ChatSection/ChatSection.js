@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
+import { useWindowScroll } from 'react-use'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: '1',
     overflow: "auto",
     backgroundColor: theme.palette.background.paper,
-
+    behavior : 'smooth'
   },
   bigAvatar: {
     margin: 10,
@@ -27,16 +27,33 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ChatSection({ messages }) {
+export default function ChatSection({ messages , input }) {
 
   const classes = useStyles();
+  const commentSection = useRef(null)
+
+  useEffect(()=>
+  {
+    scrollToMyRef()
+  }
+  ,[messages])
+
+  const scrollToMyRef = () => {
+    const scroll =
+    commentSection.current.scrollHeight -
+    commentSection.current.clientHeight;
+    commentSection.current.scrollIntoView(0, scroll);
+  };
+
   return (
+    <>
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
-      className={classes.root}
+      className={classes.root}  
     >
-      {messages.map(message =>
+    
+        {messages.map(message =>
         <ListItem>
 
           <Avatar alt="Remy Sharp" src="https://i1.pngguru.com/preview/137/834/449/cartoon-cartoon-character-avatar-drawing-film-ecommerce-facial-expression-png-clipart.jpg" className={classes.bigAvatar} />
@@ -44,8 +61,11 @@ export default function ChatSection({ messages }) {
 
           <ListItemText primary={`${message.user.firstName} ${message.user.lastName}`} secondary={`${message.body}`} />
         </ListItem>
-      )}
-
+      )    
+      }
+      <div ref={commentSection}/>
     </List>
+
+</>
   );
 }
