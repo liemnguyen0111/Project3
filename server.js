@@ -80,7 +80,7 @@ io.on('connection', socket => {
 });
 
 const PORT = process.env.PORT || 5000
-// Start a connection on port 3001
+// Start a connection on port 5000
 require('./config')
 .then(() => server.listen(PORT))
 .catch(err => console.error(err))
