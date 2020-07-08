@@ -67,6 +67,16 @@ const useStyles = makeStyles((theme) => ({
     color: 'gray',
     fontSize: '14px',
   },
+  itemtitle :
+  {
+    textDecoration : 'none',
+    color : 'black',
+    '&:hover':
+    {
+      cursor : 'pointer',
+      textDecoration : 'underline'
+    }
+  }
 }));
 
 export default function ShippedSection({shipItems}) {
@@ -104,7 +114,11 @@ export default function ShippedSection({shipItems}) {
                   />
                 </Grid>
                 <Grid item xs={8}>
+                  <div  className={classes.itemtitle}
+                  component={Link} 
+                  to={`/ItemView/:search?${item._id}`} >
                   <Typography noWrap>{item.title}</Typography>
+                  </div>
                   <Typography className={classes.detailText} noWrap>
                     {item.description}
                   </Typography>

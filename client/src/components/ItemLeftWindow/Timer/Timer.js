@@ -85,7 +85,7 @@ Object.keys(timeLeft).forEach(interval => {
     <div  className={classes.root} >
     { !props.auctionOn?   
         <Typography variant='h4' className={classes.item}>
-        <strong>{timerComponents.length ? null : 'Sold' }</strong>
+        <strong>Sold</strong>
       </Typography>
         :
         <Typography variant='h4' className={classes.item}>

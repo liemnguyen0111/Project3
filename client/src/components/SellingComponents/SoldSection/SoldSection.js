@@ -75,17 +75,27 @@ const useStyles = makeStyles((theme) => ({
     color: "gray",
     fontSize: "14px",
   },
+  itemtitle :
+  {
+    textDecoration : 'none',
+    color : 'black',
+    '&:hover':
+    {
+      cursor : 'pointer',
+      textDecoration : 'underline'
+    }
+  }
 }));
 
 const { itemShipped } = ItemAPI
 
-export default function SoldSection({soldItems, setUpDate, update}) {
+export default function SoldSection({soldItems, setUpdate , update}) {
   const classes = useStyles();
 
   const handleOnClickShip = (itemId) => {
   
     itemShipped({postId : itemId})
-    .then(() => setUpDate(!update))
+    .then(() => setUpdate(!update))
     .catch(err => console.error(err))
   };
   return (
@@ -130,7 +140,11 @@ export default function SoldSection({soldItems, setUpDate, update}) {
                     </Button>
                   </Grid>
                   <Grid item xs={8}>
-                    <Typography>{item.title}</Typography>
+                    <Typography 
+                    className={classes.itemtitle}
+                    component={Link}
+                    to={`/ItemView/:search?${item._id}`}
+                    >{item.title}</Typography>
                     <Typography className={classes.detailText}>
                       {item.description}
                     </Typography>

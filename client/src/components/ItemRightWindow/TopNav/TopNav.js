@@ -5,7 +5,7 @@ import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Grid from '@material-ui/core/Grid';
-import io from 'socket.io-client'
+import BuyOutDialog from './BuyOutDialog'
 import BidDialog from '../BidDialog'
 import ItemAPI from '../../../utils/ItemAPI'
 
@@ -38,12 +38,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const { userWatch, itemSold } = ItemAPI
+const { userWatch } = ItemAPI
 
 export default function TopNav(props) {
   const classes = useStyles();
   
   const [open, setOpen] = React.useState(false);
+  const [openBuyOut, setOpenBuyOut] = React.useState(false);
   const [isWatch, setIsWatch ] = React.useState(props.info.isWatch)
 
   const handleClickOpen = () => {
@@ -62,16 +63,14 @@ export default function TopNav(props) {
   }
 
   const handleOnBuyOut = () => {
-   
-    itemSold({ price: props.info.price, description: 'Bought out', postId: props.id, user: props.info.user })
-      .then(data => props.update())
-      .catch(err => console.error(err))
+     setOpenBuyOut(true)
   }
   
   return (
 
     <div className={classes.root}>
       <BidDialog update={props.update} handleClickOpen={handleClickOpen} handleClose={handleClose} open={open} id={props.id} />
+      <BuyOutDialog openBuyOut={openBuyOut} setOpenBuyOut={setOpenBuyOut} props={props}/>
       <Grid
         container
         direction="row"
