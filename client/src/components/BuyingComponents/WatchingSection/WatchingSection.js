@@ -106,7 +106,7 @@ export default function WatchingSection({watchItems}) {
               <Grid item xs={3}>
                 <img className={classes.thumbnail} src={item.photos[0]} alt="" />
                 <Typography className={classes.itemPrice}>
-                  {item.price? `$${item.price}`: null}
+                  {item.price? `${item.price}`: null}
                 </Typography>
               </Grid>
               <Grid item xs={8}>

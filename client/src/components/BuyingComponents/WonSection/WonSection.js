@@ -120,7 +120,7 @@ export default function WonSection({boughtItems}) {
                   <Divider />
                   <Typography noWrap>Sale Terms</Typography>
                   <Typography className={classes.detailText} noWrap>
-                    ${`${item.topBid.price} | ${item.topBid.description}`}
+                    {`${item.topBid.price} | ${item.topBid.description}`}
                   </Typography>
                   <Divider />
                   <Typography>Seller Info</Typography>

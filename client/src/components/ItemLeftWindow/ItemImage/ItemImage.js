@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) =>
     },
     thumbnail: {
       // height : '100%',
-      minHeight: '85vh',
+      minHeight: '90vh',
       width: '80%',
       objectFit: 'contain',
     },
