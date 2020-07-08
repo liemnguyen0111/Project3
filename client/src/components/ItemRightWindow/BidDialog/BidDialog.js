@@ -99,7 +99,9 @@ export default function BidDialog(props) {
     userBid(formData)
     .then(()=>
     {
-      props.update()}
+      props.update()
+      console.log(props)
+    }
     )
     .catch(err => console.error(err))
 
