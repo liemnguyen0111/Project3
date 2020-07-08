@@ -115,7 +115,7 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
     const length = file.length || 1
     for (let i = 0; i < length; i++) {
       await (file.length ? file[i] : file).mv(
-        `./client/build/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
+        `./client/build/` + (file.length ? file[i] : file).name.split(' ').join('_'),
         (err) => {
           if (err) {
             console.log('failed to upload')
@@ -124,7 +124,7 @@ router.post("/items", passport.authenticate("jwt"), async (req, res) => {
           }
         }
       );
-      path.push(`/images/` +  (file.length ? file[i] : file).name.split(' ').join('_'))
+      path.push(`/` +  (file.length ? file[i] : file).name.split(' ').join('_'))
     }
   }
 
@@ -152,7 +152,7 @@ router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
     const length = file.length || 1
     for (let i = 0; i < length; i++) {
       await (file.length ? file[i] : file).mv(
-        `./client/build/images/` + (file.length ? file[i] : file).name.split(' ').join('_'),
+        `./client/build/` + (file.length ? file[i] : file).name.split(' ').join('_'),
         (err) => {
           if (err) {
             console.log('failed to upload')
@@ -161,7 +161,7 @@ router.post("/item/bid", passport.authenticate("jwt"), async (req, res) => {
           }
         }
       );
-      path.push(`/images/` + (file.length ? file[i] : file).name.split(' ').join('_'))
+      path.push(`/` + (file.length ? file[i] : file).name.split(' ').join('_'))
     }
   }
 
