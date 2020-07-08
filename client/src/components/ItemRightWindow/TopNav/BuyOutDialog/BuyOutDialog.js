@@ -25,7 +25,8 @@ export default function BuyOutDialog(props) {
   };
 
   const handleBuyOut = () =>
-  {
+  { 
+    console.log(props.props)
       itemSold({ price: props.props.info.price, description: 'Bought out', postId: props.props.id, user: props.props.info.user })
       .then(() => props.props.update())
       .catch(err => console.error(err))

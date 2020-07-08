@@ -73,7 +73,7 @@ export default function ItemDialog(props) {
     itemSold({
       price: props.info.price,
       description: props.info.description, 
-      postId: props.info._id,
+      postId: props.info.item,
       user: props.info.user._id
     })
       .then(() => {props.update()})
