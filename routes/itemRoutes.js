@@ -234,6 +234,7 @@ router.put('/item/sold', passport.authenticate("jwt"), (req, res) => {
     user: req.body.user,
     item: req.body.postId
   }
+  console.log(req.body)
   Bid.create(newBid)
     .then(({ _id }) => {
 

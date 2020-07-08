@@ -114,11 +114,17 @@ export default function ShippedSection({shipItems}) {
                   />
                 </Grid>
                 <Grid item xs={8}>
-                  <div  className={classes.itemtitle}
+                  {console.log(item._id)}
+                
+                  <Typography
                   component={Link} 
-                  to={`/ItemView/:search?${item._id}`} >
-                  <Typography noWrap>{item.title}</Typography>
-                  </div>
+                  to={`/ItemView/:search?${item._id}`} 
+                  style={{
+                    color : 'black',
+                    textDecoration : 'none'
+                  }}
+                  noWrap>{item.title}</Typography>
+                 
                   <Typography className={classes.detailText} noWrap>
                     {item.description}
                   </Typography>
