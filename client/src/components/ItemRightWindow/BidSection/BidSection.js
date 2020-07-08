@@ -46,7 +46,7 @@ export default function BidSection({ bid ,isUserItem, auctionOn, update}) {
   const handleClose = () => {
     setOpen(false);
   }
- 
+
   return (
     <>
       <ItemDialog

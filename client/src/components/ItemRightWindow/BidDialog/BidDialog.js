@@ -137,7 +137,7 @@ export default function BidDialog(props) {
             >
               <TextField
                 required="true"
-                label="$ Your Price"
+                label="$ Your Offer"
                 value={values.numberformat}
                 onChange={handleChange}
                 name="numberformat"
@@ -152,7 +152,7 @@ export default function BidDialog(props) {
                 required="true"
                 id="outlined-multiline-static"
                 name="description"
-                label="Description (Optional)"
+                label="Description"
                 style={{ marginTop: "20px", width: "100%" }}
                 multiline
                 rows={4}

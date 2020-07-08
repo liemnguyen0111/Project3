@@ -80,6 +80,7 @@ export default function FormDialog() {
           <form onSubmit={handleSignup}>
             <TextField
               autoFocus
+              required="true"
               margin="dense"
               name="firstName"
               id="firstName"
@@ -89,6 +90,7 @@ export default function FormDialog() {
             />
             <TextField
               margin="dense"
+              required="true"
               name="lastName"
               id="lastName"
               label="Last Name"
@@ -97,6 +99,7 @@ export default function FormDialog() {
             />
             <TextField
               margin="dense"
+              required="true"
               name="address"
               id="address"
               label="Street Address"
@@ -106,6 +109,7 @@ export default function FormDialog() {
             <TextField
               margin="dense"
               name="age"
+              required="true"
               id="age"
               label="Age"
               type="number"
@@ -114,21 +118,15 @@ export default function FormDialog() {
             <TextField
               margin="dense"
               name="email"
+              required="true"
               id="name"
               label="Email Address"
               type="email"
               fullWidth
             />
-            {/* <TextField
-              margin="dense"
-              name="username"
-              id="username"
-              label="Username"
-              type="username"
-              fullWidth
-            /> */}
             <TextField
               margin="dense"
+              required="true"
               name="password"
               id="password"
               label="Password"

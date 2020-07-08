@@ -71,6 +71,7 @@ const ItemView = () => {
       console.log(data)
     let leftWindow = {
       title: data[0].title,
+      price: data[0].price,
       description: data[0].description,
       photos: data[0].photos,
       timeStart: data[0].dateTimeStart,

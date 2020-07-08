@@ -19,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
   },
+  img: {
+    objectFit: "contain",
+    height: "100%",
+    width: "100%"
+  },
 }));
 
 /**
@@ -45,13 +50,14 @@ export default function ItemPhotos({photos}) {
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
-      
-        </GridListTile>
+        <GridListTile
+          key="Subheader"
+          cols={2}
+          style={{ height: "auto" }}
+        ></GridListTile>
         {photos.map((photo) => (
           <GridListTile key={photo}>
-            <img src={photo} />
-            
+            <img className={classes.img} src={photo} />
           </GridListTile>
         ))}
       </GridList>
